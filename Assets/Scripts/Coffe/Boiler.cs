@@ -16,14 +16,23 @@ public class Boiler : MonoBehaviour {
         this.sceneManager = sceneManager;
         gameObject.SetActive(true);
 
+        FindObjectOfType<TextDisplay>().DisplayText("Fait attention au lait !", 3f);
+
         if (sceneManager.handleTaken)
             Destroy(handle);
+
+        Invoke("MakeNoise", 7f);
     }
 
-    public void StartHeating()
+    /*public void StartHeating()
     {
         isHeating = true;
         Debug.Log("StartHeating");
+    }*/
+
+    void MakeNoise()
+    {
+        Debug.Log("MakeNoise");
     }
 
     void Update()

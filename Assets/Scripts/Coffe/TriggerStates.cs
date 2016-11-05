@@ -8,9 +8,13 @@ public class TriggerStates : MonoBehaviour {
     void OnTriggerEnter(Collider other)
     {
         isTriggered = true;
-        if (name == "PorteFour" && other.tag == "Player")
+        if (name == "PorteFour" && other.tag == "Hand")
         {
             transform.parent.GetComponent<Hoven>().ToggleDoor();
+        }
+        else if (name == "Casserole" && other.tag == "Hand")
+        {
+            Debug.Log("Je me brule !!!");
         }
     }
 
@@ -18,9 +22,5 @@ public class TriggerStates : MonoBehaviour {
     void OnTriggerExit(Collider other)
     {
         isTriggered = false;
-        if (other.gameObject.name == "Pan")
-        {
-            
-        }
     }
 }
