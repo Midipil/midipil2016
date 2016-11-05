@@ -20,11 +20,6 @@ public class CoffeSceneManager : SceneManager {
 
 	}
 
-	// Get from GameManager the previous scene state (last time we entered this scene)
-	protected override void GetPreviousState(){
-
-	}
-
 	// Start end sequence when scene goal is achieved
 	public override void SetEnd(bool win){
 

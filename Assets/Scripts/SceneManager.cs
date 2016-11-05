@@ -16,9 +16,6 @@ public abstract class SceneManager : MonoBehaviour {
 	// Init scene and its content
 	public abstract void InitScene();
 
-	// Get from GameManager the previous scene state (last time we entered this scene)
-	protected abstract void GetPreviousState();
-
 	// Start end sequence when scene goal is achieved
 	public abstract void SetEnd(bool win);
 
