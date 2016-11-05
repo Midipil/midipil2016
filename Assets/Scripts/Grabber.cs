@@ -73,7 +73,6 @@ public class Grabber : MonoBehaviour {
 
 	void Grab(GameObject objToGrab){
 		Debug.Log ("Grabbed !");
-
 		grabbedObject = objToGrab.GetComponent<Grabbable> ();
 		objToGrab.transform.position = this.transform.position;
 		objToGrab.transform.rotation = this.transform.rotation;
@@ -85,10 +84,9 @@ public class Grabber : MonoBehaviour {
 
 	void Drop(){
 		Debug.Log ("Dropped !");
-
 		GetComponent<FixedJoint> ().connectedBody = null;
 		grabbedObject.SetGrabbed (false);
-		Debug.Log (this.transform.parent.GetComponent<Rigidbody> ().velocity);
+		//Debug.Log (this.transform.parent.GetComponent<Rigidbody> ().velocity);
 		grabbedObject.GetComponent<Rigidbody> ().AddForce (this.transform.GetComponent<Rigidbody>().velocity);
 
 		grabbedObject = null;
