@@ -12,7 +12,7 @@ public class MouseDrawing : MonoBehaviour {
 
     Vector3 previousPosition, lastRegisteredPosition;
 
-    bool handOn = false;
+    Transform hand;
 
     int pointCount = 0;
 
@@ -26,19 +26,14 @@ public class MouseDrawing : MonoBehaviour {
     {
         if (initialized)
         {
-            if (Input.GetMouseButtonDown(0))
-                handOn = true;
-            else if (Input.GetMouseButtonUp(0))
-                handOn = false;
-
-            if (handOn)
+            if (hand != null)
                 MoveMouse();
         }
     }
 
     void MoveMouse()
     {
-        Vector3 newPosition = new Vector3(Input.mousePosition.y - Screen.height/2f, 0f, -(Input.mousePosition.x - Screen.width/2f)) / 5000f;
+        Vector3 newPosition = new Vector3(hand.position.x, 0f, hand.position.z);
 
         if (newPosition.x < mousePad.x)
             newPosition = new Vector3(mousePad.x, 0f, newPosition.z);
@@ -77,5 +72,21 @@ public class MouseDrawing : MonoBehaviour {
 
         pointCount++;
         lastRegisteredPosition = position;
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (initialized && other.tag == "Hand")
+        {
+            hand = other.transform;
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (initialized && other.tag == "Hand")
+        {
+            hand = null;
+        }
     }
 }
