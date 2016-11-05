@@ -19,6 +19,8 @@ public class SmartphoneSceneManager : WorldManager {
 	// State we are currently
 	private SceneState currentState;
 
+	private GameManager manager;
+
 	public Smartphone phone;
 	public Key key;
 	public Door door;
@@ -27,8 +29,12 @@ public class SmartphoneSceneManager : WorldManager {
 
 		sceneName = "Smartphone";
 
-		if (!instantiated) {
+		if (!instantiated) 
+		{
 			RegisterToGameManager ();
+			GameObject obj = GameObject.FindWithTag("GameManager");
+			if(obj)
+				manager = obj.GetComponent<GameManager>();
 			instantiated = true;
 		} else {
 			Destroy (this.gameObject);
@@ -101,6 +107,8 @@ public class SmartphoneSceneManager : WorldManager {
 
         previousState = currentState;
 		previousStateWin = win;
+
+		manager.ChangeScene();
 	}
 
 }
