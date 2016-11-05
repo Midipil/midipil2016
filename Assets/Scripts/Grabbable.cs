@@ -6,6 +6,7 @@ using System.Collections;
 public class Grabbable : MonoBehaviour {
 
 	private bool isGrabbed = false;
+	public bool dropAsked = false;
 
 	// Use this for initialization
 	void Start () {
@@ -23,6 +24,10 @@ public class Grabbable : MonoBehaviour {
 
 	public bool IsGrabbed(){
 		return isGrabbed;
+	}
+
+	public void AskDrop(){
+		dropAsked = true;
 	}
 
 }
