@@ -3,7 +3,8 @@ using System.Collections;
 
 public class Orb : MonoBehaviour {
 
-	private bool triggered = false;
+	float winTime =2.0f;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -14,11 +15,13 @@ public class Orb : MonoBehaviour {
 	
 	}
 
-	public void setTriggered(){
-		triggered = true;
+	void OnTriggerEnter(Collider o) {
+		Invoke ("Win", winTime);
+		this.transform.GetComponent<Renderer> ().enabled = false;
+		this.transform.GetChild (0).gameObject.SetActive (false);
 	}
 
-	public bool isTriggered(){
-		return triggered;
+	void Win(){
+		FindObjectOfType<CouveuseSceneManager> ().SetEnd (true);
 	}
 }

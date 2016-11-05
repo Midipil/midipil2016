@@ -13,6 +13,9 @@ public class PlayerController : MonoBehaviour {
 	private float boost = 3.0f;
 	private float lerpTime = 0;
 
+	float horizontal = 0.0f;
+	float vertical = 0.0f;
+
 	private AudioSource shipSound;
 
 	void Start(){
@@ -40,8 +43,8 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		// Left/right
-		this.GetComponent<Rigidbody>().AddTorque( transform.up * rotationSpeed * Input.GetAxis("Horizontal"));
-		this.GetComponent<Rigidbody>().AddTorque( -transform.right * currentBoost * moveSpeed * Input.GetAxis("Vertical"));
+		this.GetComponent<Rigidbody>().AddTorque( transform.up * rotationSpeed * horizontal);
+		this.GetComponent<Rigidbody>().AddTorque( -transform.right * currentBoost * moveSpeed * vertical);
 		//this.GetComponent<Rigidbody>().AddTorque(- transform.forward * sidewaysSpeed * Input.GetAxis("Player_Right_Horizontal"));
 
         // LEFT STICK : MOVE FORWARD / BACKWARD & ROTATE 		
@@ -65,5 +68,10 @@ public class PlayerController : MonoBehaviour {
 	public void Boost(){
 		boost = boostFactor;
 		lerpTime = 0;
+	}
+
+	public void setDirection(float h, float v){
+		horizontal = h;
+		vertical = v;
 	}
 }

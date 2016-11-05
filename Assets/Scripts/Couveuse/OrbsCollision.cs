@@ -2,9 +2,9 @@
 using System.Collections;
 
 public class OrbsCollision : MonoBehaviour {
-
+	/*
 	private int orbsNum; // Set in orbsmanager
-	public int orbsToDestroy = 20;
+	public int orbsToDestroy = 1;
 	private int orbsDestroyed = 0;
 
 	private GameObject player;
@@ -51,4 +51,5 @@ public class OrbsCollision : MonoBehaviour {
 		Debug.Log("Player win");
 		//GameObject.FindWithTag("GameManager").GetComponent<GameManager>().playerWin = true;
 	}
+	*/
 }
