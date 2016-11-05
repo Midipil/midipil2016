@@ -8,7 +8,7 @@ public class HeadTrigger : MonoBehaviour {
         if (other.name == "Coffee")
             other.GetComponent<Coffee>().CollideWithHead(true);
         else if (other.name == "HTCVive")
-            other.GetComponent<Coffee>().CollideWithHead(true);
+            other.GetComponent<HTCVive>().CollideWithHead(true);
     }
 
     void OnTriggerExit(Collider other)
@@ -16,6 +16,6 @@ public class HeadTrigger : MonoBehaviour {
         if (other.name == "Coffee")
             other.GetComponent<Coffee>().CollideWithHead(false);
         else if (other.name == "HTCVive")
-            other.GetComponent<Coffee>().CollideWithHead(false);
+            other.GetComponent<HTCVive>().CollideWithHead(false);
     }
 }

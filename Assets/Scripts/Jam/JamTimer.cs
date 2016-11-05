@@ -5,6 +5,8 @@ public class JamTimer : MonoBehaviour {
 
     public float jamDuration, delayAfterJamEnd;
 
+    public bool hasDoneSomething;
+
     public GameObject feedback;
 
     JamSceneManager sceneManager;
@@ -18,6 +20,9 @@ public class JamTimer : MonoBehaviour {
 
     void EndJam()
     {
+        if (!hasDoneSomething)
+            return;
+
         feedback.GetComponentInChildren<Text>().text = "La jam est terminée !";
         feedback.SetActive(true);
         jamWon = false;

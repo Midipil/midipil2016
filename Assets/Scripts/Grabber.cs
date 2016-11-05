@@ -38,7 +38,7 @@ public class Grabber : MonoBehaviour {
         objToGrab.GetComponent<Grabbable>().grabber = this;
 	}
 
-	void Drop(){
+	public void Drop(){
 
 	}
 
