@@ -5,6 +5,15 @@ public class CouveuseSceneManager : WorldManager {
 
 	private static bool instantiated = false;
 
+	// All scene states
+	private enum SceneState {
+		ONE_EGG,
+		EASY_LASER,
+		MANY_EGGS,
+		CAT_LASER,
+		BROKEN_WHEEL
+	}
+
 	void Awake () {
 
 		sceneName = "Couveuse";

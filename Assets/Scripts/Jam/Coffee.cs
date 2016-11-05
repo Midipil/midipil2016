@@ -27,7 +27,7 @@ public class Coffee : MonoBehaviour {
     {
         collideWithHead = collide;
 
-        FindObjectOfType<JamTimer>().hasDoneSomething = true;
+        FindObjectOfType<JamTimer>().hasDoneSomething = false;
     }
 
     void DrinkCoffee()
@@ -39,6 +39,6 @@ public class Coffee : MonoBehaviour {
 
     void CoffeeDrank()
     {
-        FindObjectOfType<JamTimer>().EndJam("Tu as gagné la jam !");
+        FindObjectOfType<TextDisplay>().ShowEndScreen("Tu as gagné la jam !", true);
     }
 }

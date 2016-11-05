@@ -22,9 +22,9 @@ public class JamSceneManager : WorldManager {
 	// State we are currently
 	private SceneState currentState;
 
-    public JamTimer timer;
-    public CodePeeing codePeeing;
-    public MouseDrawing mouseDrawing;
+    JamTimer timer;
+    CodePeeing codePeeing;
+    MouseDrawing mouseDrawing;
 
 	void Awake () {
 
@@ -50,9 +50,13 @@ public class JamSceneManager : WorldManager {
 	}
 
 	// Init scene and its content
-	public override void InitScene(){
+	public override void InitScene()
+    {
+        timer = FindObjectOfType<JamTimer>();
+        codePeeing = FindObjectOfType<CodePeeing>();
+        mouseDrawing = FindObjectOfType<MouseDrawing>();
 
-		Debug.Log ("Init jam scene.");
+        Debug.Log ("Init jam scene.");
 
         switch (previousState)
         {
@@ -85,6 +89,7 @@ public class JamSceneManager : WorldManager {
 
         }
 
+        FindObjectOfType<TextDisplay>().Initialize(this);
         timer.Initialize(this);
     }
 
@@ -115,6 +120,8 @@ public class JamSceneManager : WorldManager {
         previousState = currentState;
 		previousStateWin = win;
 
-	}
+        FindObjectOfType<GameManager>().ChangeScene();
+
+    }
 
 }

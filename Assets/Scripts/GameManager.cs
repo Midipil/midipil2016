@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour {
 		
 	}
 
-	void ChangeScene(){
+	public void ChangeScene(){
 		// Disable Scene managers
 		foreach (WorldManager world in sceneManagers.Values) {
 			world.gameObject.SetActive(false);

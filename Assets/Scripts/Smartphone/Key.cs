@@ -30,7 +30,7 @@ public class Key : MonoBehaviour {
 
 			if(t <= 1f)
 			{
-				transform.rotation = Quaternion.Euler(0, 0, t * 360f);
+				transform.rotation = Quaternion.Euler(0, 0, -t * 360f);
 			}
 			else
 			{

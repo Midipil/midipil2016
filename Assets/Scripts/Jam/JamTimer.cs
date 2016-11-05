@@ -3,11 +3,9 @@ using UnityEngine.UI;
 
 public class JamTimer : MonoBehaviour {
 
-    public float jamDuration, delayAfterJamEnd;
+    public float jamDuration;
 
     public bool hasDoneSomething;
-
-    public GameObject feedback;
 
     JamSceneManager sceneManager;
 
@@ -16,29 +14,22 @@ public class JamTimer : MonoBehaviour {
     public void Initialize(JamSceneManager sceneManager) {
         this.sceneManager = sceneManager;
         Invoke("EndJam", jamDuration);
-	}
+        FindObjectOfType<TextDisplay>().DisplayText("Voici le thème de la jam :\n\"Déjà?\"\nFin dans 40h !", 5f);
+    }
 
     void EndJam()
     {
         if (!hasDoneSomething)
             return;
 
-        feedback.GetComponentInChildren<Text>().text = "La jam est terminée !";
-        feedback.SetActive(true);
-        jamWon = false;
-        Invoke("EndScene", delayAfterJamEnd);
+        FindObjectOfType<TextDisplay>().ShowEndScreen("Tu as perdu la jam !", false);
     }
 
-    public void EndJam(string feedbackText)
+    /*public void EndJam(string feedbackText)
     {
         feedback.GetComponentInChildren<Text>().text = feedbackText;
         feedback.SetActive(true);
         jamWon = true;
         Invoke("EndScene", delayAfterJamEnd);
-    }
-
-    void EndScene()
-    {
-        sceneManager.SetEnd(jamWon);
-    }
+    }*/
 }

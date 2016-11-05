@@ -4,9 +4,9 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour {
 
-    private float boostFactor = 3.0f;
-	private float moveSpeed = 1.5f;
-    private float rotationSpeed = 5.0f;
+    private float boostFactor = 1.0f;
+	private float moveSpeed = 1.0f;
+    private float rotationSpeed = 3.0f;
 	private float sidewaysSpeed = 1.0f;
 
 	private float boostDuration = 1;
@@ -40,7 +40,6 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		// Left/right
-		//Debug.Log(currentBoost);
 		this.GetComponent<Rigidbody>().AddTorque( transform.up * rotationSpeed * Input.GetAxis("Horizontal"));
 		this.GetComponent<Rigidbody>().AddTorque( -transform.right * currentBoost * moveSpeed * Input.GetAxis("Vertical"));
 		//this.GetComponent<Rigidbody>().AddTorque(- transform.forward * sidewaysSpeed * Input.GetAxis("Player_Right_Horizontal"));

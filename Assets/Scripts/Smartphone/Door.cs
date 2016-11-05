@@ -7,11 +7,13 @@ public class Door : MonoBehaviour
 
 	private bool opening, isOpen;
 	private float startTimeMove;
+	private Smartphone phone;
 
 	void Start () 
 	{
 		opening = false;
 		isOpen = false;	
+		phone = GameObject.Find("Smartphone").GetComponent<Smartphone>();
 	}
 
 	void Update()
@@ -32,15 +34,28 @@ public class Door : MonoBehaviour
 		}
 	}
 
-	public void Open()
+	public void Open(bool openNow = false)
 	{
 		if(!isOpen)
-			StartCoroutine("OpenDoor");
+		{
+			if(openNow)
+				MoveDoor();
+			else
+				StartCoroutine("OpenDoor");
+
+			if(phone)
+				phone.SetDrainBattery(false);
+		}
 	}
 
 	IEnumerator OpenDoor()
 	{
 		yield return new WaitForSeconds(2f);
+		MoveDoor();
+	}
+
+	void MoveDoor()
+	{
 		startTimeMove = Time.time;
 		opening = true;
 	}

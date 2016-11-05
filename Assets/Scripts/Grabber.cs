@@ -35,10 +35,10 @@ public class Grabber : MonoBehaviour {
 		dropCooldown -= Time.deltaTime;
 
 		// If an object is grabbed
-		if (grabbedObject != null){
-			if ((controller.triggerPressed && dropCooldown <= 0) || grabbedObject.dropAsked) {
-				Drop ();
-			}
+		if (grabbedObject != null 
+			&& (controller.triggerPressed || controller.gripped)
+			&& dropCooldown <= 0) {
+			Drop ();
 		}
 
 	}
@@ -49,7 +49,7 @@ public class Grabber : MonoBehaviour {
 			&& grabbedObject == null
 			&& other.gameObject.GetComponent<Grabbable> () != null 
 			&& other.gameObject.GetComponent<Grabbable> ().isActiveAndEnabled
-			&& controller.triggerPressed
+			&& (controller.triggerPressed || controller.gripped)
 			&& grabCooldown <= 0) {
 				
 			Grab (other.gameObject);
@@ -63,7 +63,7 @@ public class Grabber : MonoBehaviour {
 			&& grabbedObject == null
 			&& other.gameObject.GetComponent<Grabbable> () != null 
 			&& other.gameObject.GetComponent<Grabbable> ().isActiveAndEnabled
-			&& controller.triggerPressed
+			&& (controller.triggerPressed || controller.gripped)
 			&& grabCooldown <= 0) {
 					
 			Grab (other.gameObject);
@@ -86,7 +86,6 @@ public class Grabber : MonoBehaviour {
 	void Drop(){
 		Debug.Log ("Dropped !");
 
-		grabbedObject.dropAsked = false;
 		GetComponent<FixedJoint> ().connectedBody = null;
 		grabbedObject.SetGrabbed (false);
 		Debug.Log (this.transform.parent.GetComponent<Rigidbody> ().velocity);
