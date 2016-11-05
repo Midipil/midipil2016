@@ -52,6 +52,12 @@ public class Boiler : MonoBehaviour {
             Invoke("StartBoiling", 1f);
             sceneManager.handleTaken = true;
         }
+
+        if(transform.up.y < -0.8)
+        {
+            milk.GetComponent<Rigidbody>().useGravity = true;
+            milk.GetComponent<Rigidbody>().isKinematic = false;
+        }
     }
 
     public void HandBurning(SteamVR_TrackedController controller)
@@ -77,6 +83,6 @@ public class Boiler : MonoBehaviour {
 
     void BoilingFail()
     {
-        FindObjectOfType<TextDisplay>().ShowEndScreen("Tu as laissé déborder le lait !\nJean-Pierre Coffe n'est pas content du tout !", false);
+        FindObjectOfType<TextDisplay>().ShowEndMessage("Tu as laissé déborder le lait !\nJean-Pierre Coffe n'est pas content du tout !", false);
     }
 }

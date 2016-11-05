@@ -19,9 +19,9 @@ public class Hoven : MonoBehaviour {
         cake.gameObject.SetActive(true);
     }
 
-	public void ToggleDoor(/*SteamVR_TrackedController controller*/)
+	public void ToggleDoor(SteamVR_TrackedController controller)
     {
-        if (/*controller.triggerPressed && */anim < 0f)
+        if (controller.triggerPressed && anim < 0f)
         {
             doorOpened = !doorOpened;
 
@@ -46,6 +46,7 @@ public class Hoven : MonoBehaviour {
     {
         if (other.name == "Cake")
         {
+            other.GetComponent<Grabbable>().AskDrop();
             other.transform.parent = transform;
             other.transform.localPosition = Vector3.zero;
             other.transform.localRotation = Quaternion.identity;
@@ -91,11 +92,11 @@ public class Hoven : MonoBehaviour {
 
     void CakeBakedOk()
     {
-        FindObjectOfType<TextDisplay>().ShowEndScreen("Tu as réussis à cuire le gateau !\nJean-Pierre Coffe est fière de toi !", true);
+        FindObjectOfType<TextDisplay>().ShowEndMessage("Tu as réussis à cuire le gateau !\nJean-Pierre Coffe est fière de toi !", true);
     }
 
     void CakeBurnt()
     {
-        FindObjectOfType<TextDisplay>().ShowEndScreen("Tu as cramé le gateau !\nJean-Pierre Coffe n'est pas content du tout !", false);
+        FindObjectOfType<TextDisplay>().ShowEndMessage("Tu as cramé le gateau !\nJean-Pierre Coffe n'est pas content du tout !", false);
     }
 }

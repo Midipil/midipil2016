@@ -58,6 +58,8 @@ public class JamSceneManager : WorldManager {
 
         Debug.Log ("Init jam scene.");
 
+        previousState = currentState;
+
         switch (previousState)
         {
             case SceneState.NOT_SET:

@@ -28,6 +28,6 @@ public class HTCVive : MonoBehaviour
 
     public void PutVive()
     {
-        FindObjectOfType<TextDisplay>().ShowEndScreen("Tu as gagné la jam !", true);
+        FindObjectOfType<TextDisplay>().ShowEndMessage("Tu as gagné la jam !", true);
     }
 }
