@@ -20,7 +20,7 @@ public class JamSceneManager : WorldManager {
 	// Did we win or lose last time we played this scene
 	private bool previousStateWin;
 	// State we are currently
-	private SceneState currentState = SceneState.DO_SOME_PAINT;
+	private SceneState currentState = SceneState.DO_SOME_CODE;
 
     JamTimer timer;
     CodePeeing codePeeing;

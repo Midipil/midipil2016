@@ -26,19 +26,19 @@ public class MouseDrawing : MonoBehaviour {
     {
         if (initialized)
         {
-            if (hand != null)
-                MoveMouse();
-
-            if (!hand.GetComponent<Grabber>().controller.triggerPressed)
-            {
-                hand = null;
-            }
+			if (hand != null) {
+				MoveMouse ();
+			
+				if (!hand.GetComponent<Grabber> ().controller.triggerPressed) {
+					hand = null;
+				}
+			}
         }
     }
 
     void MoveMouse()
     {
-        Vector3 newPosition = new Vector3(hand.position.x, 0f, hand.position.z);
+		Vector3 newPosition = Vector3.Scale ((hand.position - transform.position), new Vector3 (1, 0, 1));
 
         if (newPosition.x < mousePad.x)
             newPosition = new Vector3(mousePad.x, 0f, newPosition.z);
