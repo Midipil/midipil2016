@@ -48,6 +48,11 @@ public class Door : MonoBehaviour
 		}
 	}
 
+	public void Destroy()
+	{
+		Destroy(gameObject);
+	}
+
 	IEnumerator OpenDoor()
 	{
 		yield return new WaitForSeconds(2f);
