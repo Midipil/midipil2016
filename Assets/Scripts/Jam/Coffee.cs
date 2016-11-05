@@ -16,7 +16,7 @@ public class Coffee : MonoBehaviour {
     {
         if (collideWithHead && !drinkingCoffee)
         {
-            if(Mathf.Abs(transform.rotation.eulerAngles.x) > 90 || Mathf.Abs(transform.rotation.eulerAngles.z) > 90)
+			if(transform.up.y < -0.2f)
             {
                 DrinkCoffee();
             }
