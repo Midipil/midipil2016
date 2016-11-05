@@ -61,6 +61,7 @@ public class CoffeSceneManager : WorldManager {
             case SceneState.MILK_BOILING:
                 currentState = SceneState.CAKE_OK;
                 FindObjectOfType<Hoven>().Initialize(this);
+                FindObjectOfType<Boiler>().gameObject.SetActive(false);
                 break;
             case SceneState.CAKE_OK:
                 currentState = SceneState.BOILER_HANDLE;
@@ -68,7 +69,8 @@ public class CoffeSceneManager : WorldManager {
                 break;
             case SceneState.BOILER_HANDLE:
                 currentState = SceneState.CAKE_BURNT;
-                FindObjectOfType<Boiler>().Initialize(this);
+                FindObjectOfType<Hoven>().Initialize(this);
+                FindObjectOfType<Boiler>().gameObject.SetActive(false);
                 break;
             case SceneState.CAKE_BURNT:
                 currentState = SceneState.BOILER_GRABBABLE;
@@ -88,6 +90,8 @@ public class CoffeSceneManager : WorldManager {
     {
         previousState = currentState;
         previousStateWin = win;
+
+        FindObjectOfType<GameManager>().ChangeScene();
     }
 
 }
