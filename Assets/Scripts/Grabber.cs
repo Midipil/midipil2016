@@ -5,6 +5,14 @@ using System.Collections;
 [RequireComponent(typeof (Rigidbody))]
 public class Grabber : MonoBehaviour {
 
+	SteamVR_Controller.Device controller = null;
+
+	private Grabbable grabbedObject = null;
+
+	private float dropCooldown = 0;
+	private float dropCooldownAmount = 0.1f;
+
+
 	// Use this for initialization
 	void Start () {
 
@@ -16,33 +24,66 @@ public class Grabber : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+
+		dropCooldown -= Time.deltaTime;
+
+		// If an object is grabbed
+		if (grabbedObject != null 
+			&& Input.GetKeyUp ("g")
+			&& dropCooldown <= 0) {
+			Drop ();
+		}
+
 	}
 
 	void OnTriggerEnter(Collider other) {
 
-		if (this.enabled) {
-			Debug.Log ("Grabber : Collision !");
+		if (this.enabled
+			&& grabbedObject == null
+			&& other.gameObject.GetComponent<Grabbable> () != null 
+			&& other.gameObject.GetComponent<Grabbable> ().isActiveAndEnabled
+			&& Input.GetKeyUp ("g")) {
+				
+			Grab (other.gameObject);
+		}
 
-			if (other.gameObject.GetComponent<Grabbable> () != null && other.gameObject.GetComponent<Grabbable> ().isActiveAndEnabled) {
-				Grab (other.gameObject);
-			}
+	}
+
+	void OnTriggerStay(Collider other) {
+
+		if (this.enabled
+			&& grabbedObject == null
+			&& other.gameObject.GetComponent<Grabbable> () != null 
+			&& other.gameObject.GetComponent<Grabbable> ().isActiveAndEnabled
+			&& Input.GetKeyUp ("g")) {
+					
+			Grab (other.gameObject);
 		}
 
 	}
 
 	void Grab(GameObject objToGrab){
 		Debug.Log ("Grabbed !");
-		objToGrab.transform.parent = this.transform;
-		objToGrab.transform.localPosition = Vector3.zero;
-		objToGrab.transform.localRotation = Quaternion.identity;
-		objToGrab.GetComponent<Rigidbody> ().useGravity = false;
-		objToGrab.GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.FreezeAll;
-        objToGrab.GetComponent<Grabbable>().grabber = this;
+
+		grabbedObject = objToGrab.GetComponent<Grabbable> ();
+		grabbedObject.transform.parent = this.transform;
+		grabbedObject.transform.localPosition = Vector3.zero;
+		grabbedObject.transform.localRotation = Quaternion.identity;
+		grabbedObject.GetComponent<Rigidbody> ().useGravity = false;
+		grabbedObject.GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.FreezeAll;
+		grabbedObject.SetGrabbed(true);
+
+		dropCooldown = dropCooldownAmount;
 	}
 
 	void Drop(){
+		Debug.Log ("Dropped !");
 
+		grabbedObject.transform.parent = null;
+		grabbedObject.GetComponent<Rigidbody> ().useGravity = true;
+		grabbedObject.GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.None;
+		grabbedObject.SetGrabbed (false);
+		grabbedObject = null;
 	}
 
 }

@@ -19,7 +19,7 @@ public class Killable : MonoBehaviour {
 
 	void OnCollisionEnter(Collision collision){
 		if (this.enabled) {
-			Debug.Log ("Killable : collide");
+			//Debug.Log ("Killable : collide");
 
 			// Collide with a lethal object
 			if (collision.gameObject.GetComponent<Lethal> () != null && collision.gameObject.GetComponent<Lethal> ().isActiveAndEnabled) {
@@ -32,7 +32,7 @@ public class Killable : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other) {
 		if (this.enabled) {
-			Debug.Log ("Killable : trigger");
+			//Debug.Log ("Killable : trigger");
 
 			// Collide with a lethal object
 			if (other.gameObject.GetComponent<Lethal> () != null && other.gameObject.GetComponent<Lethal> ().isActiveAndEnabled) {

@@ -5,7 +5,7 @@ using System.Collections;
 [RequireComponent(typeof (Rigidbody))]
 public class Grabbable : MonoBehaviour {
 
-    public Grabber grabber;
+	private bool isGrabbed = false;
 
 	// Use this for initialization
 	void Start () {
@@ -16,4 +16,13 @@ public class Grabbable : MonoBehaviour {
 	void Update () {
 	
 	}
+
+	public void SetGrabbed(bool grabbed){
+		isGrabbed = grabbed;
+	}
+
+	public bool IsGrabbed(){
+		return isGrabbed;
+	}
+
 }
