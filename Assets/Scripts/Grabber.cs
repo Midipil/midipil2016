@@ -20,10 +20,13 @@ public class Grabber : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider other) {
-		Debug.Log ("Collision !");
 
-		if (other.gameObject.GetComponent<Grabbable> () != null) {
-			Grab (other.gameObject);
+		if (this.enabled) {
+			Debug.Log ("Grabber : Collision !");
+
+			if (other.gameObject.GetComponent<Grabbable> () != null && other.gameObject.GetComponent<Grabbable> ().isActiveAndEnabled) {
+				Grab (other.gameObject);
+			}
 		}
 
 	}
