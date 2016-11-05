@@ -4,6 +4,7 @@ using System.Collections;
 
 public class Smartphone : MonoBehaviour 
 {
+	public GameObject cradle;
 	public GameObject tinder;
 	public TinderImg[] tinderImages;
 	public GameObject fxExplosion;
@@ -13,8 +14,10 @@ public class Smartphone : MonoBehaviour
 	public Image batteryImg;
 	public Text batteryLowText;
 	public int batteryLifeSeconds;
+	public ButtonDoor btnDoor;
 
 	private Door door;
+	private SmartphoneSceneManager sceneManager;
 
 	public int batteryLife
     {
@@ -36,9 +39,11 @@ public class Smartphone : MonoBehaviour
     private int selectedTinder = 0;
     private bool noBattery;
     private bool drainBattery = true;
+    private bool won;
 
 	void Start () 
 	{
+		sceneManager = (SmartphoneSceneManager) FindObjectOfType(typeof(SmartphoneSceneManager));
 		door = GameObject.Find("Door").GetComponent<Door>();
 		batteryLife = 100;
 		startTime = Time.time;
@@ -47,8 +52,7 @@ public class Smartphone : MonoBehaviour
 			batteryLowText.gameObject.SetActive(false);
 
 		SetBattery(false);
-
-		ShowTinder(true);
+		ShowTinder(false);
 	}
 	
 	void Update () 
@@ -74,11 +78,18 @@ public class Smartphone : MonoBehaviour
 		if(batteryLife <= 0 && !noBattery)
 		{
 			SetBattery(false);
+			won = false;
+			Invoke("SetEnd", 2f);
 		}
 		else if(batteryLife > 0 && noBattery)
 		{
 			SetBattery(true);
 		}
+	}
+
+	void SetEnd()
+	{
+		sceneManager.SetEnd(won);
 	}
 
 	void SetBattery(bool empty)
@@ -98,10 +109,13 @@ public class Smartphone : MonoBehaviour
         	if(door)
         	{
         		if(Vector3.Distance(transform.position, door.transform.position) < 1.5f)
-        			Destroy(door.gameObject);
+        			door.Destroy();
         	}
 
         	Destroy(gameObject);
+
+        	won = true;
+			Invoke("SetEnd", 3f);
         }
 	}
 
@@ -133,11 +147,19 @@ public class Smartphone : MonoBehaviour
 
 	public void MatchTinder()
 	{
-
+		cradle.gameObject.SetActive(false);
+		won = false;
+		Invoke("SetEnd", 4f);
 	}
 
 	public void SetDrainBattery(bool drain)
 	{
 		drainBattery = drain;
 	}
+
+	public void SetBtnDoor(bool show)
+	{
+		btnDoor.gameObject.SetActive(show);
+	}
+
 }
