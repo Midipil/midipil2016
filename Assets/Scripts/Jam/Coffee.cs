@@ -14,11 +14,6 @@ public class Coffee : MonoBehaviour {
 	
 	void Update ()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            
-        }
-
         if (collideWithHead && !drinkingCoffee)
         {
             if(Mathf.Abs(transform.rotation.eulerAngles.x) > 90 || Mathf.Abs(transform.rotation.eulerAngles.z) > 90)
@@ -31,7 +26,8 @@ public class Coffee : MonoBehaviour {
     public void CollideWithHead(bool collide)
     {
         collideWithHead = collide;
-        Debug.Log("collide " + collideWithHead);
+
+        FindObjectOfType<JamTimer>().hasDoneSomething = true;
     }
 
     void DrinkCoffee()
