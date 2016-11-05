@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public abstract class SceneManager : MonoBehaviour {
+public class CoffeSceneManager : SceneManager {
 
 	// Use this for initialization
-	protected void Start () {
-		DontDestroyOnLoad (this.gameObject);
+	void Start () {
+		// Call base class Start method
+		base.Start ();
+
 	}
 	
 	// Update is called once per frame
@@ -14,12 +16,18 @@ public abstract class SceneManager : MonoBehaviour {
 	}
 
 	// Init scene and its content
-	public abstract void InitScene();
+	public override void InitScene(){
+
+	}
 
 	// Get from GameManager the previous scene state (last time we entered this scene)
-	protected abstract void GetPreviousState();
+	protected override void GetPreviousState(){
+
+	}
 
 	// Start end sequence when scene goal is achieved
-	public abstract void SetEnd(bool win);
+	public override void SetEnd(bool win){
+
+	}
 
 }
