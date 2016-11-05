@@ -11,7 +11,7 @@ public class CodePeeing : MonoBehaviour {
 
     string randomCode;
 
-    int collideCount = 0;
+    int currentTextLength = 0;
 
     public void Initialize()
     {
@@ -25,14 +25,17 @@ public class CodePeeing : MonoBehaviour {
     {
         if (initialized && other.tag == "Player")
         {
-            if (collideCount + 20 <= randomCode.Length)
+            if (currentTextLength + codePieceLength <= randomCode.Length)
                 DisplayMoreCode();
         }
     }
 
     void DisplayMoreCode()
     {
-        codeText.text += randomCode.Substring(collideCount, collideCount + codePieceLength);
-        collideCount += codePieceLength;
+        if(currentTextLength == 0)
+            FindObjectOfType<JamTimer>().hasDoneSomething = true;
+
+        codeText.text += randomCode.Substring(currentTextLength, codePieceLength);
+        currentTextLength += codePieceLength;
     }
 }

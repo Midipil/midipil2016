@@ -3,9 +3,9 @@ using System.Collections;
 
 [RequireComponent(typeof (Collider))]
 [RequireComponent(typeof (Rigidbody))]
-public class Grabbable : MonoBehaviour {
+public class Lethal : MonoBehaviour {
 
-	private bool isGrabbed = false;
+	public float minVelocityToKill = 0;
 
 	// Use this for initialization
 	void Start () {
@@ -16,13 +16,4 @@ public class Grabbable : MonoBehaviour {
 	void Update () {
 	
 	}
-
-	public void SetGrabbed(bool grabbed){
-		isGrabbed = grabbed;
-	}
-
-	public bool IsGrabbed(){
-		return isGrabbed;
-	}
-
 }

@@ -22,6 +22,7 @@ public class JamSceneManager : WorldManager {
 	// State we are currently
 	private SceneState currentState;
 
+    public JamTimer timer;
     public CodePeeing codePeeing;
     public MouseDrawing mouseDrawing;
 
@@ -66,6 +67,8 @@ public class JamSceneManager : WorldManager {
                 break;
 
             case SceneState.DO_SOME_PAINT:
+                currentState = SceneState.DO_SOME_CODE;
+                codePeeing.Initialize();
                 break;
 
             case SceneState.PUT_THE_VIVE:
@@ -82,6 +85,7 @@ public class JamSceneManager : WorldManager {
 
         }
 
+        timer.Initialize(this);
     }
 
 	// Start end sequence when scene goal is achieved
