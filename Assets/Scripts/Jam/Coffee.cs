@@ -39,6 +39,6 @@ public class Coffee : MonoBehaviour {
 
     void CoffeeDrank()
     {
-        FindObjectOfType<TextDisplay>().ShowEndScreen("Tu as gagné la jam !", true);
+        FindObjectOfType<TextDisplay>().ShowEndMessage("Tu as gagné la jam !", true);
     }
 }
