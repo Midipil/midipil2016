@@ -4,4 +4,14 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/_Scenes/Jam.unity
+  - enabled: 1
+    path: Assets/_Scenes/Coffe.unity
+  - enabled: 1
+    path: Assets/_Scenes/Couveuse.unity
+  - enabled: 1
+    path: Assets/_Scenes/Monster.unity
+  - enabled: 1
+    path: Assets/_Scenes/Smartphone.unity
