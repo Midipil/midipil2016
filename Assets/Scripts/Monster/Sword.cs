@@ -25,7 +25,7 @@ public class Sword : MonoBehaviour {
 	void Update () {
 
 		if (grabbable.IsGrabbed ()) {
-
+			UnlockSword ();
 		}
 
 	}
