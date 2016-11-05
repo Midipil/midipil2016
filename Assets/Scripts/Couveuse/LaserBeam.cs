@@ -11,12 +11,16 @@ public class LaserBeam : MonoBehaviour
     public GameObject impactFX;
     public int timeToKill = 3;
     public float currentTimeHit;
+	float initSpotAngle;
+
+	float deathTime = 5.0f;
 
 
     void Start()
     {
         line = gameObject.GetComponent<LineRenderer>();
 		currentTimeHit = timeToKill;
+		initSpotAngle = this.transform.Find ("Spotlight").GetComponent<Light> ().spotAngle;
     }
 
     void Update()
@@ -24,17 +28,17 @@ public class LaserBeam : MonoBehaviour
 
         if (currentTimeHit <= 0){
 			//GameObject.FindWithTag("GameManager").GetComponent<GameManager>().enemyWin = true;
-			Debug.Log("Enemy win");
+			//Debug.Log("Enemy win");
 		}
 
         Ray ray = new Ray(transform.position + minRadiusRayCast * transform.forward, transform.forward);
         RaycastHit hit;
 
-        line.SetPosition(0, transform.position);
+        //line.SetPosition(0, transform.position);
 
         if (Physics.Raycast(ray, out hit, rayLength))
         {
-            line.SetPosition(1, hit.point);
+            //line.SetPosition(1, hit.point);
             if (hit.transform.parent.tag == "Player")
             {
                 //hit.transform.GetComponent<Player>().life -= laserDamages;
@@ -45,16 +49,24 @@ public class LaserBeam : MonoBehaviour
 				if (!source.isPlaying){
 					hit.transform.gameObject.GetComponent<AudioSource>().Play();
 				}
+				this.transform.Find ("Spotlight").GetComponent<Light> ().spotAngle = 8;
 
-                impactFX.transform.position = hit.point;
+               // impactFX.transform.position = hit.point;
                 impactFX.SetActive(true);
+
+				Invoke ("Die", deathTime);
             }
         }
         else
         {
+			this.transform.Find ("Spotlight").GetComponent<Light> ().spotAngle = initSpotAngle;
             line.SetPosition(1, ray.GetPoint(rayLength));
-            impactFX.SetActive(false);
+            //impactFX.SetActive(false);
 			currentTimeHit = timeToKill;
         }
     }
+
+	void Die(){
+		FindObjectOfType<CouveuseSceneManager> ().SetEnd (false);
+	}
 }

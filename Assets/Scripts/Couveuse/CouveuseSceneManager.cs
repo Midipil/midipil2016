@@ -14,6 +14,9 @@ public class CouveuseSceneManager : WorldManager {
 		BROKEN_WHEEL
 	}
 
+	SceneState currentState;
+	SceneState previousState;
+
 	void Awake () {
 
 		sceneName = "Couveuse";
@@ -45,6 +48,20 @@ public class CouveuseSceneManager : WorldManager {
 
 	// Start end sequence when scene goal is achieved
 	public override void SetEnd(bool win){
+
+		switch (currentState)
+		{
+		case SceneState.ONE_EGG:
+			break;
+
+
+		default:
+			break;
+		}
+
+		previousState = currentState;
+
+		FindObjectOfType<GameManager>().ChangeScene();
 
 	}
 
