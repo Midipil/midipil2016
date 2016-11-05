@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class JamSceneManager : SceneManager {
+public class JamSceneManager : WorldManager {
+
+	private static bool instantiated = false;
 
 	// All scene states
 	private enum SceneState {
@@ -19,10 +21,21 @@ public class JamSceneManager : SceneManager {
 	// State we are currently
 	private SceneState currentState;
 
+	void Awake () {
+
+		sceneName = "Jam";
+
+		if (!instantiated) {
+			RegisterToGameManager ();
+			instantiated = true;
+		} else {
+			Destroy (this.gameObject);
+		}
+
+	}
+
 	// Use this for initialization
 	void Start () {
-		// Call base class Start method
-		base.Start ();
 
 	}
 	
@@ -33,6 +46,8 @@ public class JamSceneManager : SceneManager {
 
 	// Init scene and its content
 	public override void InitScene(){
+
+		Debug.Log ("Init jam scene.");
 
 		switch (previousState) {
 		case SceneState.DO_SOME_CODE:

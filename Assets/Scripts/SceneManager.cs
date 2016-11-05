@@ -1,11 +1,27 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public abstract class SceneManager : MonoBehaviour {
+public abstract class WorldManager : MonoBehaviour {
+
+	public string sceneName = "undefined";
+
+	protected void RegisterToGameManager () {
+		DontDestroyOnLoad (this.gameObject);
+
+		// Register to GameManager
+		GameObject gameManagerGO = GameObject.FindWithTag("GameManager");
+		if (gameManagerGO != null) {
+			GameManager gameManager = gameManagerGO.GetComponent<GameManager> ();
+			gameManager.RegisterSceneManager (this);
+		} else {
+			Debug.LogError ("No game object tagged GameManager found");
+		}
+
+	}
 
 	// Use this for initialization
-	protected void Start () {
-		DontDestroyOnLoad (this.gameObject);
+	void Start () {
+
 	}
 	
 	// Update is called once per frame

@@ -1,12 +1,25 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SmartphoneSceneManager : SceneManager {
+public class SmartphoneSceneManager : WorldManager {
+
+	private static bool instantiated = false;
+
+	void Awake () {
+
+		sceneName = "Smartphone";
+
+		if (!instantiated) {
+			RegisterToGameManager ();
+			instantiated = true;
+		} else {
+			Destroy (this.gameObject);
+		}
+
+	}
 
 	// Use this for initialization
 	void Start () {
-		// Call base class Start method
-		base.Start ();
 
 	}
 	
@@ -17,6 +30,7 @@ public class SmartphoneSceneManager : SceneManager {
 
 	// Init scene and its content
 	public override void InitScene(){
+		Debug.Log ("Init smartphone scene.");
 
 	}
 
