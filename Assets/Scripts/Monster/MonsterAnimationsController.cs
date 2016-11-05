@@ -9,6 +9,11 @@ public class MonsterAnimationsController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		if (!animator.isInitialized) {
+			animator.Rebind ();
+		}
+
+		animator.SetBool ("IsDead", false);
 		animator.SetFloat ("TimeBeforeRoar", timeBeforeRoar);
 	}
 	
@@ -25,6 +30,7 @@ public class MonsterAnimationsController : MonoBehaviour {
 	}
 
 	public void TriggerDeath(){
+		animator.SetBool ("IsDead", true);
 		animator.SetTrigger ("TriggerDeath");
 	}
 
