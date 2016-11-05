@@ -38,6 +38,7 @@ public class Grabber : MonoBehaviour {
 		objToGrab.transform.localRotation = Quaternion.identity;
 		objToGrab.GetComponent<Rigidbody> ().useGravity = false;
 		objToGrab.GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.FreezeAll;
+        objToGrab.GetComponent<Grabbable>().grabber = this;
 	}
 
 	void Drop(){
