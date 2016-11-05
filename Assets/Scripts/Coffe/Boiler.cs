@@ -11,6 +11,8 @@ public class Boiler : MonoBehaviour {
 
     bool isHeating = true;
 
+    SteamVR_TrackedController burningHand;
+
     public void Initialize(CoffeSceneManager sceneManager)
     {
         this.sceneManager = sceneManager;
@@ -50,6 +52,21 @@ public class Boiler : MonoBehaviour {
             Invoke("StartBoiling", 1f);
             sceneManager.handleTaken = true;
         }
+    }
+
+    public void HandBurning(SteamVR_TrackedController controller)
+    {
+        burningHand = controller;
+
+        InvokeRepeating("BurnHaptic", 0f, 0.1f);
+
+        if (controller == null && burningHand != null)
+            sceneManager.SetEnd(false);
+    }
+
+    void BurnHaptic()
+    {
+        SteamVR_Controller.Input((int)burningHand.controllerIndex).TriggerHapticPulse(100);
     }
 
     void StartBoiling()

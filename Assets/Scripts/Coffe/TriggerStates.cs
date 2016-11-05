@@ -10,11 +10,11 @@ public class TriggerStates : MonoBehaviour {
         isTriggered = true;
         if (name == "PorteFour" && other.tag == "Hand")
         {
-            transform.parent.GetComponent<Hoven>().ToggleDoor();
+            transform.parent.GetComponent<Hoven>().ToggleDoor(/*other.GetComponent<Grabber>().controller*/);
         }
         else if (name == "Casserole" && other.tag == "Hand")
         {
-            Debug.Log("Je me brule !!!");
+            transform.parent.GetComponent<Boiler>().HandBurning(other.GetComponent<Grabber>().controller);
         }
     }
 
