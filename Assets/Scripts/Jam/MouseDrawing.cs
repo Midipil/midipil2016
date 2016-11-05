@@ -28,6 +28,11 @@ public class MouseDrawing : MonoBehaviour {
         {
             if (hand != null)
                 MoveMouse();
+
+            if (!hand.GetComponent<Grabber>().controller.triggerPressed)
+            {
+                hand = null;
+            }
         }
     }
 
@@ -76,7 +81,15 @@ public class MouseDrawing : MonoBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
-        if (initialized && other.tag == "Hand")
+        if (initialized && other.tag == "Hand" && other.GetComponent<Grabber>().controller.triggerPressed)
+        {
+            hand = other.transform;
+        }
+    }
+
+    void OnTriggerStay(Collider other)
+    {
+        if (initialized && hand == null && other.tag == "Hand" && other.GetComponent<Grabber>().controller.triggerPressed)
         {
             hand = other.transform;
         }

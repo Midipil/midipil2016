@@ -28,7 +28,7 @@ public class TextDisplay : MonoBehaviour {
         feedback.text = "";
     }
 
-    public void ShowEndScreen(string message, bool win)
+    public void ShowEndMessage(string message, bool win)
     {
         feedback.text = message;
         gameWon = win;

@@ -6,7 +6,7 @@ public class EnemyController : MonoBehaviour {
 	float horizontal = 0.0f;
 	float vertical = 0.0f;
 
-	float speed = 1.5f; 
+	float speed = 0.02f; 
 
 	// Update is called once per frame
 	void FixedUpdate() {

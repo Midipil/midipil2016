@@ -71,6 +71,7 @@ GameObject:
   - 23: {fileID: 23000014246734150}
   - 54: {fileID: 54000010696957324}
   - 114: {fileID: 114000012629492744}
+  - 114: {fileID: 114000011313236942}
   m_Layer: 0
   m_Name: Smartphone
   m_TagString: Untagged
@@ -323,10 +324,10 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000010803787336}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -1.29, y: 3.42, z: 2.12}
+  m_LocalRotation: {x: 0.5, y: 0.5, z: 0.5, w: 0.5}
+  m_LocalPosition: {x: -0.156, y: 0.576, z: -0.019}
   m_LocalScale: {x: 0.02, y: 0.52946687, z: 0.262728}
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 90}
   m_Children:
   - {fileID: 4000013190475652}
   - {fileID: 4000011917471018}
@@ -373,7 +374,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 050e005d8ca633c4b91ed789cf6a30db, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
@@ -611,6 +612,17 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &114000011313236942
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010803787336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 104e16392f4013449998c1338166075a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114000011481826722
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -670,6 +682,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b89b88a31242d1428647dd909d66878, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  phone: {fileID: 114000012629492744}
 --- !u!114 &114000012195484966
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -708,6 +721,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 848a3b6cba37f6a4a9ef5e9da0474d53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cradle: {fileID: 0}
   tinder: {fileID: 1000010117467066}
   tinderImages:
   - {fileID: 114000012631459508}
@@ -718,7 +732,8 @@ MonoBehaviour:
   screenOFF: {fileID: 1000010473185378}
   batteryImg: {fileID: 114000011481826722}
   batteryLowText: {fileID: 114000013645716862}
-  batteryLifeSeconds: 300
+  batteryLifeSeconds: 40
+  btnDoor: {fileID: 114000012033745418}
 --- !u!114 &114000012631459508
 MonoBehaviour:
   m_ObjectHideFlags: 1

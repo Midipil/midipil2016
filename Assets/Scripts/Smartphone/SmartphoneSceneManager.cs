@@ -5,12 +5,36 @@ public class SmartphoneSceneManager : WorldManager {
 
 	private static bool instantiated = false;
 
+	// All scene states
+	private enum SceneState {
+        NOT_SET,
+        OPEN_DOOR,
+		MATCH_TINDER
+	}
+
+	// State we were last time we played this scene
+	private SceneState previousState;
+	// Did we win or lose last time we played this scene
+	private bool previousStateWin;
+	// State we are currently
+	private SceneState currentState;
+
+	private GameManager manager;
+
+	public Smartphone phone;
+	public Key key;
+	public Door door;
+
 	void Awake () {
 
 		sceneName = "Smartphone";
 
-		if (!instantiated) {
+		if (!instantiated) 
+		{
 			RegisterToGameManager ();
+			GameObject obj = GameObject.FindWithTag("GameManager");
+			if(obj)
+				manager = obj.GetComponent<GameManager>();
 			instantiated = true;
 		} else {
 			Destroy (this.gameObject);
@@ -29,14 +53,62 @@ public class SmartphoneSceneManager : WorldManager {
 	}
 
 	// Init scene and its content
-	public override void InitScene(){
-		Debug.Log ("Init smartphone scene.");
+	public override void InitScene()
+	{
+		switch (previousState)
+        {
+        	case SceneState.NOT_SET:
+				currentState = SceneState.OPEN_DOOR;
+				phone.SetBtnDoor(false);
+				key.gameObject.SetActive(true);
+                break;
 
+            case SceneState.OPEN_DOOR:
+            	if(!previousStateWin)
+            	{
+            		currentState = SceneState.OPEN_DOOR;
+					phone.SetBtnDoor(false);
+					key.gameObject.SetActive(true);
+            	}
+            	else
+            	{
+            		currentState = SceneState.MATCH_TINDER;
+            		key.gameObject.SetActive(false);
+            		phone.SetBtnDoor(true);
+            	}
+                break;
+
+            case SceneState.MATCH_TINDER:
+            	key.gameObject.SetActive(false);
+            	phone.SetBtnDoor(true);
+                break;
+
+            default:
+                break;
+        }
+
+		Debug.Log ("Init smartphone scene.");
 	}
 
 	// Start end sequence when scene goal is achieved
-	public override void SetEnd(bool win){
+	public override void SetEnd(bool win)
+	{
+		switch (currentState)
+        {
+            case SceneState.OPEN_DOOR:
+                break;
 
+            case SceneState.MATCH_TINDER:
+                break;
+
+            default:
+                break;
+        }
+
+        previousState = currentState;
+		previousStateWin = win;
+
+		manager.ChangeScene();
 	}
 
 }
