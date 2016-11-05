@@ -7,6 +7,7 @@ public class JamSceneManager : WorldManager {
 
 	// All scene states
 	private enum SceneState {
+        NOT_SET,
 		DO_SOME_CODE,
 		DO_SOME_PAINT,
 		PUT_THE_VIVE,
@@ -20,6 +21,9 @@ public class JamSceneManager : WorldManager {
 	private bool previousStateWin;
 	// State we are currently
 	private SceneState currentState;
+
+    public CodePeeing codePeeing;
+    public MouseDrawing mouseDrawing;
 
 	void Awake () {
 
@@ -49,34 +53,62 @@ public class JamSceneManager : WorldManager {
 
 		Debug.Log ("Init jam scene.");
 
-		switch (previousState) {
-		case SceneState.DO_SOME_CODE:
-			break;
+        switch (previousState)
+        {
+            case SceneState.NOT_SET:
+                currentState = SceneState.DO_SOME_CODE;
+                codePeeing.Initialize();
+                break;
 
-		case SceneState.DO_SOME_PAINT:
-			break;
+            case SceneState.DO_SOME_CODE:
+                currentState = SceneState.DO_SOME_PAINT;
+                mouseDrawing.Initialize();
+                break;
 
-		case SceneState.PUT_THE_VIVE:
-			break;
+            case SceneState.DO_SOME_PAINT:
+                break;
 
-		case SceneState.DRINK_COFFEE:
-			break;
+            case SceneState.PUT_THE_VIVE:
+                break;
 
-		case SceneState.WATCH_THE_CLOCK:
-			break;
+            case SceneState.DRINK_COFFEE:
+                break;
 
-		default:
-			break;
+            case SceneState.WATCH_THE_CLOCK:
+                break;
 
-		}
+            default:
+                break;
 
-	}
+        }
+
+    }
 
 	// Start end sequence when scene goal is achieved
 	public override void SetEnd(bool win){
 
-		// Save current state as previous one
-		previousState = currentState;
+        switch (currentState)
+        {
+            case SceneState.DO_SOME_CODE:
+                break;
+
+            case SceneState.DO_SOME_PAINT:
+                break;
+
+            case SceneState.PUT_THE_VIVE:
+                break;
+
+            case SceneState.DRINK_COFFEE:
+                break;
+
+            case SceneState.WATCH_THE_CLOCK:
+                break;
+
+            default:
+                break;
+        }
+
+        previousState = currentState;
 		previousStateWin = win;
 
 	}
