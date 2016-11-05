@@ -5,15 +5,16 @@ public class Hoven : MonoBehaviour {
 
     public Transform door;
 
-    bool doorOpened;
+    bool doorOpened, cakePlaced;
 
-    Cake cake;
+    public Cake cake;
 
     CoffeSceneManager sceneManager;
 
     public void Initialize(CoffeSceneManager sceneManager)
     {
         this.sceneManager = sceneManager;
+        cake.gameObject.SetActive(true);
     }
 
 	public void ToggleDoor()
@@ -28,7 +29,7 @@ public class Hoven : MonoBehaviour {
         }
         else
         {
-            if (cake != null)
+            if (cakePlaced)
             {
                 Invoke("CookCake", 1f);
             }
@@ -44,7 +45,7 @@ public class Hoven : MonoBehaviour {
             other.transform.parent = transform;
             other.transform.localPosition = Vector3.zero;
             other.transform.localRotation = Quaternion.identity;
-            cake = other.GetComponent<Cake>();
+            cakePlaced = true;
         }
     }
 
@@ -75,6 +76,6 @@ public class Hoven : MonoBehaviour {
 
     void CakeBurnt()
     {
-        FindObjectOfType<EndScreen>().ShowEndScreen("Tu as cramé le gateau !\nJean-Pierre Coffe n'est pas content du tout !", true);
+        FindObjectOfType<EndScreen>().ShowEndScreen("Tu as cramé le gateau !\nJean-Pierre Coffe n'est pas content du tout !", false);
     }
 }

@@ -13,12 +13,13 @@ public class EndScreen : MonoBehaviour {
     public void Initialize(WorldManager sceneManager)
     {
         this.sceneManager = sceneManager;
+        feedback.transform.parent.gameObject.SetActive(false);
     }
 
     public void ShowEndScreen(string message, bool win)
     {
         feedback.text = message;
-        gameObject.SetActive(true);
+        feedback.transform.parent.gameObject.SetActive(true);
         gameWon = win;
         Invoke("EndScene", feedbackDelay);
     }

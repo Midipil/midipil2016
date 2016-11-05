@@ -5,6 +5,8 @@ public class CoffeSceneManager : WorldManager {
 
 	private static bool instantiated = false;
 
+    public bool handleTaken;
+
     // All scene states
     public enum SceneState
     {
@@ -53,18 +55,26 @@ public class CoffeSceneManager : WorldManager {
         switch (previousState)
         {
             case SceneState.NOT_SET:
+                currentState = SceneState.MILK_BOILING;
+                FindObjectOfType<Boiler>().Initialize(this);
+                break;
+            case SceneState.MILK_BOILING:
                 currentState = SceneState.CAKE_OK;
                 FindObjectOfType<Hoven>().Initialize(this);
                 break;
-            case SceneState.MILK_BOILING:
+            case SceneState.CAKE_OK:
+                currentState = SceneState.BOILER_HANDLE;
+                FindObjectOfType<Boiler>().Initialize(this);
                 break;
             case SceneState.BOILER_HANDLE:
-                break;
-            case SceneState.BOILER_GRABBABLE:
-                break;
-            case SceneState.CAKE_OK:
+                currentState = SceneState.CAKE_BURNT;
+                FindObjectOfType<Boiler>().Initialize(this);
                 break;
             case SceneState.CAKE_BURNT:
+                currentState = SceneState.BOILER_GRABBABLE;
+                FindObjectOfType<Boiler>().Initialize(this);
+                break;
+            case SceneState.BOILER_GRABBABLE:
                 break;
             default:
                 break;
