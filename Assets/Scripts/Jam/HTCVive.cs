@@ -1,11 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-[RequireComponent(typeof (Collider))]
-[RequireComponent(typeof (Rigidbody))]
-public class Grabbable : MonoBehaviour {
-
-    public Grabber grabber;
+public class HTCVive : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
