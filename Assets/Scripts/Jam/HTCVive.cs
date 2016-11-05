@@ -28,7 +28,6 @@ public class HTCVive : MonoBehaviour
 
     public void PutVive()
     {
-        //grabbable.grabber.Drop();
-        FindObjectOfType<JamTimer>().EndJam("Vous avez gagnez la jam !");
+        FindObjectOfType<TextDisplay>().ShowEndScreen("Tu as gagné la jam !", true);
     }
 }

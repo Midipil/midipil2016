@@ -80,7 +80,7 @@ public class CoffeSceneManager : WorldManager {
                 break;
         }
 
-        FindObjectOfType<EndScreen>().Initialize(this);
+        FindObjectOfType<TextDisplay>().Initialize(this);
 	}
 
 	// Start end sequence when scene goal is achieved

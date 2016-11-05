@@ -85,6 +85,7 @@ public class JamSceneManager : WorldManager {
 
         }
 
+        FindObjectOfType<TextDisplay>().Initialize(this);
         timer.Initialize(this);
     }
 

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class EndScreen : MonoBehaviour {
+public class TextDisplay : MonoBehaviour {
 
     public Text feedback;
     public float feedbackDelay;
@@ -13,13 +13,24 @@ public class EndScreen : MonoBehaviour {
     public void Initialize(WorldManager sceneManager)
     {
         this.sceneManager = sceneManager;
-        feedback.transform.parent.gameObject.SetActive(false);
+        feedback.text = "";
+    }
+
+    public void DisplayText(string text, float duration)
+    {
+        CancelInvoke("HideText");
+        feedback.text = text;
+        Invoke("HideText", duration);
+    }
+
+    public void HideText()
+    {
+        feedback.text = "";
     }
 
     public void ShowEndScreen(string message, bool win)
     {
         feedback.text = message;
-        feedback.transform.parent.gameObject.SetActive(true);
         gameWon = win;
         Invoke("EndScene", feedbackDelay);
     }
