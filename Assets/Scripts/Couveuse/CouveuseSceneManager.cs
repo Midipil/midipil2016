@@ -14,8 +14,10 @@ public class CouveuseSceneManager : WorldManager {
 		BROKEN_WHEEL
 	}
 
-	SceneState currentState;
-	SceneState previousState;
+	SceneState currentState = SceneState.ONE_EGG;
+	SceneState previousState = SceneState.ONE_EGG;
+
+	public GameObject playerCamera, enemyCamera, playerBot, enemyBot, oneEgg, manyEggs, enemy;
 
 	void Awake () {
 
@@ -43,6 +45,23 @@ public class CouveuseSceneManager : WorldManager {
 	// Init scene and its content
 	public override void InitScene(){
 		Debug.Log ("Init couveuse scene.");
+		switch (currentState)
+		{
+		case SceneState.ONE_EGG:
+			Debug.Log ("smlkfvnmé");
+			playerCamera.SetActive (true);
+			playerBot.SetActive (false);
+			enemyCamera.SetActive (false);
+			enemyBot.SetActive (true);
+			oneEgg.SetActive (true);
+			manyEggs.SetActive (false);
+			enemy.SetActive (false);
+			break;
+
+
+		default:
+			break;
+		}
 
 	}
 
