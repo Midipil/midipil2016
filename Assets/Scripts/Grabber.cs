@@ -3,14 +3,16 @@ using System.Collections;
 
 [RequireComponent(typeof (Collider))]
 [RequireComponent(typeof (Rigidbody))]
+[RequireComponent(typeof (FixedJoint))]
 public class Grabber : MonoBehaviour {
 
-	SteamVR_Controller.Device controller = null;
+	public SteamVR_TrackedController controller = null;
 
 	private Grabbable grabbedObject = null;
 
 	private float dropCooldown = 0;
-	private float dropCooldownAmount = 0.1f;
+	private float grabCooldown = 0;
+	private float cooldownAmount = 0.2f;
 
 
 	// Use this for initialization
@@ -20,16 +22,21 @@ public class Grabber : MonoBehaviour {
 		gameObject.GetComponent<Rigidbody> ().useGravity = false;
 		gameObject.GetComponent<Collider> ().isTrigger = true;
 
+		//controller = transform.parent.GetComponent<SteamVR_TrackedController> ();
+		//controller.TriggerClicked += OnTriggerClicked;
+
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
-
+		
+		grabCooldown -= Time.deltaTime;
 		dropCooldown -= Time.deltaTime;
 
 		// If an object is grabbed
 		if (grabbedObject != null 
-			&& Input.GetKeyUp ("g")
+			&& controller.triggerPressed
 			&& dropCooldown <= 0) {
 			Drop ();
 		}
@@ -42,7 +49,8 @@ public class Grabber : MonoBehaviour {
 			&& grabbedObject == null
 			&& other.gameObject.GetComponent<Grabbable> () != null 
 			&& other.gameObject.GetComponent<Grabbable> ().isActiveAndEnabled
-			&& Input.GetKeyUp ("g")) {
+			&& controller.triggerPressed
+			&& grabCooldown <= 0) {
 				
 			Grab (other.gameObject);
 		}
@@ -55,7 +63,8 @@ public class Grabber : MonoBehaviour {
 			&& grabbedObject == null
 			&& other.gameObject.GetComponent<Grabbable> () != null 
 			&& other.gameObject.GetComponent<Grabbable> ().isActiveAndEnabled
-			&& Input.GetKeyUp ("g")) {
+			&& controller.triggerPressed
+			&& grabCooldown <= 0) {
 					
 			Grab (other.gameObject);
 		}
@@ -66,24 +75,40 @@ public class Grabber : MonoBehaviour {
 		Debug.Log ("Grabbed !");
 
 		grabbedObject = objToGrab.GetComponent<Grabbable> ();
-		grabbedObject.transform.parent = this.transform;
-		grabbedObject.transform.localPosition = Vector3.zero;
-		grabbedObject.transform.localRotation = Quaternion.identity;
-		grabbedObject.GetComponent<Rigidbody> ().useGravity = false;
-		grabbedObject.GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.FreezeAll;
+		objToGrab.transform.position = this.transform.position;
+		objToGrab.transform.rotation = this.transform.rotation;
+		GetComponent<FixedJoint> ().connectedBody = objToGrab.GetComponent<Rigidbody> ();
 		grabbedObject.SetGrabbed(true);
 
-		dropCooldown = dropCooldownAmount;
+		dropCooldown = cooldownAmount;
 	}
 
 	void Drop(){
 		Debug.Log ("Dropped !");
 
-		grabbedObject.transform.parent = null;
-		grabbedObject.GetComponent<Rigidbody> ().useGravity = true;
-		grabbedObject.GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.None;
+		GetComponent<FixedJoint> ().connectedBody = null;
 		grabbedObject.SetGrabbed (false);
+		Debug.Log (this.transform.parent.GetComponent<Rigidbody> ().velocity);
+		grabbedObject.GetComponent<Rigidbody> ().AddForce (this.transform.GetComponent<Rigidbody>().velocity);
+
 		grabbedObject = null;
+
+		grabCooldown = cooldownAmount;
 	}
 
+	void OnTriggerClicked(object o, ClickedEventArgs e){
+		//Debug.Log ("click");
+	}
+	/*
+	void Update () {
+		if (controller!=null) {
+			HandleControllerInput (controller);
+		}
+	}
+
+	void HandleControllerInput(SteamVR_Controller.Device c){
+		// Create sculpture on trigger press
+
+	}
+*/
 }
