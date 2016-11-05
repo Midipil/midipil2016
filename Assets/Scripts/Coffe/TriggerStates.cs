@@ -26,6 +26,7 @@ public class TriggerStates : MonoBehaviour {
         if (name == "Casserole" && other.tag == "Hand")
         {
             transform.parent.GetComponent<Boiler>().HandBurning(null);
+            //FindObjectOfType<CoffeSceneManager>().SetEnd(false);
         }
     }
 }
