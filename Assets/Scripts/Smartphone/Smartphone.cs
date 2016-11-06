@@ -4,6 +4,8 @@ using System.Collections;
 
 public class Smartphone : MonoBehaviour 
 {
+	public int controllerIndex { get; private set; }
+
 	public GameObject cradle;
 	public GameObject tinder;
 	public TinderImg[] tinderImages;
@@ -15,6 +17,7 @@ public class Smartphone : MonoBehaviour
 	public Text batteryLowText;
 	public int batteryLifeSeconds;
 	public ButtonDoor btnDoor;
+	public Grabbable grab;
 
 	private Door door;
 	private SmartphoneSceneManager sceneManager;
@@ -43,6 +46,7 @@ public class Smartphone : MonoBehaviour
 
 	void Start () 
 	{
+		controllerIndex = -1;
 		sceneManager = (SmartphoneSceneManager) FindObjectOfType(typeof(SmartphoneSceneManager));
 		door = GameObject.Find("Door").GetComponent<Door>();
 		batteryLife = 100;
@@ -85,6 +89,9 @@ public class Smartphone : MonoBehaviour
 		{
 			SetBattery(true);
 		}
+
+		if(controllerIndex != grab.controllerIndex)
+			controllerIndex = grab.controllerIndex;
 	}
 
 	void SetEnd()
@@ -148,7 +155,7 @@ public class Smartphone : MonoBehaviour
 	public void MatchTinder()
 	{
 		cradle.gameObject.SetActive(false);
-		won = false;
+		won = true;
 		Invoke("SetEnd", 4f);
 	}
 

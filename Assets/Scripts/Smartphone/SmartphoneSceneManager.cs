@@ -21,9 +21,9 @@ public class SmartphoneSceneManager : WorldManager {
 
 	private GameManager manager;
 
-	public Smartphone phone;
-	public Key key;
-	public Door door;
+	private Smartphone phone;
+	private Key key;
+	private Door door;
 
 	void Awake () {
 
@@ -55,6 +55,11 @@ public class SmartphoneSceneManager : WorldManager {
 	// Init scene and its content
 	public override void InitScene()
 	{
+		SmartphoneHolder holder = GameObject.FindWithTag("Holder").GetComponent<SmartphoneHolder>();
+		phone = holder.phone;
+		key = holder.key;
+		door = holder.door;
+
 		switch (previousState)
         {
         	case SceneState.NOT_SET:
@@ -62,7 +67,6 @@ public class SmartphoneSceneManager : WorldManager {
 				phone.SetBtnDoor(false);
 				key.gameObject.SetActive(true);
                 break;
-
             case SceneState.OPEN_DOOR:
             	if(!previousStateWin)
             	{
@@ -77,7 +81,6 @@ public class SmartphoneSceneManager : WorldManager {
             		phone.SetBtnDoor(true);
             	}
                 break;
-
             case SceneState.MATCH_TINDER:
             	key.gameObject.SetActive(false);
             	phone.SetBtnDoor(true);

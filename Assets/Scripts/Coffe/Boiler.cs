@@ -9,9 +9,9 @@ public class Boiler : MonoBehaviour {
     public Grabbable handle;
     public GameObject heatingParticles, boilingParticles;
 
-    bool isHeating = true, handleGrabbed;
+    bool needToLook, isHeating = true, handleGrabbed;
 
-    SteamVR_TrackedController burningHand;
+	SteamVR_TrackedObject burningHand;
 
     public void Initialize(CoffeSceneManager sceneManager)
     {
@@ -20,9 +20,12 @@ public class Boiler : MonoBehaviour {
 
         FindObjectOfType<TextDisplay>().DisplayText("Fait attention au lait !", 5f);
 
-        if (sceneManager.handleTaken)
-            Destroy(handle);
+		if (sceneManager.handleTaken) {
+			Destroy(handle);
+			gameObject.AddComponent<Grabbable>();
+		}
 
+		Invoke("NeedToLook", 3f);
         Invoke("MakeNoise", 8f);
 
         //FindObjectOfType<Grabber>().Grab(gameObject);
@@ -34,6 +37,11 @@ public class Boiler : MonoBehaviour {
         Debug.Log("StartHeating");
     }*/
 
+	void NeedToLook()
+	{
+		needToLook = true;
+	}
+
     void MakeNoise()
     {
         Debug.Log("MakeNoise");
@@ -43,7 +51,7 @@ public class Boiler : MonoBehaviour {
     {
         if (isHeating)
         {
-            if (isHeating && !handleGrabbed && Vector3.Angle(transform.position - Camera.main.transform.position, Camera.main.transform.transform.forward) > Camera.main.fieldOfView)
+			if (needToLook && isHeating && !handleGrabbed && Vector3.Angle(transform.position - Camera.main.transform.position, Camera.main.transform.transform.forward) > Camera.main.fieldOfView)
             {
                 StartBoiling();
             }
@@ -51,9 +59,12 @@ public class Boiler : MonoBehaviour {
 
         if (!handleGrabbed && handle.IsGrabbed())
         {
-            Invoke("StartBoiling", 1f);
+            //Invoke("StartBoiling", 1f);
             sceneManager.handleTaken = true;
-            handleGrabbed = true;
+			handleGrabbed = true;
+			handle.GetComponent<Rigidbody>().useGravity = true;
+			handle.GetComponent<Rigidbody>().isKinematic = false;
+			handle.GetComponent<Collider>().isTrigger = false;
             CancelInvoke("MakeNoise");
         }
 
@@ -79,22 +90,25 @@ public class Boiler : MonoBehaviour {
         milk.GetComponent<Collider>().enabled = true;
     }
 
-    public void HandBurning(SteamVR_TrackedController controller)
-    {
+    /*public void HandBurning(SteamVR_TrackedObject controller)
+	{
+		Debug.Log("HandBurning");
         CancelInvoke("MakeNoise");
 
-        if (controller == null && burningHand != null)
-            sceneManager.SetEnd(false);
-
-        burningHand = controller;
-
-        InvokeRepeating("BurnHaptic", 0f, 0.1f);
+		if (controller == null && burningHand != null) {
+			sceneManager.SetEnd (false);
+			CancelInvoke ("BurnHaptic");
+		}
+		else if (controller != null && burningHand == null) {
+			burningHand = controller;
+			InvokeRepeating("BurnHaptic", 0f, 0.1f);
+		}
     }
 
     void BurnHaptic()
     {
-        //SteamVR_Controller.Input((int)burningHand.controllerIndex).TriggerHapticPulse(100);
-    }
+		SteamVR_Controller.Input((int)burningHand.index).TriggerHapticPulse(5000);
+    }*/
 
     void StartBoiling()
     {

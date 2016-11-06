@@ -5,6 +5,12 @@ using System.Collections;
 [RequireComponent(typeof (Rigidbody))]
 public class Grabbable : MonoBehaviour {
 
+	public int controllerIndex 
+	{ 
+		get;
+		private set;
+	}
+
 	private bool isGrabbed = false;
 	[HideInInspector]
 	public bool dropAsked = false;
@@ -19,8 +25,10 @@ public class Grabbable : MonoBehaviour {
 	
 	}
 
-	public void SetGrabbed(bool grabbed){
+	public void SetGrabbed(bool grabbed, int controller_index = -1)
+	{
 		isGrabbed = grabbed;
+		controllerIndex = controller_index;
 	}
 
 	public bool IsGrabbed(){
