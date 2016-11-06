@@ -42,9 +42,6 @@ public class Door : MonoBehaviour
 				MoveDoor();
 			else
 				StartCoroutine("OpenDoor");
-
-			if(phone)
-				phone.SetDrainBattery(false);
 		}
 	}
 
