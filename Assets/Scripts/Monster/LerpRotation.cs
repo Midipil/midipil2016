@@ -24,9 +24,9 @@ public class LerpRotation : MonoBehaviour {
 		if (animStarted) {
 			float distCovered = (Time.time - startTime) * speed;
 			float fracJourney = distCovered / journeyLength;
-			target.transform.rotation = Quaternion.Euler(Vector3.Lerp (beginRotation, endRotation, fracJourney));
-			if (distCovered >= 1) {
-				animStarted = false;
+			target.transform.localRotation = Quaternion.Euler(Vector3.Lerp (beginRotation, endRotation, fracJourney));
+			if (fracJourney >= 1) {
+				//animStarted = false;
 				GameObject.FindWithTag ("SceneManager").GetComponent<MonsterSceneManager>().SetEnd(true);
 			}
 		}
@@ -34,9 +34,11 @@ public class LerpRotation : MonoBehaviour {
 	}
 
 	void OnTriggerEnter() {
-		animStarted = true;
-		startTime = Time.time;
-		journeyLength = Vector3.Distance(beginRotation, endRotation);
+		if (!animStarted) {
+			animStarted = true;
+			startTime = Time.time;
+			journeyLength = Vector3.Distance (beginRotation, endRotation);
+		}
 	}
 
 }
