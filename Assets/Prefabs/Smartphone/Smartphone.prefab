@@ -761,7 +761,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -798,7 +798,7 @@ MonoBehaviour:
   screenOFF: {fileID: 1000010473185378}
   batteryImg: {fileID: 114000011481826722}
   batteryLowText: {fileID: 114000013645716862}
-  batteryLifeSeconds: 40
+  batteryLifeSeconds: 60
   btnDoor: {fileID: 114000012033745418}
   grab: {fileID: 114000011313236942}
 --- !u!114 &114000012631459508
@@ -1210,7 +1210,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000010117467066}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -1220,7 +1220,7 @@ RectTransform:
   m_RootOrder: 4
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -0, y: -0.74}
   m_SizeDelta: {x: 5.5, y: 9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224000011417813214
