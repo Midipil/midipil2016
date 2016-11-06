@@ -14,7 +14,7 @@ public class TriggerStates : MonoBehaviour {
         }
         else if (name == "Casserole" && other.tag == "Hand")
         {
-            transform.parent.GetComponent<Boiler>().HandBurning(other.GetComponent<Grabber>().controller);
+			transform.parent.GetComponent<Boiler>().HandBurning(other.GetComponentInParent<SteamVR_TrackedObject>());
         }
     }
 
