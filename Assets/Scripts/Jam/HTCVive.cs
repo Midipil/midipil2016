@@ -27,7 +27,8 @@ public class HTCVive : MonoBehaviour
     }
 
     public void PutVive()
-    {
+	{
+		GameObject.Find ("GameManager").GetComponent<GameManager> ().playWin ();
 		FindObjectOfType<JamSceneManager>().SetEnd(true);
     }
 }
