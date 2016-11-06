@@ -12,10 +12,10 @@ public class TriggerStates : MonoBehaviour {
         {
             transform.parent.GetComponent<Hoven>().ToggleDoor(other.GetComponent<Grabber>().controller);
         }
-        else if (name == "Casserole" && other.tag == "Hand")
+        /*else if (name == "Casserole" && other.tag == "Hand")
         {
 			transform.parent.GetComponent<Boiler>().HandBurning(other.GetComponentInParent<SteamVR_TrackedObject>());
-        }
+        }*/
     }
 
 
@@ -25,8 +25,21 @@ public class TriggerStates : MonoBehaviour {
 
         if (name == "Casserole" && other.tag == "Hand")
         {
-            transform.parent.GetComponent<Boiler>().HandBurning(null);
-            //FindObjectOfType<CoffeSceneManager>().SetEnd(false);
+			//Debug.Log ("END");
+            FindObjectOfType<CoffeSceneManager>().SetEnd(false);
         }
-    }
+	}
+
+
+	void OnTriggerStay(Collider other)
+	{
+		isTriggered = true;
+
+		if (name == "Casserole" && other.tag == "Hand")
+		{
+			//Debug.Log ("HAPTIC");
+			SteamVR_Controller.Input((int)other.GetComponentInParent<SteamVR_TrackedObject>().index).TriggerHapticPulse(5000);
+
+		}
+	}
 }

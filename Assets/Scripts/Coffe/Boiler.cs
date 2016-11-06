@@ -20,8 +20,10 @@ public class Boiler : MonoBehaviour {
 
         FindObjectOfType<TextDisplay>().DisplayText("Fait attention au lait !", 5f);
 
-        if (sceneManager.handleTaken)
-            Destroy(handle);
+		if (sceneManager.handleTaken) {
+			Destroy(handle);
+			gameObject.AddComponent<Grabbable>();
+		}
 
 		Invoke("NeedToLook", 3f);
         Invoke("MakeNoise", 8f);
@@ -88,7 +90,7 @@ public class Boiler : MonoBehaviour {
         milk.GetComponent<Collider>().enabled = true;
     }
 
-    public void HandBurning(SteamVR_TrackedObject controller)
+    /*public void HandBurning(SteamVR_TrackedObject controller)
 	{
 		Debug.Log("HandBurning");
         CancelInvoke("MakeNoise");
@@ -97,9 +99,8 @@ public class Boiler : MonoBehaviour {
 			sceneManager.SetEnd (false);
 			CancelInvoke ("BurnHaptic");
 		}
-		else if (burningHand == null) {
+		else if (controller != null && burningHand == null) {
 			burningHand = controller;
-
 			InvokeRepeating("BurnHaptic", 0f, 0.1f);
 		}
     }
@@ -107,7 +108,7 @@ public class Boiler : MonoBehaviour {
     void BurnHaptic()
     {
 		SteamVR_Controller.Input((int)burningHand.index).TriggerHapticPulse(5000);
-    }
+    }*/
 
     void StartBoiling()
     {
