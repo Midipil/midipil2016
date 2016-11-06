@@ -13,18 +13,21 @@ public class ButtonDoor : MonoBehaviour
 	
 	void OnTriggerEnter(Collider other) 
 	{
-        bool ok = false;
+		if (other != null) 
+		{
+			bool ok = false;
 
-        if(other.gameObject.tag.Equals("LeftHand") || other.gameObject.tag.Equals("RightHand"))
-        {
-        	int index = (int)other.gameObject.GetComponentInParent<SteamVR_TrackedObject>().index;
-
-        	if(phone.controllerIndex != index)
+			if(other.gameObject.tag.Equals("LeftHand") || other.gameObject.tag.Equals("RightHand"))
 			{
-				door.Open(true);
-				phone.SetEndTime(true, 3f);
-	        	gameObject.SetActive(false);
+				int index = (int)other.gameObject.GetComponentInParent<SteamVR_TrackedObject>().index;
+
+				if(phone.controllerIndex != index)
+				{
+					door.Open(true);
+					phone.SetEndTime(true, 3f);
+					gameObject.SetActive(false);
+				}
 			}
-        }
+		} 
     }
 }

@@ -52,7 +52,9 @@ public class Smartphone : MonoBehaviour
 	{
 		controllerIndex = -1;
 		sceneManager = (SmartphoneSceneManager) FindObjectOfType(typeof(SmartphoneSceneManager));
-		door = GameObject.Find("Door").GetComponent<Door>();
+		GameObject obj = GameObject.Find ("Door");
+		if(obj)
+			door = obj.GetComponent<Door>();
 		batteryLife = 100;
 		startTime = Time.time;
 

@@ -10,7 +10,7 @@ public class TinderBtn : MonoBehaviour
 
 	void OnTriggerEnter(Collider other) 
 	{
-		if(isCollisionEnabled)
+		if(isCollisionEnabled && other)
 		{
 			if(other.gameObject.tag.Equals("LeftHand") || other.gameObject.tag.Equals("RightHand"))
         	{
