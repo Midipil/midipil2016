@@ -51,8 +51,12 @@ public class Grabber : MonoBehaviour {
 			&& other.gameObject.GetComponent<Grabbable> ().isActiveAndEnabled
 			&& (controller.triggerPressed || controller.gripped)
 			&& grabCooldown <= 0) {
-				
-			Grab (other.gameObject);
+
+			if (other.gameObject.GetComponent<Grabbable> ().cantBeGrabbed) {
+				SteamVR_Controller.Input((int)GetComponentInParent<SteamVR_TrackedObject>().index).TriggerHapticPulse((ushort)1000);
+			} else {
+				Grab (other.gameObject);
+			}
 		}
 
 	}
@@ -65,8 +69,12 @@ public class Grabber : MonoBehaviour {
 			&& other.gameObject.GetComponent<Grabbable> ().isActiveAndEnabled
 			&& (controller.triggerPressed || controller.gripped)
 			&& grabCooldown <= 0) {
-					
-			Grab (other.gameObject);
+
+			if (other.gameObject.GetComponent<Grabbable> ().cantBeGrabbed) {
+				SteamVR_Controller.Input((int)GetComponentInParent<SteamVR_TrackedObject>().index).TriggerHapticPulse((ushort)1000);
+			} else {
+				Grab (other.gameObject);
+			}
 		}
 
 	}

@@ -16,7 +16,7 @@ public class Sword : MonoBehaviour {
 	void Start () {
 
 		if (!unlockable) {
-			grabbable.enabled = false;
+			grabbable.cantBeGrabbed = true;
 		}
 
 	}
