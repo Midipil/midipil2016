@@ -3,6 +3,7 @@ using System.Collections;
 
 public class Door : MonoBehaviour 
 {
+	public AudioSource audio;
 	public float timeMoveDoor; // Time to open the door
 
 	private bool opening, isOpen;
@@ -38,6 +39,8 @@ public class Door : MonoBehaviour
 	{
 		if(!isOpen)
 		{
+			audio.Stop();
+			audio.Play();
 			if(openNow)
 				MoveDoor();
 			else
@@ -60,5 +63,6 @@ public class Door : MonoBehaviour
 	{
 		startTimeMove = Time.time;
 		opening = true;
+		phone.SetEndTime(true, timeMoveDoor);
 	}
 }
