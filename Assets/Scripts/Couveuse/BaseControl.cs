@@ -30,6 +30,7 @@ public class BaseControl : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider o) {
+
 		if (ec) {
 			if (controlDirection == Direction.LEFT) {
 				ec.setDirection (-1.0f, 0.0f);
@@ -52,8 +53,7 @@ public class BaseControl : MonoBehaviour {
 	} 
 
 	void OnTriggerStay(Collider o){
-		Debug.Log ("RUMBLE");
-		SteamVR_Controller.Input((int)o.transform.GetComponentInParent<SteamVR_TrackedObject>().index).TriggerHapticPulse((ushort)1000);
+			SteamVR_Controller.Input ((int)o.transform.GetComponentInParent<SteamVR_TrackedObject> ().index).TriggerHapticPulse ((ushort)1000);
 	}
 
 	void OnTriggerExit(Collider o) {
