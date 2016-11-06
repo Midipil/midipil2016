@@ -8,6 +8,7 @@ public class Boiler : MonoBehaviour {
     public GameObject milk;
     public Grabbable handle;
     public GameObject heatingParticles, boilingParticles;
+    public AudioSource backNoise;
 
     bool needToLook, isHeating = true, handleGrabbed;
 
@@ -18,19 +19,19 @@ public class Boiler : MonoBehaviour {
         this.sceneManager = sceneManager;
         gameObject.SetActive(true);
 
-        FindObjectOfType<TextDisplay>().DisplayText("Fait attention au lait !", 10f);
+        FindObjectOfType<TextDisplay>().DisplayText("Fait attention au lait !", 8f);
 
 		if (sceneManager.handleTaken) {
 			Destroy(handle);
 			gameObject.AddComponent<Grabbable>();
 		}
 
-		Invoke("NeedToLook", 10f);
-        Invoke("MakeNoise", 15f);
+		Invoke("NeedToLook", 5f);
+        Invoke("MakeNoise", 10f);
 
         GetComponent<AudioSource>().Play();
 
-        //FindObjectOfType<Grabber>().Grab(gameObject);
+        FindObjectOfType<Grabber>().Grab(gameObject);
     }
 
     /*public void StartHeating()
@@ -46,7 +47,7 @@ public class Boiler : MonoBehaviour {
 
     void MakeNoise()
     {
-        Debug.Log("MakeNoise");
+        backNoise.Play();
     }
 
     void Update()
@@ -77,6 +78,7 @@ public class Boiler : MonoBehaviour {
             boilingParticles.SetActive(false);
             GetComponent<AudioSource>().Stop();
             CancelInvoke("MakeNoise");
+            isHeating = false;
         }
 
         if(transform.up.y < -0.8)

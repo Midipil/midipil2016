@@ -19,7 +19,7 @@ public class CoffeSceneManager : WorldManager {
     }
 
     // State we were last time we played this scene
-	private SceneState previousState = SceneState.MILK_BOILING;
+	private SceneState previousState = SceneState.NOT_SET;
     // Did we win or lose last time we played this scene
     private bool previousStateWin;
     // State we are currently
@@ -35,7 +35,6 @@ public class CoffeSceneManager : WorldManager {
 		} else {
 			Destroy (this.gameObject);
 		}
-
 	}
 
 	// Use this for initialization
