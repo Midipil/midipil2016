@@ -28,7 +28,7 @@ public class SnapGrabbedObject : MonoBehaviour {
 
 			if (other.name == "Cake") {
 				FindObjectOfType<Hoven> ().cakePlaced = true;
-				//other.GetComponent<Rigidbody> ().isKinematic = true;
+                Destroy(this);
 			}
 		}
 
