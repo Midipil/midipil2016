@@ -28,6 +28,8 @@ public class Boiler : MonoBehaviour {
 		Invoke("NeedToLook", 10f);
         Invoke("MakeNoise", 15f);
 
+        GetComponent<AudioSource>().Play();
+
         //FindObjectOfType<Grabber>().Grab(gameObject);
     }
 
@@ -54,6 +56,7 @@ public class Boiler : MonoBehaviour {
 			if (needToLook && isHeating && !handleGrabbed && Vector3.Angle(transform.position - Camera.main.transform.position, Camera.main.transform.transform.forward) > Camera.main.fieldOfView)
             {
                 StartBoiling();
+                GetComponent<AudioSource>().volume = 1f;
             }
         }
 
@@ -72,6 +75,7 @@ public class Boiler : MonoBehaviour {
         {
             heatingParticles.SetActive(false);
             boilingParticles.SetActive(false);
+            GetComponent<AudioSource>().Stop();
             CancelInvoke("MakeNoise");
         }
 

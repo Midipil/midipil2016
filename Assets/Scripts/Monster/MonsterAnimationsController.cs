@@ -11,6 +11,12 @@ public class MonsterAnimationsController : MonoBehaviour {
 	private float countdownBeforeEnd = 8.0f;
 	private bool win = false;
 
+	public AudioSource idleSound;
+	public AudioSource roarSound;
+	public AudioSource attackSound;
+	public AudioSource whooshSound;
+	public AudioSource deathSound;
+
 	// Use this for initialization
 	void Start () {
 		if (!animator.isInitialized) {
@@ -35,6 +41,38 @@ public class MonsterAnimationsController : MonoBehaviour {
 		if (countdownBeforeEnd <= 0) {
 			GameObject.FindWithTag ("SceneManager").GetComponent<MonsterSceneManager>().SetEnd(win);
 		}
+
+
+		// Play sounds
+		if (animator.GetCurrentAnimatorStateInfo(0).IsName("Idle breathing") && !idleSound.isPlaying) {
+			idleSound.Play ();
+			roarSound.Stop ();
+			attackSound.Stop ();
+			whooshSound.Stop ();
+			deathSound.Stop ();
+		}
+		else if (animator.GetCurrentAnimatorStateInfo(0).IsName("Roaring") && !roarSound.isPlaying) {
+			idleSound.Stop ();
+			roarSound.Play ();
+			attackSound.Stop ();
+			whooshSound.Stop ();
+			deathSound.Stop ();
+		}
+		else if (animator.GetCurrentAnimatorStateInfo(0).IsName("Attack") && !attackSound.isPlaying) {
+			idleSound.Stop ();
+			roarSound.Stop ();
+			attackSound.Play ();
+			whooshSound.PlayDelayed (1.5f);
+			deathSound.Stop ();
+		}
+		else if (animator.GetCurrentAnimatorStateInfo(0).IsName("Death") && !deathSound.isPlaying) {
+			idleSound.Stop ();
+			roarSound.Stop ();
+			attackSound.Stop ();
+			whooshSound.Stop ();
+			deathSound.Play ();
+		}
+
 
 	}
 

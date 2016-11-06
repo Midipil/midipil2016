@@ -5,6 +5,7 @@ using System.Collections;
 public class Sword : MonoBehaviour {
 
 	public bool unlockable = true;
+	public AudioSource swordUnlockSound;
 
 	public Grabbable grabbable = null;
 
@@ -36,6 +37,7 @@ public class Sword : MonoBehaviour {
 
 	private void UnlockSword(){
 		gameObject.GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.None;
+		swordUnlockSound.Play ();
 	}
 
 }

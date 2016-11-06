@@ -10,6 +10,8 @@ public class Hoven : MonoBehaviour {
 
     public Cake cake;
 
+    public AudioClip openSound, closeSound;
+
     CoffeSceneManager sceneManager;
 
     float anim = -1;
@@ -34,7 +36,7 @@ public class Hoven : MonoBehaviour {
 
             if (doorOpened)
             {
-                //door.Rotate(Vector3.right, 80f);
+                GetComponent<AudioSource>().PlayOneShot(openSound);
             }
             else
             {
@@ -61,7 +63,12 @@ public class Hoven : MonoBehaviour {
             //door.Rotate(Vector3.right, Mathf.Lerp(80f, 0f, anim));
 
             if (anim >= 1f)
+            {
                 anim = -1;
+
+                if(!doorOpened)
+                    GetComponent<AudioSource>().PlayOneShot(closeSound);
+            }
         }
 
 		if (GetComponentInChildren<TriggerStates> ().isTriggered && controller.triggerPressed)
