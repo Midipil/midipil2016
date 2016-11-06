@@ -17,6 +17,7 @@ public class SwordSound : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider other) {
+		Debug.Log (other.gameObject.tag);
 		if (other.gameObject.tag != "LeftHand" && other.gameObject.tag != "RightHand") {
 			swordSounds [Random.Range (0, swordSounds.Length)].Play ();
 		}
