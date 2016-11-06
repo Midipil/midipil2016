@@ -130,6 +130,12 @@ public class SmartphoneSceneManager : WorldManager {
                 break;
         }
 
+		if (win) {
+			GameObject.Find ("GameManager").GetComponent<GameManager> ().playWin ();
+		} else {
+			GameObject.Find ("GameManager").GetComponent<GameManager> ().playLoose ();
+		}
+
         previousState = currentState;
 		previousStateWin = win;
 
