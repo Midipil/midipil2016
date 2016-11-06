@@ -81,7 +81,7 @@ public class Grabber : MonoBehaviour {
 
 	}
 
-	void Grab(GameObject objToGrab){
+	public void Grab(GameObject objToGrab){
 		Debug.Log ("Grabbed !");
 		grabbedObject = objToGrab.GetComponent<Grabbable> ();
 		objToGrab.transform.position = this.transform.position;
