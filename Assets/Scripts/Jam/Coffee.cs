@@ -26,6 +26,7 @@ public class Coffee : MonoBehaviour {
     public void CollideWithHead(bool collide)
     {
         collideWithHead = collide;
+		Debug.Log ("CollideWithHead");
 
         FindObjectOfType<JamTimer>().hasDoneSomething = false;
     }
@@ -34,11 +35,13 @@ public class Coffee : MonoBehaviour {
     {
         GetComponent<AudioSource>().Play();
         drinkingCoffee = true;
-        Invoke("CoffeeDrank", delayToDrinkCoffee);
+		Invoke("CoffeeDrank", delayToDrinkCoffee);
+		Debug.Log ("DrinkCoffee");
     }
 
     void CoffeeDrank()
-    {
+	{
+		Debug.Log ("CoffeeDrank");
         FindObjectOfType<TextDisplay>().ShowEndMessage("Tu as gagné la jam !", true);
     }
 }
