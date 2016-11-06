@@ -7,6 +7,9 @@ public class GameManager : MonoBehaviour {
 
 	private static bool instantiated = false;
 
+	public AudioClip winSound;
+	public AudioClip looseSound;
+
 	int gamesCount = 0;
 
 	string[] scenesNames = new string[5];
@@ -72,5 +75,15 @@ public class GameManager : MonoBehaviour {
 	public void RegisterSceneManager(WorldManager world) {
 		Debug.Log ("Registered");
 		sceneManagers.Add (world.sceneName, world);
+	}
+
+	public void playWin(){
+		GetComponent<AudioSource> ().clip = winSound;
+		GetComponent<AudioSource> ().Play ();
+	}
+
+	public void playLoose(){
+		GetComponent<AudioSource> ().clip = looseSound;
+		GetComponent<AudioSource> ().Play ();
 	}
 }

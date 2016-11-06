@@ -50,6 +50,12 @@ public class BaseControl : MonoBehaviour {
 		}
 
 	} 
+
+	void OnTriggerStay(Collider o){
+		Debug.Log ("RUMBLE");
+		SteamVR_Controller.Input((int)o.transform.GetComponentInParent<SteamVR_TrackedObject>().index).TriggerHapticPulse((ushort)1000);
+	}
+
 	void OnTriggerExit(Collider o) {
 		if (ec) {
 			

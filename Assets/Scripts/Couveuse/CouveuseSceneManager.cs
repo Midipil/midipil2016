@@ -43,6 +43,10 @@ public class CouveuseSceneManager : WorldManager {
 			SceneManager.LoadScene (sceneName, LoadSceneMode.Single);
 			InitScene ();
 		}
+		if(Input.GetKeyUp("e")){
+			SetEnd (false);
+		}
+
 	}
 
 	// Init scene and its content
@@ -115,6 +119,12 @@ public class CouveuseSceneManager : WorldManager {
 
             default:
 			break;
+		}
+
+		if (win) {
+			GameObject.Find ("GameManager").GetComponent<GameManager> ().playWin ();
+		} else {
+			GameObject.Find ("GameManager").GetComponent<GameManager> ().playLoose ();
 		}
 
 		FindObjectOfType<GameManager>().ChangeScene();
