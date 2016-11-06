@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class CouveuseSceneManager : WorldManager {
 
@@ -37,12 +38,15 @@ public class CouveuseSceneManager : WorldManager {
 	
 	// Update is called once per frame
 	void Update () {
-	
+		if(Input.GetKeyUp("p")){
+			currentState++;
+			SceneManager.LoadScene (sceneName, LoadSceneMode.Single);
+			InitScene ();
+		}
 	}
 
 	// Init scene and its content
 	public override void InitScene(){
-
 
 		playerBot = GameObject.Find ("Bearbot").gameObject;
 		enemyBot = GameObject.Find ("Evil").gameObject;
@@ -51,7 +55,6 @@ public class CouveuseSceneManager : WorldManager {
 		enemy = GameObject.Find ("Enemy").gameObject;
 		baseControls = GameObject.Find ("BaseControls").gameObject;
 		laserControls = GameObject.Find ("LaserControls").gameObject;
-		Debug.Log ("player : " + player.name);
 		playerCamera = player.transform.Find ("Anchor/[CameraRig]").gameObject;
 		enemyCamera = enemy.transform.Find ("[CameraRig]").gameObject;
 
