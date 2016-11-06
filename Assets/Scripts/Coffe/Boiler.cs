@@ -18,15 +18,15 @@ public class Boiler : MonoBehaviour {
         this.sceneManager = sceneManager;
         gameObject.SetActive(true);
 
-        FindObjectOfType<TextDisplay>().DisplayText("Fait attention au lait !", 5f);
+        FindObjectOfType<TextDisplay>().DisplayText("Fait attention au lait !", 10f);
 
 		if (sceneManager.handleTaken) {
 			Destroy(handle);
 			gameObject.AddComponent<Grabbable>();
 		}
 
-		Invoke("NeedToLook", 3f);
-        Invoke("MakeNoise", 8f);
+		Invoke("NeedToLook", 10f);
+        Invoke("MakeNoise", 15f);
 
         //FindObjectOfType<Grabber>().Grab(gameObject);
     }

@@ -14,15 +14,21 @@ public class Hoven : MonoBehaviour {
 
     float anim = -1;
 
+	SteamVR_TrackedController controller;
+
     public void Initialize(CoffeSceneManager sceneManager)
     {
         this.sceneManager = sceneManager;
 		cake.Initialize (sceneManager);
+
+		FindObjectOfType<TextDisplay>().DisplayText("Mets le gateau au four !", 10f);
     }
 
 	public void ToggleDoor(SteamVR_TrackedController controller)
     {
-        if (/*controller.triggerPressed &&*/ anim < 0f)
+		this.controller = controller;
+
+        if (controller.triggerPressed && anim < 0f)
         {
             doorOpened = !doorOpened;
 
@@ -57,15 +63,8 @@ public class Hoven : MonoBehaviour {
             if (anim >= 1f)
                 anim = -1;
         }
-    }
 
-    void CakeBakedOk()
-    {
-        FindObjectOfType<TextDisplay>().ShowEndMessage("Tu as réussis à cuire le gateau !\nJean-Pierre Coffe est fière de toi !", true);
-    }
-
-    void CakeBurnt()
-    {
-        FindObjectOfType<TextDisplay>().ShowEndMessage("Tu as cramé le gateau !\nJean-Pierre Coffe n'est pas content du tout !", false);
+		if (GetComponentInChildren<TriggerStates> ().isTriggered && controller.triggerPressed)
+			ToggleDoor (controller);
     }
 }

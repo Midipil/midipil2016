@@ -99,7 +99,7 @@ public class Grabber : MonoBehaviour {
 		grabbedObject.SetGrabbed (false);
 		//Debug.Log (this.transform.parent.GetComponent<Rigidbody> ().velocity);
 		grabbedObject.GetComponent<Rigidbody> ().AddForce (this.transform.GetComponent<Rigidbody>().velocity);
-		grabbedObject.GetComponent<Collider> ().isTrigger = true;
+		grabbedObject.GetComponent<Collider> ().isTrigger = false;
 		grabbedObject = null;
 
 		grabCooldown = cooldownAmount;

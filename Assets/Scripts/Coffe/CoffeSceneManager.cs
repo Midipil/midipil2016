@@ -52,6 +52,8 @@ public class CoffeSceneManager : WorldManager {
 	public override void InitScene(){
 		Debug.Log ("Init coffe scene.");
 
+		FindObjectOfType<TextDisplay>().Initialize(this);
+
         switch (previousState)
         {
             case SceneState.NOT_SET:
@@ -72,8 +74,9 @@ public class CoffeSceneManager : WorldManager {
                 FindObjectOfType<Hoven>().Initialize(this);
                 FindObjectOfType<Boiler>().gameObject.SetActive(false);
                 break;
-            case SceneState.CAKE_BURNT:
-                currentState = SceneState.BOILER_GRABBABLE;
+			case SceneState.CAKE_BURNT:
+				currentState = SceneState.BOILER_GRABBABLE;
+				handleTaken = true;
                 FindObjectOfType<Boiler>().Initialize(this);
                 break;
             case SceneState.BOILER_GRABBABLE:
@@ -81,8 +84,6 @@ public class CoffeSceneManager : WorldManager {
             default:
                 break;
         }
-
-        FindObjectOfType<TextDisplay>().Initialize(this);
 	}
 
 	// Start end sequence when scene goal is achieved

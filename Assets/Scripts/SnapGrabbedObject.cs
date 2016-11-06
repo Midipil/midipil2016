@@ -26,8 +26,10 @@ public class SnapGrabbedObject : MonoBehaviour {
 			other.gameObject.transform.position = transform.position + positionOffset;
 			other.gameObject.transform.rotation = transform.rotation;
 
-			if (other.name == "Cake")
+			if (other.name == "Cake") {
 				FindObjectOfType<Hoven> ().cakePlaced = true;
+				//other.GetComponent<Rigidbody> ().isKinematic = true;
+			}
 		}
 
 	}

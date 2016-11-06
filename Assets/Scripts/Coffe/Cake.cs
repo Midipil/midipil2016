@@ -38,4 +38,14 @@ public class Cake : MonoBehaviour
 			Invoke("CakeBakedOk", 3f);
 		}
 	}
+
+	void CakeBakedOk()
+	{
+		FindObjectOfType<TextDisplay>().ShowEndMessage("Tu as réussis à cuire le gateau !\nJean-Pierre Coffe est fière de toi !", true);
+	}
+
+	void CakeBurnt()
+	{
+		FindObjectOfType<TextDisplay>().ShowEndMessage("Tu as cramé le gateau !\nJean-Pierre Coffe n'est pas content du tout !", false);
+	}
 }

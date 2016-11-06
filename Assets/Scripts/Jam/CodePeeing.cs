@@ -23,7 +23,7 @@ public class CodePeeing : MonoBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
-        if (initialized && other.tag == "Hand")
+		if (initialized && other.tag.Contains("Hand"))
         {
             if (currentTextLength + codePieceLength <= randomCode.Length)
                 DisplayMoreCode();
