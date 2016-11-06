@@ -17,7 +17,7 @@ public class JamTimer : MonoBehaviour {
         FindObjectOfType<TextDisplay>().DisplayText("Voici le thème de la jam :\n\"Déjà?\"\nFin dans 40h !", 10f);
     }
 
-    void EndJam()
+    public void EndJam()
     {
         if (!hasDoneSomething)
             return;

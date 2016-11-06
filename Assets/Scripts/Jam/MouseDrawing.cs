@@ -72,7 +72,10 @@ public class MouseDrawing : MonoBehaviour {
         if(pointCount == 1)
         {
             line.SetPosition(pointCount - 1, position);
-            FindObjectOfType<JamTimer>().hasDoneSomething = true;
+			if (!FindObjectOfType<JamTimer> ().hasDoneSomething) {
+				FindObjectOfType<JamTimer>().hasDoneSomething = true;
+				FindObjectOfType<JamTimer> ().Invoke ("EndJam", 5f);
+			}
         }
 
         pointCount++;

@@ -34,8 +34,12 @@ public class CodePeeing : MonoBehaviour {
 
     void DisplayMoreCode()
     {
-        if(currentTextLength == 0)
-            FindObjectOfType<JamTimer>().hasDoneSomething = true;
+		if (currentTextLength == 0) {
+			if (!FindObjectOfType<JamTimer> ().hasDoneSomething) {
+				FindObjectOfType<JamTimer>().hasDoneSomething = true;
+				FindObjectOfType<JamTimer> ().Invoke ("EndJam", 5f);
+			}
+		}
 
         codeText.text += randomCode.Substring(currentTextLength, codePieceLength);
         currentTextLength += codePieceLength;
