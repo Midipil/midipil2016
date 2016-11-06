@@ -61,10 +61,10 @@ public class SmartphoneSceneManager : WorldManager {
 		key = holder.key;
 		door = holder.door;
 
-		Grabber right = GameObject.FindWithTag("RightHand").GetComponent<Grabber>();
-		Grabber left = GameObject.FindWithTag("LeftHand").GetComponent<Grabber>();
+		//Grabber right = GameObject.FindWithTag("RightHand").GetComponent<Grabber>();
+		//Grabber left = GameObject.FindWithTag("LeftHand").GetComponent<Grabber>();
 
-		right.Grab(phone.gameObject);
+		//right.Grab(phone.gameObject);
 
 		switch (previousState)
         {
@@ -72,22 +72,22 @@ public class SmartphoneSceneManager : WorldManager {
 				currentState = SceneState.OPEN_DOOR;
 				phone.SetBtnDoor(false);
 				key.gameObject.SetActive(true);
-				left.Grab(key.gameObject);
+				//left.Grab(key.gameObject);
                 break;
             case SceneState.OPEN_DOOR:
             	if(!previousStateWin)
             	{
             		currentState = SceneState.OPEN_DOOR;
 					phone.SetBtnDoor(false);
-					phone.ShowTinder(false);
+					//phone.ShowTinder(false);
 					key.gameObject.SetActive(true);
-					left.Grab(key.gameObject);
+					//left.Grab(key.gameObject);
             	}
             	else
             	{
             		currentState = SceneState.OPEN_DOOR_BTN;
             		key.gameObject.SetActive(false);
-            		phone.ShowTinder(false);
+            		//phone.ShowTinder(false);
             		phone.SetBtnDoor(true);
             	}
                 break;
