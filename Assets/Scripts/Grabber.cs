@@ -95,12 +95,34 @@ public class Grabber : MonoBehaviour {
 
 	void Drop(){
 		Debug.Log ("Dropped !");
+
+		var rigidbody = grabbedObject.GetComponent<Rigidbody>();
+		var trackedObj = GetComponentInParent<SteamVR_TrackedObject>();
+		var device = SteamVR_Controller.Input((int)trackedObj.index);
+
 		GetComponent<FixedJoint> ().connectedBody = null;
 		grabbedObject.SetGrabbed (false);
-		//Debug.Log (this.transform.parent.GetComponent<Rigidbody> ().velocity);
-		grabbedObject.GetComponent<Rigidbody> ().AddForce (this.transform.GetComponent<Rigidbody>().velocity);
 		grabbedObject.GetComponent<Collider> ().isTrigger = false;
 		grabbedObject = null;
+
+		// We should probably apply the offset between trackedObj.transform.position
+		// and device.transform.pos to insert into the physics sim at the correct
+		// location, however, we would then want to predict ahead the visual representation
+		// by the same amount we are predicting our render poses.
+
+		var origin = trackedObj.origin ? trackedObj.origin : trackedObj.transform.parent;
+		if (origin != null)
+		{
+			rigidbody.velocity = origin.TransformVector(device.velocity);
+			rigidbody.angularVelocity = origin.TransformVector(device.angularVelocity);
+		}
+		else
+		{
+			rigidbody.velocity = device.velocity;
+			rigidbody.angularVelocity = device.angularVelocity;
+		}
+
+		rigidbody.maxAngularVelocity = rigidbody.angularVelocity.magnitude;
 
 		grabCooldown = cooldownAmount;
 	}
