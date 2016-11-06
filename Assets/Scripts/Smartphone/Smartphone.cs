@@ -93,7 +93,7 @@ public class Smartphone : MonoBehaviour
 			controllerIndex = grab.controllerIndex;
 	}
 
-	void SetEnd(bool win, float time)
+	public void SetEnd(bool win, float time)
 	{
 		won = win;
 		Invoke("SetEnd", time);
