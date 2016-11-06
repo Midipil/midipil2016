@@ -814,10 +814,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 259fd8e7aa3e545468d5f111b944b37e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  img: {fileID: 0}
+  img: {fileID: 114000013156224206}
   buttons:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 114000010623410128}
+  - {fileID: 114000011205082486}
 --- !u!114 &114000010623410128
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -829,7 +829,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2dde7a4aaaa69444e9b1ef7f2a852fba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  phone: {fileID: 0}
+  phone: {fileID: 114000012629492744}
   cancelBtn: 1
 --- !u!114 &114000010777498598
 MonoBehaviour:
@@ -869,7 +869,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2dde7a4aaaa69444e9b1ef7f2a852fba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  phone: {fileID: 0}
+  phone: {fileID: 114000012629492744}
   cancelBtn: 0
 --- !u!114 &114000011288827302
 MonoBehaviour:
@@ -984,7 +984,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b89b88a31242d1428647dd909d66878, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  phone: {fileID: 0}
+  phone: {fileID: 114000012629492744}
 --- !u!114 &114000012195484966
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1052,10 +1052,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 259fd8e7aa3e545468d5f111b944b37e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  img: {fileID: 0}
+  img: {fileID: 114000012195484966}
   buttons:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 114000014187048268}
+  - {fileID: 114000012996435644}
 --- !u!114 &114000012946858206
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1094,7 +1094,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2dde7a4aaaa69444e9b1ef7f2a852fba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  phone: {fileID: 0}
+  phone: {fileID: 114000012629492744}
   cancelBtn: 0
 --- !u!114 &114000013156224206
 MonoBehaviour:
@@ -1216,7 +1216,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2dde7a4aaaa69444e9b1ef7f2a852fba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  phone: {fileID: 0}
+  phone: {fileID: 114000012629492744}
   cancelBtn: 1
 --- !u!136 &136000010548755572
 CapsuleCollider:
