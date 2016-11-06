@@ -148,7 +148,7 @@ public class Smartphone : MonoBehaviour
 	public void MatchTinder()
 	{
 		cradle.gameObject.SetActive(false);
-		won = false;
+		won = true;
 		Invoke("SetEnd", 4f);
 	}
 

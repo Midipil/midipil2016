@@ -78,7 +78,7 @@ public class Grabber : MonoBehaviour {
 		objToGrab.transform.rotation = this.transform.rotation;
 		GetComponent<FixedJoint> ().connectedBody = objToGrab.GetComponent<Rigidbody> ();
 		grabbedObject.SetGrabbed(true);
-
+		
 		dropCooldown = cooldownAmount;
 	}
 
