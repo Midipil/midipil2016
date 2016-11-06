@@ -10,6 +10,7 @@ public class MonsterAnimationsController : MonoBehaviour {
 	private bool countdownStarted = false;
 	private float countdownBeforeEnd = 8.0f;
 	private bool win = false;
+	private bool deathHasBeenPlayed = false;
 
 	public AudioSource idleSound;
 	public AudioSource roarSound;
@@ -65,12 +66,13 @@ public class MonsterAnimationsController : MonoBehaviour {
 			whooshSound.PlayDelayed (1.5f);
 			deathSound.Stop ();
 		}
-		else if (animator.GetCurrentAnimatorStateInfo(0).IsName("Death") && !deathSound.isPlaying) {
+		else if (animator.GetCurrentAnimatorStateInfo(0).IsName("Death") && !deathSound.isPlaying && !deathHasBeenPlayed) {
 			idleSound.Stop ();
 			roarSound.Stop ();
 			attackSound.Stop ();
 			whooshSound.Stop ();
 			deathSound.Play ();
+			deathHasBeenPlayed = true;
 		}
 
 
@@ -79,6 +81,7 @@ public class MonsterAnimationsController : MonoBehaviour {
 	public void TriggerAttack(){
 		if (!animator.GetCurrentAnimatorStateInfo (0).IsName ("Attack")) {
 			animator.SetTrigger ("TriggerAttack");
+			countdownBeforeEnd = 4.0f;
 			countdownStarted = true;
 			win = false;
 			GameObject.FindWithTag ("Holder").GetComponent<MonsterObjectsHolder> ().sword.GetComponent<Lethal> ().enabled = false;
@@ -89,6 +92,7 @@ public class MonsterAnimationsController : MonoBehaviour {
 		if (!animator.GetCurrentAnimatorStateInfo (0).IsName ("Death")) {
 			animator.SetTrigger ("TriggerDeath");
 			animator.SetBool ("IsDead", true);
+			countdownBeforeEnd = 6.0f;
 			countdownStarted = true;
 			win = true;
 		}
