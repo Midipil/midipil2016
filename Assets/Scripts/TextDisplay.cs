@@ -32,6 +32,13 @@ public class TextDisplay : MonoBehaviour {
     {
         feedback.text = message;
         gameWon = win;
+
+		if (win) {
+			GameObject.Find ("GameManager").GetComponent<GameManager> ().playWin ();
+		} else {
+			GameObject.Find ("GameManager").GetComponent<GameManager> ().playLoose ();
+		}
+
         Invoke("EndScene", feedbackDelay);
     }
 
