@@ -81,7 +81,7 @@ public class MouseDrawing : MonoBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
-        if (initialized && other.tag == "Hand" && other.GetComponent<Grabber>().controller.triggerPressed)
+		if (initialized && other.tag.Contains("Hand") && other.GetComponent<Grabber>().controller.triggerPressed)
         {
             hand = other.transform;
         }
@@ -89,7 +89,7 @@ public class MouseDrawing : MonoBehaviour {
 
     void OnTriggerStay(Collider other)
     {
-        if (initialized && hand == null && other.tag == "Hand" && other.GetComponent<Grabber>().controller.triggerPressed)
+		if (initialized && hand == null && other.tag.Contains("Hand") && other.GetComponent<Grabber>().controller.triggerPressed)
         {
             hand = other.transform;
         }
@@ -97,7 +97,7 @@ public class MouseDrawing : MonoBehaviour {
 
     void OnTriggerExit(Collider other)
     {
-        if (initialized && other.tag == "Hand")
+		if (initialized && other.tag.Contains("Hand"))
         {
             hand = null;
         }

@@ -6,6 +6,7 @@ public class Smartphone : MonoBehaviour
 {
 	public int controllerIndex { get; private set; }
 
+	public MeshRenderer meshRender;
 	public GameObject cradle;
 	public GameObject tinder;
 	public TinderImg[] tinderImages;
@@ -56,7 +57,6 @@ public class Smartphone : MonoBehaviour
 			batteryLowText.gameObject.SetActive(false);
 
 		SetBattery(false);
-		ShowTinder(false);
 	}
 	
 	void Update () 
@@ -94,6 +94,12 @@ public class Smartphone : MonoBehaviour
 			controllerIndex = grab.controllerIndex;
 	}
 
+	public void SetEnd(bool win, float time)
+	{
+		won = win;
+		Invoke("SetEnd", time);
+	}
+
 	void SetEnd()
 	{
 		sceneManager.SetEnd(won);
@@ -112,16 +118,20 @@ public class Smartphone : MonoBehaviour
 		if (collision.relativeVelocity.magnitude > 5)
         {
         	Instantiate(fxExplosion, transform.position, Quaternion.identity);
+        	won = false;
 
         	if(door)
         	{
         		if(Vector3.Distance(transform.position, door.transform.position) < 1.5f)
+        		{
+        			won = true;
         			door.Destroy();
+        		}
         	}
 
-        	Destroy(gameObject);
+        	meshRender.enabled = false;
+        	screenON.SetActive(false);
 
-        	won = true;
 			Invoke("SetEnd", 3f);
         }
 	}

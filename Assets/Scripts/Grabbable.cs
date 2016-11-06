@@ -15,6 +15,8 @@ public class Grabbable : MonoBehaviour {
 	[HideInInspector]
 	public bool dropAsked = false;
 
+	public bool cantBeGrabbed = false;
+
 	// Use this for initialization
 	void Start () {
 	

@@ -14,7 +14,7 @@ public class JamTimer : MonoBehaviour {
     public void Initialize(JamSceneManager sceneManager) {
         this.sceneManager = sceneManager;
         Invoke("EndJam", jamDuration);
-        FindObjectOfType<TextDisplay>().DisplayText("Voici le thème de la jam :\n\"Déjà?\"\nFin dans 40h !", 5f);
+        FindObjectOfType<TextDisplay>().DisplayText("Voici le thème de la jam :\n\"Déjà?\"\nFin dans 40h !", 10f);
     }
 
     void EndJam()

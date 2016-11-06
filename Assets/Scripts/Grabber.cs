@@ -41,6 +41,8 @@ public class Grabber : MonoBehaviour {
 			Drop ();
 		}
 
+		if (grabbedObject != null && grabbedObject.dropAsked)
+			Drop ();
 	}
 
 	void OnTriggerEnter(Collider other) {
@@ -51,8 +53,12 @@ public class Grabber : MonoBehaviour {
 			&& other.gameObject.GetComponent<Grabbable> ().isActiveAndEnabled
 			&& (controller.triggerPressed || controller.gripped)
 			&& grabCooldown <= 0) {
-				
-			Grab (other.gameObject);
+
+			if (other.gameObject.GetComponent<Grabbable> ().cantBeGrabbed) {
+				SteamVR_Controller.Input((int)GetComponentInParent<SteamVR_TrackedObject>().index).TriggerHapticPulse((ushort)1000);
+			} else {
+				Grab (other.gameObject);
+			}
 		}
 
 	}
@@ -65,19 +71,24 @@ public class Grabber : MonoBehaviour {
 			&& other.gameObject.GetComponent<Grabbable> ().isActiveAndEnabled
 			&& (controller.triggerPressed || controller.gripped)
 			&& grabCooldown <= 0) {
-					
-			Grab (other.gameObject);
+
+			if (other.gameObject.GetComponent<Grabbable> ().cantBeGrabbed) {
+				SteamVR_Controller.Input((int)GetComponentInParent<SteamVR_TrackedObject>().index).TriggerHapticPulse((ushort)1000);
+			} else {
+				Grab (other.gameObject);
+			}
 		}
 
 	}
 
-	void Grab(GameObject objToGrab){
+	public void Grab(GameObject objToGrab){
 		Debug.Log ("Grabbed !");
 		grabbedObject = objToGrab.GetComponent<Grabbable> ();
 		objToGrab.transform.position = this.transform.position;
 		objToGrab.transform.rotation = this.transform.rotation;
+		objToGrab.GetComponent<Collider> ().isTrigger = true;
 		GetComponent<FixedJoint> ().connectedBody = objToGrab.GetComponent<Rigidbody> ();
-		grabbedObject.SetGrabbed(true, (int)controller.controllerIndex);
+		grabbedObject.SetGrabbed(true, (int)GetComponentInParent<SteamVR_TrackedObject>().index);
 
 		dropCooldown = cooldownAmount;
 	}
@@ -88,7 +99,7 @@ public class Grabber : MonoBehaviour {
 		grabbedObject.SetGrabbed (false);
 		//Debug.Log (this.transform.parent.GetComponent<Rigidbody> ().velocity);
 		grabbedObject.GetComponent<Rigidbody> ().AddForce (this.transform.GetComponent<Rigidbody>().velocity);
-
+		grabbedObject.GetComponent<Collider> ().isTrigger = false;
 		grabbedObject = null;
 
 		grabCooldown = cooldownAmount;

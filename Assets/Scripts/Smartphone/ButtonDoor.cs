@@ -15,19 +15,16 @@ public class ButtonDoor : MonoBehaviour
 	{
         bool ok = false;
 
-		if(phone.controllerIndex == -1)
-			ok = other.gameObject.tag.Equals("LeftHand") || other.gameObject.tag.Equals("RightHand");
-		else if(phone.controllerIndex == 0)
-			ok = other.gameObject.tag.Equals("RightHand");
-		else if(phone.controllerIndex == 1)
-			ok = other.gameObject.tag.Equals("LeftHand");
+        if(other.gameObject.tag.Equals("LeftHand") || other.gameObject.tag.Equals("RightHand"))
+        {
+        	int index = (int)other.gameObject.GetComponentInParent<SteamVR_TrackedObject>().index;
 
-		if(ok)
-		{
-			door.Open(true);    
-        	phone.ShowTinder(true);
-        	gameObject.SetActive(false);
-		}
-        
+        	if(phone.controllerIndex != index)
+			{
+				door.Open(true);
+				phone.SetEnd(true, 3f);
+	        	gameObject.SetActive(false);
+			}
+        }
     }
 }

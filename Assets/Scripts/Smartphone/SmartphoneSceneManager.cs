@@ -9,6 +9,7 @@ public class SmartphoneSceneManager : WorldManager {
 	private enum SceneState {
         NOT_SET,
         OPEN_DOOR,
+        OPEN_DOOR_BTN,
 		MATCH_TINDER
 	}
 
@@ -60,32 +61,50 @@ public class SmartphoneSceneManager : WorldManager {
 		key = holder.key;
 		door = holder.door;
 
+		Grabber right = GameObject.FindWithTag("RightHand").GetComponent<Grabber>();
+		Grabber left = GameObject.FindWithTag("LeftHand").GetComponent<Grabber>();
+
+		right.Grab(phone.gameObject);
+
 		switch (previousState)
         {
         	case SceneState.NOT_SET:
 				currentState = SceneState.OPEN_DOOR;
 				phone.SetBtnDoor(false);
 				key.gameObject.SetActive(true);
+				left.Grab(key.gameObject);
                 break;
             case SceneState.OPEN_DOOR:
             	if(!previousStateWin)
             	{
             		currentState = SceneState.OPEN_DOOR;
 					phone.SetBtnDoor(false);
+					phone.ShowTinder(false);
 					key.gameObject.SetActive(true);
+					left.Grab(key.gameObject);
             	}
             	else
             	{
-            		currentState = SceneState.MATCH_TINDER;
+            		currentState = SceneState.OPEN_DOOR_BTN;
             		key.gameObject.SetActive(false);
+            		phone.ShowTinder(false);
             		phone.SetBtnDoor(true);
             	}
                 break;
-            case SceneState.MATCH_TINDER:
+            case SceneState.OPEN_DOOR_BTN:
+            	currentState = SceneState.MATCH_TINDER;
             	key.gameObject.SetActive(false);
-            	phone.SetBtnDoor(true);
+            	phone.SetBtnDoor(false);
+            	phone.ShowTinder(true);
+            	door.gameObject.SetActive(false);
                 break;
 
+            case SceneState.MATCH_TINDER:
+            	key.gameObject.SetActive(false);
+            	phone.SetBtnDoor(false);
+            	phone.ShowTinder(true);
+            	door.gameObject.SetActive(false);
+            	break;
             default:
                 break;
         }
@@ -99,6 +118,9 @@ public class SmartphoneSceneManager : WorldManager {
 		switch (currentState)
         {
             case SceneState.OPEN_DOOR:
+                break;
+
+            case SceneState.OPEN_DOOR_BTN:
                 break;
 
             case SceneState.MATCH_TINDER:
