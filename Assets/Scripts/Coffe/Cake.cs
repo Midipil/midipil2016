@@ -16,7 +16,7 @@ public class Cake : MonoBehaviour
         cakeOk.SetActive(false);
         cakeBurnt.SetActive(false);
 
-		FindObjectOfType<Grabber>().Grab(gameObject);
+		//FindObjectOfType<Grabber>().Grab(gameObject);
     }
 
 	public void CookCake()
