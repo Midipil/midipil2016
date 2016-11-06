@@ -16,12 +16,21 @@ public class Orb : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider o) {
-		Invoke ("Win", winTime);
+		Invoke ("End", winTime);
 		this.transform.GetComponent<Renderer> ().enabled = false;
 		this.transform.GetChild (0).gameObject.SetActive (false);
 	}
 
-	void Win(){
-		FindObjectOfType<CouveuseSceneManager> ().SetEnd (true);
-	}
+    void End()
+    {
+        if (FindObjectOfType<CouveuseSceneManager>().currentState == CouveuseSceneManager.SceneState.ONE_EGG)
+        {
+            FindObjectOfType<CouveuseSceneManager>().SetEnd(true);
+        }
+        else if (FindObjectOfType<CouveuseSceneManager>().currentState == CouveuseSceneManager.SceneState.TOO_SLOW)
+        {
+            FindObjectOfType<CouveuseSceneManager>().SetEnd(false);
+        }
+
+    }
 }
