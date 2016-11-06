@@ -11,24 +11,29 @@ ModelImporter:
     100006: object307_MeshPart0
     100008: object307_MeshPart1
     100010: Shape5
+    100012: Couvercle
     400000: //RootNode
     400002: Material_Preview_Dummy
     400004: object307
     400006: object307_MeshPart0
     400008: object307_MeshPart1
     400010: Shape5
+    400012: Couvercle
     2300000: Material_Preview_Dummy
     2300002: object307_MeshPart0
     2300004: object307_MeshPart1
     2300006: Shape5
+    2300008: Couvercle
     3300000: Material_Preview_Dummy
     3300002: object307_MeshPart0
     3300004: object307_MeshPart1
     3300006: Shape5
+    3300008: Couvercle
     4300000: object307_MeshPart0
     4300002: object307_MeshPart1
     4300004: Material_Preview_Dummy
     4300006: Shape5
+    4300008: Couvercle
   materials:
     importMaterials: 1
     materialName: 0
