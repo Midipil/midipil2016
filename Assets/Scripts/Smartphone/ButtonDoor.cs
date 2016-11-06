@@ -13,9 +13,21 @@ public class ButtonDoor : MonoBehaviour
 	
 	void OnTriggerEnter(Collider other) 
 	{
-        // TODO : Check tag hand
-        door.Open(true);    
-        phone.ShowTinder(true);
-        gameObject.SetActive(false);
+        bool ok = false;
+
+		if(phone.controllerIndex == -1)
+			ok = other.gameObject.tag.Equals("LeftHand") || other.gameObject.tag.Equals("RightHand");
+		else if(phone.controllerIndex == 0)
+			ok = other.gameObject.tag.Equals("RightHand");
+		else if(phone.controllerIndex == 1)
+			ok = other.gameObject.tag.Equals("LeftHand");
+
+		if(ok)
+		{
+			door.Open(true);    
+        	phone.ShowTinder(true);
+        	gameObject.SetActive(false);
+		}
+        
     }
 }

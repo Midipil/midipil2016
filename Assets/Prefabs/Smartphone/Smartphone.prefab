@@ -799,6 +799,7 @@ MonoBehaviour:
   batteryLowText: {fileID: 114000013645716862}
   batteryLifeSeconds: 40
   btnDoor: {fileID: 114000012033745418}
+  grab: {fileID: 114000011313236942}
 --- !u!114 &114000012631459508
 MonoBehaviour:
   m_ObjectHideFlags: 1
