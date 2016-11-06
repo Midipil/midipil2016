@@ -3,7 +3,7 @@ using System.Collections;
 
 public class BaseControl : MonoBehaviour {
 
-	public enum Direction {UP, DOWN, LEFT, RIGHT, PLAYER_FORWARD};
+	public enum Direction {UP, DOWN, LEFT, RIGHT, PLAYER_FORWARD, LASER};
 	public Direction controlDirection = Direction.LEFT;
 	public float pressOffset = 0.01f;
 	Transform child;
@@ -39,8 +39,10 @@ public class BaseControl : MonoBehaviour {
 				ec.setDirection (0.0f, 1.0f);
 			} else if (controlDirection == Direction.DOWN) {
 				ec.setDirection (0.0f, -1.0f);
-			}
-		}
+            } else if (controlDirection == Direction.LASER) {
+                ec.activateLaser(true);
+            }
+        }
 		child.localPosition = new Vector3 (initPos.x, initPos.y  -  pressOffset, initPos.z);
 
 		if (controlDirection == Direction.PLAYER_FORWARD) {
@@ -50,8 +52,15 @@ public class BaseControl : MonoBehaviour {
 	} 
 	void OnTriggerExit(Collider o) {
 		if (ec) {
-			ec.setDirection (0.0f, 0.0f);
-		}
+			
+            if (controlDirection == Direction.LASER)
+            {
+                ec.activateLaser(false);
+            } else
+            {
+                ec.setDirection(0.0f, 0.0f);
+            }
+        }
 		if (pc) {
 			pc.setDirection (0.0f, 0.0f);
 		}

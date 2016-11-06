@@ -9,15 +9,15 @@ public class CouveuseSceneManager : WorldManager {
 	private enum SceneState {
 		ONE_EGG,
 		EASY_LASER,
-		MANY_EGGS,
+		FATE,
 		CAT_LASER,
 		BROKEN_WHEEL
 	}
 
-	SceneState currentState = SceneState.ONE_EGG;
-	SceneState previousState = SceneState.ONE_EGG;
+	SceneState currentState = SceneState.FATE;
+	SceneState previousState;
 
-	public GameObject playerCamera, enemyCamera, playerBot, enemyBot, oneEgg, manyEggs, enemy;
+	public GameObject playerCamera, enemyCamera, playerBot, enemyBot, oneEgg, enemy, baseControls, laserControls;
 
 	void Awake () {
 
@@ -48,18 +48,40 @@ public class CouveuseSceneManager : WorldManager {
 		switch (currentState)
 		{
 		case SceneState.ONE_EGG:
-			Debug.Log ("smlkfvnmé");
 			playerCamera.SetActive (true);
 			playerBot.SetActive (false);
 			enemyCamera.SetActive (false);
 			enemyBot.SetActive (true);
 			oneEgg.SetActive (true);
-			manyEggs.SetActive (false);
 			enemy.SetActive (false);
 			break;
 
+        case SceneState.EASY_LASER:
+            playerCamera.SetActive(false);
+            playerBot.SetActive(true);
+            enemyCamera.SetActive(true);
+            enemyBot.SetActive(false);
+            oneEgg.SetActive(false);
+            enemy.SetActive(true);
+            baseControls.SetActive(false);
+            laserControls.SetActive(true);
+            enemy.GetComponent<EnemyController>().activateLaser(false);
+            enemy.transform.Rotate(new Vector3(90, 0, 0));
+            break;
 
-		default:
+        case SceneState.FATE:
+            playerCamera.SetActive(true);
+            playerBot.SetActive(false);
+            enemyCamera.SetActive(false);
+            enemyBot.SetActive(true);
+            oneEgg.SetActive(false);
+            enemy.SetActive(true);
+            enemy.GetComponent<EnemyController>().sweep=true;
+
+            break;
+
+
+            default:
 			break;
 		}
 

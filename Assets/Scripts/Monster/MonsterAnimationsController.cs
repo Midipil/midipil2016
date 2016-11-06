@@ -8,7 +8,7 @@ public class MonsterAnimationsController : MonoBehaviour {
 	private float timeBeforeRoar = 7.0f;
 
 	private bool countdownStarted = false;
-	private float countdownBeforeEnd = 2.0f;
+	private float countdownBeforeEnd = 8.0f;
 	private bool win = false;
 
 	// Use this for initialization
@@ -39,16 +39,21 @@ public class MonsterAnimationsController : MonoBehaviour {
 	}
 
 	public void TriggerAttack(){
-		animator.SetTrigger ("TriggerAttack");
-		countdownStarted = true;
-		win = false;
+		if (!animator.GetCurrentAnimatorStateInfo (0).IsName ("Attack")) {
+			animator.SetTrigger ("TriggerAttack");
+			countdownStarted = true;
+			win = false;
+			GameObject.FindWithTag ("Holder").GetComponent<MonsterObjectsHolder> ().sword.GetComponent<Lethal> ().enabled = false;
+		}
 	}
 
 	public void TriggerDeath(){
-		animator.SetBool ("IsDead", true);
-		animator.SetTrigger ("TriggerDeath");
-		countdownStarted = true;
-		win = true;
+		if (!animator.GetCurrentAnimatorStateInfo (0).IsName ("Death")) {
+			animator.SetTrigger ("TriggerDeath");
+			animator.SetBool ("IsDead", true);
+			countdownStarted = true;
+			win = true;
+		}
 	}
 
 }

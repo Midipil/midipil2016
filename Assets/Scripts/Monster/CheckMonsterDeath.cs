@@ -13,7 +13,7 @@ public class CheckMonsterDeath : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
+		
 		foreach (Killable collider in colliders) {
 			if (collider.IsDead ()) {
 				animationController.TriggerDeath ();
