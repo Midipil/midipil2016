@@ -54,7 +54,7 @@ public class LaserBeam : MonoBehaviour
                // impactFX.transform.position = hit.point;
                 impactFX.SetActive(true);
 
-				Invoke ("Die", deathTime);
+				Invoke ("End", deathTime);
             }
         }
         else
@@ -66,7 +66,14 @@ public class LaserBeam : MonoBehaviour
         }
     }
 
-	void Die(){
-		FindObjectOfType<CouveuseSceneManager> ().SetEnd (false);
+	void End(){
+       if( FindObjectOfType<CouveuseSceneManager>().currentState == CouveuseSceneManager.SceneState.EASY_LASER)
+        {
+            FindObjectOfType<CouveuseSceneManager>().SetEnd(true);
+        } else if (FindObjectOfType<CouveuseSceneManager>().currentState == CouveuseSceneManager.SceneState.FATE)
+        {
+            FindObjectOfType<CouveuseSceneManager>().SetEnd(false);
+        }
+        
 	}
 }

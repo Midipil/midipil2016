@@ -16,7 +16,9 @@ public class PlayerController : MonoBehaviour {
 	float horizontal = 0.0f;
 	float vertical = 0.0f;
 
-	private AudioSource shipSound;
+    public bool sweep = false;
+
+    private AudioSource shipSound;
 
 	void Start(){
 		GameObject ab = GameObject.Find("Afterburner").gameObject;
@@ -45,17 +47,23 @@ public class PlayerController : MonoBehaviour {
 		// Left/right
 		this.GetComponent<Rigidbody>().AddTorque( transform.up * rotationSpeed * horizontal);
 		this.GetComponent<Rigidbody>().AddTorque( -transform.right * currentBoost * moveSpeed * vertical);
-		//this.GetComponent<Rigidbody>().AddTorque(- transform.forward * sidewaysSpeed * Input.GetAxis("Player_Right_Horizontal"));
+        //this.GetComponent<Rigidbody>().AddTorque(- transform.forward * sidewaysSpeed * Input.GetAxis("Player_Right_Horizontal"));
+
+        if (sweep)
+        {
+            Debug.Log("sweeee");
+            this.GetComponent<Rigidbody>().AddTorque(transform.right * -0.4f * moveSpeed);
+        }
 
         // LEFT STICK : MOVE FORWARD / BACKWARD & ROTATE 		
-		//transform.Rotate(new Vector3(currentBoost * moveSpeed * Input.GetAxis("Player_Vertical"), rotationSpeed * Input.GetAxis("Player_Horizontal"), 0));
+        //transform.Rotate(new Vector3(currentBoost * moveSpeed * Input.GetAxis("Player_Vertical"), rotationSpeed * Input.GetAxis("Player_Horizontal"), 0));
 
         // RIGHT STICK : DRIFT LEFT / RIGHT
         //transform.Rotate(new Vector3( 0f, 0f, Input.GetAxis("Player_Right_Horizontal")));
 
         // BOOSTER
         //Input.GetButton("")
-		/*
+        /*
         if (Input.GetButton("CalibrationRotation"))
         {
             // RECALIBRATE
