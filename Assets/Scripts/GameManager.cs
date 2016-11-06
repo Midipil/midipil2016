@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour {
 	public AudioClip looseSound;
 
 	int gamesCount = 0;
+	int maxBeforeCredits = 20;
 
 	string[] scenesNames = new string[5];
 
@@ -45,23 +46,36 @@ public class GameManager : MonoBehaviour {
 		if (Input.GetKeyUp ("n")) {
 			ChangeScene ();
 		}
+
+		if (Input.GetKeyUp ("c")) {
+			LoadCredits ();
+		}
 		
 	}
 
 	public void ChangeScene(){
-		// Disable Scene managers
-		SteamVR_Fade.View(Color.black, 2);
-		foreach (WorldManager world in sceneManagers.Values) {
-			world.gameObject.SetActive(false);
+		if(gamesCount > maxBeforeCredits){
+			LoadCredits();
+		} else {
+
+			// Disable Scene managers
+			SteamVR_Fade.View(Color.black, 2);
+			foreach (WorldManager world in sceneManagers.Values) {
+				world.gameObject.SetActive(false);
+			}
+
+			string sceneToLoad = scenesNames [gamesCount % scenesNames.Length];
+			// Load scene
+			SceneManager.LoadScene (sceneToLoad, LoadSceneMode.Single);
+			// Increment counter
+			gamesCount++;
+			Debug.Log ("Change scene : " + sceneToLoad + " ; Count : " + gamesCount);
 		}
+		
+	}
 
-		string sceneToLoad = scenesNames [gamesCount % scenesNames.Length];
-		// Load scene
-		SceneManager.LoadScene (sceneToLoad, LoadSceneMode.Single);
-		// Increment counter
-		gamesCount++;
-		Debug.Log ("Change scene : " + sceneToLoad + " ; Count : " + gamesCount);
-
+	private void LoadCredits(){
+		SceneManager.LoadScene ("Credits", LoadSceneMode.Single);
 	}
 
 	void OnSceneWasLoaded(Scene scene, LoadSceneMode loadSceneMode){
