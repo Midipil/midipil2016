@@ -37,7 +37,7 @@ public class Sword : MonoBehaviour {
 
 	private void UnlockSword(){
 		gameObject.GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.None;
-		swordUnlockSound.Play ();
+		//swordUnlockSound.Play ();
 	}
 
 }

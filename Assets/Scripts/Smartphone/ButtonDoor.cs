@@ -22,7 +22,7 @@ public class ButtonDoor : MonoBehaviour
         	if(phone.controllerIndex != index)
 			{
 				door.Open(true);
-				phone.SetEnd(true, 3f);
+				phone.SetEndTime(true, 3f);
 	        	gameObject.SetActive(false);
 			}
         }

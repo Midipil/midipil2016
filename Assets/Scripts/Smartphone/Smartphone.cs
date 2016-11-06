@@ -19,6 +19,9 @@ public class Smartphone : MonoBehaviour
 	public int batteryLifeSeconds;
 	public ButtonDoor btnDoor;
 	public Grabbable grab;
+	public AudioSource audioExplode;
+	public AudioSource audioLowBattery;
+	public AudioSource audioMatchTinder;
 
 	private Door door;
 	private SmartphoneSceneManager sceneManager;
@@ -72,6 +75,8 @@ public class Smartphone : MonoBehaviour
 
 		if(batteryLife <= 25 && !batteryLowText.gameObject.activeSelf)
 		{
+			audioLowBattery.Stop();
+			audioLowBattery.Play();
 			batteryLowText.gameObject.SetActive(true);
 		}
 		else if(batteryLife > 25 && batteryLowText.gameObject.activeSelf)
@@ -94,7 +99,7 @@ public class Smartphone : MonoBehaviour
 			controllerIndex = grab.controllerIndex;
 	}
 
-	public void SetEnd(bool win, float time)
+	public void SetEndTime(bool win, float time)
 	{
 		won = win;
 		Invoke("SetEnd", time);
@@ -117,6 +122,8 @@ public class Smartphone : MonoBehaviour
 	{
 		if (collision.relativeVelocity.magnitude > 5)
         {
+        	audioExplode.Stop();
+        	audioExplode.Play();
         	Instantiate(fxExplosion, transform.position, Quaternion.identity);
         	won = false;
 
@@ -164,7 +171,9 @@ public class Smartphone : MonoBehaviour
 
 	public void MatchTinder()
 	{
-		cradle.gameObject.SetActive(false);
+		audioMatchTinder.Stop();
+		audioMatchTinder.Play();
+		cradle.gameObject.SetActive(true);
 		won = true;
 		Invoke("SetEnd", 4f);
 	}
