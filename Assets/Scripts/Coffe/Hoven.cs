@@ -5,7 +5,8 @@ public class Hoven : MonoBehaviour {
 
     public Transform door;
 
-    bool doorOpened, cakePlaced;
+	bool doorOpened;
+	public bool cakePlaced;
 
     public Cake cake;
 
@@ -16,12 +17,12 @@ public class Hoven : MonoBehaviour {
     public void Initialize(CoffeSceneManager sceneManager)
     {
         this.sceneManager = sceneManager;
-        cake.gameObject.SetActive(true);
+		cake.Initialize (sceneManager);
     }
 
 	public void ToggleDoor(SteamVR_TrackedController controller)
     {
-        if (controller.triggerPressed && anim < 0f)
+        if (/*controller.triggerPressed &&*/ anim < 0f)
         {
             doorOpened = !doorOpened;
 
@@ -33,24 +34,12 @@ public class Hoven : MonoBehaviour {
             {
                 if (cakePlaced)
                 {
-                    Invoke("CookCake", 1f);
+                    cake.Invoke("CookCake", 1f);
                 }
 
                 //door.Rotate(Vector3.right, -80f);
             }
             anim = 0f;
-        }
-    }
-
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.name == "Cake")
-        {
-            other.GetComponent<Grabbable>().AskDrop();
-            other.transform.parent = transform;
-            other.transform.localPosition = Vector3.zero;
-            other.transform.localRotation = Quaternion.identity;
-            cakePlaced = true;
         }
     }
 
@@ -67,26 +56,6 @@ public class Hoven : MonoBehaviour {
 
             if (anim >= 1f)
                 anim = -1;
-        }
-    }
-
-    void CookCake()
-    {
-        GetComponent<AudioSource>().Play();
-
-        if (sceneManager.currentState == CoffeSceneManager.SceneState.CAKE_OK)
-        {
-            cake.cakeRaw.SetActive(false);
-            cake.cakeOk.SetActive(true);
-
-            Invoke("CakeBakedOk", 1f);
-        }
-        else if (sceneManager.currentState == CoffeSceneManager.SceneState.CAKE_BURNT)
-        {
-            cake.cakeRaw.SetActive(false);
-            cake.cakeBurnt.SetActive(true);
-
-            Invoke("CakeBakedOk", 1f);
         }
     }
 
