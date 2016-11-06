@@ -8,7 +8,7 @@ public class TriggerStates : MonoBehaviour {
     void OnTriggerEnter(Collider other)
     {
         isTriggered = true;
-        if (name == "PorteFour" && other.tag == "Hand")
+		if (name == "PorteFour" && other.tag.Contains("Hand"))
         {
             transform.parent.GetComponent<Hoven>().ToggleDoor(other.GetComponent<Grabber>().controller);
         }
@@ -23,7 +23,7 @@ public class TriggerStates : MonoBehaviour {
     {
         isTriggered = false;
 
-        if (name == "Casserole" && other.tag == "Hand")
+		if (name == "Casserole" && other.tag.Contains("Hand"))
         {
 			//Debug.Log ("END");
             FindObjectOfType<CoffeSceneManager>().SetEnd(false);
@@ -35,7 +35,7 @@ public class TriggerStates : MonoBehaviour {
 	{
 		isTriggered = true;
 
-		if (name == "Casserole" && other.tag == "Hand")
+		if (name == "Casserole" && other.tag.Contains("Hand"))
 		{
 			//Debug.Log ("HAPTIC");
 			SteamVR_Controller.Input((int)other.GetComponentInParent<SteamVR_TrackedObject>().index).TriggerHapticPulse(5000);
