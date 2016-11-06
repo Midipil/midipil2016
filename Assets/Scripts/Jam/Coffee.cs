@@ -32,7 +32,7 @@ public class Coffee : MonoBehaviour {
 
     void DrinkCoffee()
     {
-        Debug.Log("DrinkCoffee");
+        GetComponent<AudioSource>().Play();
         drinkingCoffee = true;
         Invoke("CoffeeDrank", delayToDrinkCoffee);
     }
