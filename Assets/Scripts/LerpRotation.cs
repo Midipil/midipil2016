@@ -27,6 +27,7 @@ public class LerpRotation : MonoBehaviour {
 			target.transform.rotation = Quaternion.Euler(Vector3.Lerp (beginRotation, endRotation, fracJourney));
 			if (distCovered >= 1) {
 				animStarted = false;
+				GameObject.FindWithTag ("SceneManager").GetComponent<MonsterSceneManager>().SetEnd(true);
 			}
 		}
 
