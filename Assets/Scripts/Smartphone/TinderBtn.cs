@@ -12,11 +12,22 @@ public class TinderBtn : MonoBehaviour
 	{
 		if(isCollisionEnabled)
 		{
-			// TODO : Check tag hand
-	        if(cancelBtn)
-	        	phone.NextTinder();
-	       	else
-	       		phone.MatchTinder();
+			bool ok = false;
+
+			if(phone.controllerIndex == -1)
+				ok = other.gameObject.tag.Equals("LeftHand") || other.gameObject.tag.Equals("RightHand");
+			else if(phone.controllerIndex == 0)
+				ok = other.gameObject.tag.Equals("RightHand");
+			else if(phone.controllerIndex == 1)
+				ok = other.gameObject.tag.Equals("LeftHand");
+
+			if(ok)
+			{
+				if(cancelBtn)
+		        	phone.NextTinder();
+		       	else
+		       		phone.MatchTinder();
+			}
 		}
     }
 

@@ -131,6 +131,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
+--- !u!1 &1000011806595416
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 4000011211388208}
+  - 108: {fileID: 108000011275888556}
+  m_Layer: 0
+  m_Name: Spotlight
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1000011814330344
 GameObject:
   m_ObjectHideFlags: 1
@@ -188,7 +204,7 @@ GameObject:
   m_IsActive: 0
 --- !u!1 &1000013037179418
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
@@ -311,29 +327,43 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000013037179418}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
   m_Children: []
-  m_Father: {fileID: 4000010983078112}
-  m_RootOrder: 2
+  m_Father: {fileID: 4000011211388208}
+  m_RootOrder: 0
 --- !u!4 &4000010983078112
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000010803787336}
-  m_LocalRotation: {x: 0.5, y: 0.5, z: 0.5, w: 0.5}
-  m_LocalPosition: {x: -0.156, y: 0.576, z: -0.019}
-  m_LocalScale: {x: 0.02, y: 0.52946687, z: 0.262728}
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 90}
+  m_LocalRotation: {x: -0.6963643, y: -0.6963643, z: 0.122787856, w: 0.122787856}
+  m_LocalPosition: {x: -0.329, y: 0.533, z: 4.119}
+  m_LocalScale: {x: 0.011540681, y: 0.30552045, z: 0.15160301}
+  m_LocalEulerAnglesHint: {x: 0, y: -160, z: 90}
   m_Children:
   - {fileID: 4000013190475652}
   - {fileID: 4000011917471018}
-  - {fileID: 4000010264965678}
+  - {fileID: 4000011211388208}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!4 &4000011211388208
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011806595416}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+  m_Children:
+  - {fileID: 4000010264965678}
+  m_Father: {fileID: 4000010983078112}
+  m_RootOrder: 2
 --- !u!4 &4000011917471018
 Transform:
   m_ObjectHideFlags: 1
@@ -436,6 +466,40 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 43, y: 10, z: 400}
   m_Center: {x: 0, y: 0, z: -200}
+--- !u!108 &108000011275888556
+Light:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011806595416}
+  m_Enabled: 1
+  serializedVersion: 7
+  m_Type: 0
+  m_Color: {r: 1, g: 0.4802231, b: 0.08088237, a: 1}
+  m_Intensity: 1
+  m_Range: 2
+  m_SpotAngle: 60
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 0
+    m_Resolution: -1
+    m_CustomResolution: -1
+    m_Strength: 1
+    m_Bias: 0.05
+    m_NormalBias: 0.4
+    m_NearPlane: 0.2
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_Lightmapping: 4
+  m_AreaSize: {x: 1, y: 1}
+  m_BounceIntensity: 1
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
 --- !u!108 &108000012726805342
 Light:
   m_ObjectHideFlags: 1
@@ -445,10 +509,10 @@ Light:
   m_Enabled: 1
   serializedVersion: 7
   m_Type: 0
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1
-  m_Range: 1.5
-  m_SpotAngle: 70
+  m_Color: {r: 0, g: 0.526065, b: 0.83823526, a: 1}
+  m_Intensity: 0.5
+  m_Range: 2
+  m_SpotAngle: 60
   m_CookieSize: 10
   m_Shadows:
     m_Type: 0
@@ -623,6 +687,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 104e16392f4013449998c1338166075a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dropAsked: 0
 --- !u!114 &114000011481826722
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -695,7 +760,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -727,13 +792,14 @@ MonoBehaviour:
   - {fileID: 114000012631459508}
   - {fileID: 114000010472658810}
   fxExplosion: {fileID: 166318, guid: 10b208ad5441938479bcff09cbf9a403, type: 2}
-  screenLight: {fileID: 108000012726805342}
+  screenLight: {fileID: 108000011275888556}
   screenON: {fileID: 1000010128047084}
   screenOFF: {fileID: 1000010473185378}
   batteryImg: {fileID: 114000011481826722}
   batteryLowText: {fileID: 114000013645716862}
   batteryLifeSeconds: 40
   btnDoor: {fileID: 114000012033745418}
+  grab: {fileID: 114000011313236942}
 --- !u!114 &114000012631459508
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -888,9 +954,9 @@ CapsuleCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 1
-  m_Height: 1
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Height: 40
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: -10}
 --- !u!136 &136000010764346874
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -901,9 +967,9 @@ CapsuleCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 1
-  m_Height: 1
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Height: 40
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: -10}
 --- !u!136 &136000012700463684
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -914,9 +980,9 @@ CapsuleCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 1
-  m_Height: 1
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Height: 40
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: -10}
 --- !u!136 &136000012947642924
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -927,9 +993,9 @@ CapsuleCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 1
-  m_Height: 1
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Height: 40
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: -10}
 --- !u!212 &212000010959591306
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -82,12 +82,6 @@ public class CoffeSceneManager : WorldManager {
                 break;
         }
 
-        if (handleTaken)
-        {
-            Destroy(FindObjectOfType<Boiler>().transform.Find("MancheCasserole").GetComponent<Grabbable>());
-            FindObjectOfType<Boiler>().gameObject.AddComponent<Grabbable>();
-        }
-
         FindObjectOfType<TextDisplay>().Initialize(this);
 	}
 

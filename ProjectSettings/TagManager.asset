@@ -7,8 +7,9 @@ TagManager:
   - GameManager
   - SceneManager
   - Enemy
-  - Hand
+  - RightHand
   - Holder
+  - LeftHand
   layers:
   - Default
   - TransparentFX
