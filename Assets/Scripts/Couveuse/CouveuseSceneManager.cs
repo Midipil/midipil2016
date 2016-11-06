@@ -13,16 +13,16 @@ public class CouveuseSceneManager : WorldManager {
 		TOO_SLOW
 	}
 
-	public SceneState currentState = SceneState.TOO_SLOW;
-	SceneState previousState;
+	public SceneState currentState = SceneState.ONE_EGG;
 
-	public GameObject playerCamera, enemyCamera, playerBot, enemyBot, oneEgg, player, enemy, baseControls, laserControls;
+	private GameObject playerCamera, enemyCamera, playerBot, enemyBot, oneEgg, player, enemy, baseControls, laserControls;
 
 	void Awake () {
 
 		sceneName = "Couveuse";
 
 		if (!instantiated) {
+			DontDestroyOnLoad (this);
 			RegisterToGameManager ();
 			instantiated = true;
 		} else {
@@ -33,7 +33,6 @@ public class CouveuseSceneManager : WorldManager {
 
 	// Use this for initialization
 	void Start () {
-
 	}
 	
 	// Update is called once per frame
@@ -43,50 +42,48 @@ public class CouveuseSceneManager : WorldManager {
 
 	// Init scene and its content
 	public override void InitScene(){
-		Debug.Log ("Init couveuse scene.");
+
+
+		playerBot = GameObject.Find ("Bearbot").gameObject;
+		enemyBot = GameObject.Find ("Evil").gameObject;
+		oneEgg = GameObject.Find ("OneEgg").gameObject;
+		player = GameObject.Find ("Player").gameObject;
+		enemy = GameObject.Find ("Enemy").gameObject;
+		baseControls = GameObject.Find ("BaseControls").gameObject;
+		laserControls = GameObject.Find ("LaserControls").gameObject;
+		Debug.Log ("player : " + player.name);
+		playerCamera = player.transform.Find ("Anchor/[CameraRig]").gameObject;
+		enemyCamera = enemy.transform.Find ("[CameraRig]").gameObject;
+
+		Debug.Log ("Init couveuse scene with state : "+ currentState);
 		switch (currentState)
 		{
 		case SceneState.ONE_EGG:
-			playerCamera.SetActive (true);
 			playerBot.SetActive (false);
 			enemyCamera.SetActive (false);
-			enemyBot.SetActive (true);
-			oneEgg.SetActive (true);
 			enemy.SetActive (false);
 			break;
 
         case SceneState.EASY_LASER:
-            playerCamera.SetActive(false);
-            playerBot.SetActive(true);
-            enemyCamera.SetActive(true);
+            	playerCamera.SetActive(false);
             enemyBot.SetActive(false);
             oneEgg.SetActive(false);
-            enemy.SetActive(true);
             baseControls.SetActive(false);
-            laserControls.SetActive(true);
             enemy.GetComponent<EnemyController>().activateLaser(false);
             enemy.transform.Rotate(new Vector3(90, 0, 0));
             break;
 
         case SceneState.FATE:
-            playerCamera.SetActive(true);
             playerBot.SetActive(false);
             enemyCamera.SetActive(false);
-            enemyBot.SetActive(true);
             oneEgg.SetActive(false);
-            enemy.SetActive(true);
             enemy.GetComponent<EnemyController>().sweep=true;
 
             break;
 
             case SceneState.TOO_SLOW:
                 playerCamera.SetActive(false);
-                playerBot.SetActive(true);
-                enemyCamera.SetActive(true);
                 enemyBot.SetActive(false);
-                oneEgg.SetActive(true);
-                enemy.SetActive(true);
-                baseControls.SetActive(true);
                 laserControls.SetActive(false);
                 enemy.GetComponent<EnemyController>().activateLaser(true);
                 player.GetComponent<PlayerController>().sweep = true;
@@ -101,27 +98,21 @@ public class CouveuseSceneManager : WorldManager {
 
 	// Start end sequence when scene goal is achieved
 	public override void SetEnd(bool win){
-
 		switch (currentState)
 		{
 		case SceneState.ONE_EGG:
-                previousState = currentState;
                 currentState = SceneState.EASY_LASER;
 			break;
             case SceneState.EASY_LASER:
-                previousState = currentState;
                 currentState = SceneState.FATE;
                 break;
             case SceneState.FATE:
-                previousState = currentState;
-                currentState = SceneState.EASY_LASER;
+			currentState = SceneState.TOO_SLOW;
                 break;
 
             default:
 			break;
 		}
-
-		previousState = currentState;
 
 		FindObjectOfType<GameManager>().ChangeScene();
 
