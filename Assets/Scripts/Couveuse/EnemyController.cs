@@ -45,7 +45,6 @@ public class EnemyController : MonoBehaviour {
 
     public void activateLaser(bool b)
     {
-        Debug.Log("laser");
         transform.GetComponent<LineRenderer>().enabled=b;
         transform.GetComponent<LaserBeam>().enabled=b;
         transform.Find("Spotlight").gameObject.SetActive(b);

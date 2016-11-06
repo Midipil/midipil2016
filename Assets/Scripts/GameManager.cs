@@ -47,6 +47,7 @@ public class GameManager : MonoBehaviour {
 
 	public void ChangeScene(){
 		// Disable Scene managers
+		SteamVR_Fade.View(Color.black, 2);
 		foreach (WorldManager world in sceneManagers.Values) {
 			world.gameObject.SetActive(false);
 		}
@@ -61,6 +62,7 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void OnSceneWasLoaded(Scene scene, LoadSceneMode loadSceneMode){
+		SteamVR_Fade.View(Color.clear, 2);
 		// Enable right scene manager
 		sceneManagers [SceneManager.GetActiveScene().name].gameObject.SetActive(true);
 		// Init loaded scene

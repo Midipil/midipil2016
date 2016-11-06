@@ -51,7 +51,6 @@ public class PlayerController : MonoBehaviour {
 
         if (sweep)
         {
-            Debug.Log("sweeee");
             this.GetComponent<Rigidbody>().AddTorque(transform.right * -0.4f * moveSpeed);
         }
 

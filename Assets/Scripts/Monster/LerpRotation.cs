@@ -5,6 +5,7 @@ using System.Collections;
 public class LerpRotation : MonoBehaviour {
 
 	public GameObject target;
+	public AudioSource sfx;
 	public Vector3 beginRotation;
 	public Vector3 endRotation;
 
@@ -36,6 +37,7 @@ public class LerpRotation : MonoBehaviour {
 	void OnTriggerEnter() {
 		if (!animStarted) {
 			animStarted = true;
+			sfx.Play ();
 			startTime = Time.time;
 			journeyLength = Vector3.Distance (beginRotation, endRotation);
 		}
