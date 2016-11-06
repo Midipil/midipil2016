@@ -14,7 +14,7 @@ public class EnemyController : MonoBehaviour {
 
     void Start()
     {
-
+		activateLaser (false);
     }
 
     void Update()
