@@ -14,7 +14,7 @@ public class CouveuseSceneManager : WorldManager {
 		TOO_SLOW
 	}
 
-	public SceneState currentState = SceneState.ONE_EGG;
+	public SceneState currentState;
 
 	private GameObject playerCamera, enemyCamera, playerBot, enemyBot, oneEgg, player, enemy, baseControls, laserControls;
 
@@ -92,6 +92,7 @@ public class CouveuseSceneManager : WorldManager {
                 playerCamera.SetActive(false);
                 enemyBot.SetActive(false);
                 laserControls.SetActive(false);
+			baseControls.SetActive(false);
                 enemy.GetComponent<EnemyController>().activateLaser(true);
                 player.GetComponent<PlayerController>().sweep = true;
                 enemy.transform.Rotate(new Vector3(100, 0, 0));
