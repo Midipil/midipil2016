@@ -9,6 +9,8 @@ public class CodePeeing : MonoBehaviour {
     public Text codeText;
     public int codePieceLength;
 
+    public AudioClip[] keyboardSounds = new AudioClip[3];
+
     string randomCode;
 
     int currentTextLength = 0;
@@ -37,5 +39,8 @@ public class CodePeeing : MonoBehaviour {
 
         codeText.text += randomCode.Substring(currentTextLength, codePieceLength);
         currentTextLength += codePieceLength;
+
+        if (!GetComponent<AudioSource>().isPlaying)
+            GetComponent<AudioSource>().PlayOneShot(keyboardSounds[Random.Range(0, 2)], 1f);
     }
 }
