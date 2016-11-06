@@ -24,8 +24,8 @@ public class ButtonDoor : MonoBehaviour
 
 		if(ok)
 		{
-			door.Open(true);    
-        	phone.ShowTinder(true);
+			door.Open(true);
+			phone.SetEnd(true, 3f);
         	gameObject.SetActive(false);
 		}
         

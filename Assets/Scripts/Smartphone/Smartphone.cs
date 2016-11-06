@@ -56,7 +56,6 @@ public class Smartphone : MonoBehaviour
 			batteryLowText.gameObject.SetActive(false);
 
 		SetBattery(false);
-		ShowTinder(false);
 	}
 	
 	void Update () 
@@ -92,6 +91,12 @@ public class Smartphone : MonoBehaviour
 
 		if(controllerIndex != grab.controllerIndex)
 			controllerIndex = grab.controllerIndex;
+	}
+
+	void SetEnd(bool win, float time)
+	{
+		won = win;
+		Invoke("SetEnd", time);
 	}
 
 	void SetEnd()
