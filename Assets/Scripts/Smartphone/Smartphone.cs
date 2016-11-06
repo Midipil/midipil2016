@@ -101,14 +101,12 @@ public class Smartphone : MonoBehaviour
 
 	public void SetEndTime(bool win, float time)
 	{
-		print("endtime");
 		won = win;
 		Invoke("SetEnd", time);
 	}
 
 	void SetEnd()
 	{
-		print("end " + sceneManager);
 		sceneManager.SetEnd(won);
 	}
 
