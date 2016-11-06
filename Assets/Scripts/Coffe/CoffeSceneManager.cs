@@ -19,7 +19,7 @@ public class CoffeSceneManager : WorldManager {
     }
 
     // State we were last time we played this scene
-    private SceneState previousState;
+	private SceneState previousState = SceneState.MILK_BOILING;
     // Did we win or lose last time we played this scene
     private bool previousStateWin;
     // State we are currently

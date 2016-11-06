@@ -41,6 +41,8 @@ public class Grabber : MonoBehaviour {
 			Drop ();
 		}
 
+		if (grabbedObject != null && grabbedObject.dropAsked)
+			Drop ();
 	}
 
 	void OnTriggerEnter(Collider other) {
