@@ -31,7 +31,7 @@ public class Boiler : MonoBehaviour {
 
         GetComponent<AudioSource>().Play();
 
-        FindObjectOfType<Grabber>().Grab(gameObject);
+        //FindObjectOfType<Grabber>().Grab(gameObject);
     }
 
     /*public void StartHeating()
@@ -58,6 +58,8 @@ public class Boiler : MonoBehaviour {
             {
                 StartBoiling();
                 GetComponent<AudioSource>().volume = 1f;
+                isHeating = false;
+                Debug.Log(Vector3.Angle(transform.position - Camera.main.transform.position, Camera.main.transform.transform.forward) + " " + Camera.main.fieldOfView);
             }
         }
 
