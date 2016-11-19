@@ -33,6 +33,11 @@ public class StartButton : MonoBehaviour {
 
 		child.localPosition = initPos;
 
-	} 
+	}
+
+    void OnTriggerStay(Collider o)
+    {
+        SteamVR_Controller.Input((int)o.transform.GetComponentInParent<SteamVR_TrackedObject>().index).TriggerHapticPulse((ushort)1000);
+    }
 
 }
