@@ -23,10 +23,12 @@ public class Smartphone : MonoBehaviour
 	public AudioSource audioLowBattery;
 	public AudioSource audioMatchTinder;
 
-	private Door door;
+    private Door door;
 	private SmartphoneSceneManager sceneManager;
+    private bool exploded = false;
 
-	public int batteryLife
+
+    public int batteryLife
     {
 		get 
 		{
@@ -47,26 +49,50 @@ public class Smartphone : MonoBehaviour
     private bool noBattery;
     private bool drainBattery = true;
     private bool won;
+    private SteamVR_TrackedObject right;
+    private bool firstPulse = false;
 
-	void Start () 
-	{
-		controllerIndex = -1;
-		sceneManager = (SmartphoneSceneManager) FindObjectOfType(typeof(SmartphoneSceneManager));
-		GameObject obj = GameObject.Find ("Door");
-		if(obj)
-			door = obj.GetComponent<Door>();
-		batteryLife = 100;
-		startTime = Time.time;
+    void Start()
+    {
+        controllerIndex = -1;
+        sceneManager = (SmartphoneSceneManager)FindObjectOfType(typeof(SmartphoneSceneManager));
+        GameObject obj = GameObject.Find("Door");
+        if (obj)
+            door = obj.GetComponent<Door>();
+        batteryLife = 100;
+        startTime = Time.time;
 
-		if(batteryLowText)
-			batteryLowText.gameObject.SetActive(false);
+        if (batteryLowText)
+            batteryLowText.gameObject.SetActive(false);
 
-		SetBattery(false);
-	}
+        SetBattery(false);
+        
+    }
+
+    bool SetRightPulse(int time)
+    {
+        if(!right)
+        {
+            GameObject o = GameObject.FindGameObjectWithTag("RightHand");
+            if (o)
+                right = o.GetComponentInParent<SteamVR_TrackedObject>();
+        }
+
+        if (right)
+        {
+            SteamVR_Controller.Input((int)right.index).TriggerHapticPulse((ushort)time);
+            return true;
+        }
+        else
+            return false;
+    }
 	
 	void Update () 
 	{
-		if(drainBattery)
+        if (!firstPulse)
+            firstPulse = SetRightPulse(1000);
+
+        if (drainBattery)
 		{
 			float currentTime = Time.time - startTime;
 			if(currentTime <= batteryLifeSeconds)
@@ -77,21 +103,24 @@ public class Smartphone : MonoBehaviour
 
 		if(batteryLife <= 25 && !batteryLowText.gameObject.activeSelf)
 		{
-			audioLowBattery.Stop();
+            audioLowBattery.Stop();
 			audioLowBattery.Play();
-			batteryLowText.gameObject.SetActive(true);
+            SetRightPulse(2000);
+            batteryLowText.gameObject.SetActive(true);
 		}
 		else if(batteryLife > 25 && batteryLowText.gameObject.activeSelf)
 		{
 			batteryLowText.gameObject.SetActive(false);
 		}
 
-		if(batteryLife <= 0 && !noBattery)
+		if(batteryLife <= 0 && !noBattery && !exploded)
 		{
 			SetBattery(false);
 			won = false;
-			Invoke("SetEnd", 2f);
-		}
+
+            Explode();
+
+        }
 		else if(batteryLife > 0 && noBattery)
 		{
 			SetBattery(true);
@@ -124,26 +153,32 @@ public class Smartphone : MonoBehaviour
 	{
 		if (collision.relativeVelocity.magnitude > 5)
         {
-        	audioExplode.Stop();
-        	audioExplode.Play();
-        	Instantiate(fxExplosion, transform.position, Quaternion.identity);
-        	won = false;
-
-        	if(door)
-        	{
-        		if(Vector3.Distance(transform.position, door.transform.position) < 1.5f)
-        		{
-        			won = true;
-        			door.Destroy();
-        		}
-        	}
-
-        	meshRender.enabled = false;
-        	screenON.SetActive(false);
-
-			Invoke("SetEnd", 3f);
+            Explode();
         }
 	}
+
+    private void Explode()
+    {
+        exploded = true;
+        audioExplode.Stop();
+        audioExplode.Play();
+        Instantiate(fxExplosion, transform.position, Quaternion.identity);
+        won = false;
+
+        if (door)
+        {
+            if (Vector3.Distance(transform.position, door.transform.position) < 1.5f)
+            {
+                won = true;
+                door.Destroy();
+            }
+        }
+
+        meshRender.enabled = false;
+        screenON.SetActive(false);
+
+        Invoke("SetEnd", 3f);
+    }
 
 	public void ShowTinder(bool show)
 	{
@@ -173,7 +208,8 @@ public class Smartphone : MonoBehaviour
 
 	public void MatchTinder()
 	{
-		audioMatchTinder.Stop();
+        tinder.gameObject.SetActive(false);
+        audioMatchTinder.Stop();
 		audioMatchTinder.Play();
 		cradle.gameObject.SetActive(true);
 		won = true;
@@ -189,5 +225,14 @@ public class Smartphone : MonoBehaviour
 	{
 		btnDoor.gameObject.SetActive(show);
 	}
+
+    public void SetTinderImages(Sprite[] new_images)
+    {
+        for(int i = 0; i < new_images.Length; i++)
+        {
+            if (i < tinderImages.Length)
+                tinderImages[i].SetImage(new_images[i]);
+        }
+    }
 
 }

@@ -80,6 +80,10 @@ public class GameManager : MonoBehaviour {
 
 	void OnSceneWasLoaded(Scene scene, LoadSceneMode loadSceneMode){
 		SteamVR_Fade.View(Color.clear, 2);
+		// For safety, double check
+		foreach (WorldManager world in sceneManagers.Values) {
+			world.gameObject.SetActive(false);
+		}
 		// Enable right scene manager
 		sceneManagers [SceneManager.GetActiveScene().name].gameObject.SetActive(true);
 		// Init loaded scene
