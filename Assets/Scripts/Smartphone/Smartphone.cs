@@ -213,7 +213,7 @@ public class Smartphone : MonoBehaviour
 
     public void MatchTinder()
 	{
-        if (george)
+        if (george && selectedTinder == 2)
             cradle.SetGeorgeSound();
         tinder.gameObject.SetActive(false);
         audioMatchTinder.Stop();
