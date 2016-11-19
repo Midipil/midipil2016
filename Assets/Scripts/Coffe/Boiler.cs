@@ -20,12 +20,12 @@ public class Boiler : MonoBehaviour {
         gameObject.SetActive(true);
 
         FindObjectOfType<TextDisplay>().DisplayText("Ne laisse pas le lait déborder !", 8f);
-
-		if (sceneManager.handleTaken) {
+        
+		if (sceneManager.getLooseHandle()) {
 			Destroy(handle);
 			gameObject.AddComponent<Grabbable>();
 		}
-
+        
 		Invoke("NeedToLook", 5f);
         Invoke("MakeNoise", 10f);
 
@@ -63,10 +63,10 @@ public class Boiler : MonoBehaviour {
             }
         }
 
-        if (!handleGrabbed && handle.IsGrabbed())
+        if (!handleGrabbed && handle.IsGrabbed() && sceneManager.getLooseHandle()==true)
         {
             //Invoke("StartBoiling", 1f);
-            sceneManager.handleTaken = true;
+           
 			handleGrabbed = true;
 			handle.GetComponent<Rigidbody>().useGravity = true;
 			handle.GetComponent<Rigidbody>().isKinematic = false;
@@ -74,19 +74,22 @@ public class Boiler : MonoBehaviour {
             CancelInvoke("MakeNoise");
         }
 
-        if(GetComponent<Grabbable>() != null && GetComponent<Grabbable>().IsGrabbed() && isHeating)
+        if(GetComponent<Grabbable>() != null && GetComponent<Grabbable>().IsGrabbed() && isHeating && sceneManager.getLooseHandle() == false)
         {
             heatingParticles.SetActive(false);
             boilingParticles.SetActive(false);
             GetComponent<AudioSource>().Stop();
             CancelInvoke("MakeNoise");
             isHeating = false;
+            Debug.Log("case 1");
         }
 
         if(transform.up.y < -0.8)
         {
             milk.GetComponent<Rigidbody>().useGravity = true;
             milk.GetComponent<Rigidbody>().isKinematic = false;
+            heatingParticles.SetActive(false);
+            boilingParticles.SetActive(false);
             Invoke("EnableMilkCollider", 0.2f);
             FindObjectOfType<TextDisplay>().ShowEndMessage("Oh mon dieu !\nIl a fait tomber le lait !!!", false);
             milk.AddComponent<Grabbable>();

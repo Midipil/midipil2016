@@ -35,13 +35,13 @@ public class Cake : MonoBehaviour
 			cakeRaw.SetActive(false);
 			cakeBurnt.SetActive(true);
 
-			Invoke("CakeBakedOk", 3f);
+			Invoke("CakeBurnt", 3f);
 		}
 	}
 
 	void CakeBakedOk()
 	{
-		FindObjectOfType<TextDisplay>().ShowEndMessage("Tu as réussis à cuire le gateau !\nJean-Pierre Coffe est fier de toi !", true);
+		FindObjectOfType<TextDisplay>().ShowEndMessage("Tu as réussi à cuire le gâteau !\nJean-Pierre Coffe est fier de toi !", true);
 	}
 
 	void CakeBurnt()

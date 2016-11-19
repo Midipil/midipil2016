@@ -5,7 +5,7 @@ public class CoffeSceneManager : WorldManager {
 
 	private static bool instantiated = false;
 
-    public bool handleTaken;
+    private bool looseHandle = false;
 
     // All scene states
     public enum SceneState
@@ -37,8 +37,17 @@ public class CoffeSceneManager : WorldManager {
 		}
 	}
 
-	// Use this for initialization
-	void Start () {
+    public bool getLooseHandle()
+    {
+        return looseHandle;
+    }
+    public void setLooseHandle(bool b)
+    {
+        looseHandle = b;
+    }
+
+    // Use this for initialization
+    void Start () {
 
 	}
 	
@@ -58,14 +67,17 @@ public class CoffeSceneManager : WorldManager {
             case SceneState.NOT_SET:
                 currentState = SceneState.MILK_BOILING;
                 FindObjectOfType<Boiler>().Initialize(this);
+                looseHandle = false;
                 break;
             case SceneState.MILK_BOILING:
                 currentState = SceneState.CAKE_OK;
+                
                 FindObjectOfType<Hoven>().Initialize(this);
                 FindObjectOfType<Boiler>().gameObject.SetActive(false);
                 break;
             case SceneState.CAKE_OK:
                 currentState = SceneState.BOILER_HANDLE;
+                looseHandle = true;
                 FindObjectOfType<Boiler>().Initialize(this);
                 break;
             case SceneState.BOILER_HANDLE:
@@ -75,7 +87,7 @@ public class CoffeSceneManager : WorldManager {
                 break;
 			case SceneState.CAKE_BURNT:
 				currentState = SceneState.BOILER_GRABBABLE;
-				handleTaken = true;
+                looseHandle = false;
                 FindObjectOfType<Boiler>().Initialize(this);
                 break;
             case SceneState.BOILER_GRABBABLE:

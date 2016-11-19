@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour {
 	public AudioClip looseSound;
 
 	int gamesCount = 1;
-	int maxBeforeCredits = 20;
+	int maxBeforeCredits = 25;
 
 	string[] scenesNames = new string[5];
 
