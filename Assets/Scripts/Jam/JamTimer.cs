@@ -22,7 +22,7 @@ public class JamTimer : MonoBehaviour {
         if (!hasDoneSomething)
             return;
 
-        FindObjectOfType<TextDisplay>().ShowEndMessage("Tu as perdu la jam !", false);
+        FindObjectOfType<TextDisplay>().ShowEndMessage("Le temps est écoulé, vous avez perdu la jam...", false);
     }
 
     /*public void EndJam(string feedbackText)
