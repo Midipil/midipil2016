@@ -38,7 +38,7 @@ public class TriggerStates : MonoBehaviour {
 
 		if (name == "Casserole" && other.tag.Contains("Hand"))
 		{
-			Debug.Log ("HAPTIC");
+			//Debug.Log ("HAPTIC");
 			SteamVR_Controller.Input((int)other.GetComponentInParent<SteamVR_TrackedObject>().index).TriggerHapticPulse((ushort)2000);
 
 		}
