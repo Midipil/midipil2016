@@ -7,7 +7,7 @@ public class Smartphone : MonoBehaviour
 	public int controllerIndex { get; private set; }
 
 	public MeshRenderer meshRender;
-	public GameObject cradle;
+	public Baby cradle;
 	public GameObject tinder;
 	public TinderImg[] tinderImages;
 	public GameObject fxExplosion;
@@ -26,7 +26,7 @@ public class Smartphone : MonoBehaviour
     private Door door;
 	private SmartphoneSceneManager sceneManager;
     private bool exploded = false;
-
+    private bool george = false;
 
     public int batteryLife
     {
@@ -206,8 +206,15 @@ public class Smartphone : MonoBehaviour
 		tinderImages[selectedTinder].Fade(true);	
 	}
 
-	public void MatchTinder()
+    public void SetGeorge()
+    {
+        george = true;
+    }
+
+    public void MatchTinder()
 	{
+        if (george)
+            cradle.SetGeorgeSound();
         tinder.gameObject.SetActive(false);
         audioMatchTinder.Stop();
 		audioMatchTinder.Play();

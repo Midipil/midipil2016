@@ -15,7 +15,7 @@ public class TinderImg : MonoBehaviour
 	{
 		if(fading)
 		{
-			float t = (Time.time - startTimeFade) / 1.5f;
+			float t = (Time.time - startTimeFade) / 0.5f;
 
 			if(t <= 1f)
 			{

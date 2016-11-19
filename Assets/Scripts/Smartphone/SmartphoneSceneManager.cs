@@ -96,6 +96,7 @@ public class SmartphoneSceneManager : WorldManager
             	phone.SetBtnDoor(false);
             	phone.ShowTinder(true);
             	door.gameObject.SetActive(false);
+                phone.SetGeorge();
                 break;
 
             case SceneState.MATCH_TINDER:
