@@ -59,8 +59,8 @@ public class CouveuseSceneManager : WorldManager {
 		enemy = GameObject.Find ("Enemy").gameObject;
 		baseControls = GameObject.Find ("BaseControls").gameObject;
 		laserControls = GameObject.Find ("LaserControls").gameObject;
-		playerCamera = player.transform.Find ("Anchor/[CameraRig]").gameObject;
-		enemyCamera = enemy.transform.Find ("[CameraRig]").gameObject;
+		playerCamera = player.transform.Find ("Anchor/[CameraRigCustom]").gameObject;
+		enemyCamera = enemy.transform.Find ("[CameraRigCustom]").gameObject;
 
 		Debug.Log ("Init couveuse scene with state : "+ currentState);
 		switch (currentState)

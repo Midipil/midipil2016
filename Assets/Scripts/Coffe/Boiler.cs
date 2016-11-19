@@ -19,7 +19,7 @@ public class Boiler : MonoBehaviour {
         this.sceneManager = sceneManager;
         gameObject.SetActive(true);
 
-        FindObjectOfType<TextDisplay>().DisplayText("Fait attention au lait !", 8f);
+        FindObjectOfType<TextDisplay>().DisplayText("Ne laisse pas le lait déborder !", 8f);
 
 		if (sceneManager.handleTaken) {
 			Destroy(handle);

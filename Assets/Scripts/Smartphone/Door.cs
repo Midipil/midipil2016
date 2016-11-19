@@ -3,8 +3,10 @@ using System.Collections;
 
 public class Door : MonoBehaviour 
 {
-	public AudioSource audio;
+	public AudioSource audioDoor;
 	public float timeMoveDoor; // Time to open the door
+    public float timeMoveHandle;
+    public GameObject handle;
 
 	private bool opening, isOpen;
 	private float startTimeMove;
@@ -21,17 +23,36 @@ public class Door : MonoBehaviour
 	{
 		if(!isOpen && opening)
 		{
-			float t = (Time.time - startTimeMove) / timeMoveDoor;
+            float tHandle = (Time.time - startTimeMove) / timeMoveHandle;
 
-			if(t <= 1f)
-			{
-				transform.rotation = Quaternion.Euler(0f, t * 90f, 0f);
-			}
-			else
-			{
-				isOpen = true;
-				opening = false;
-			}
+            if(tHandle <= 1f)
+            {
+                if(tHandle <= 0.5f)
+                {
+                    handle.transform.localRotation = Quaternion.Euler(-(tHandle * 2f * 45f), 0f, 0f);
+                }
+                else
+                {
+                    handle.transform.localRotation = Quaternion.Euler((1f - ((tHandle - 0.5f) * 2f)) * -45f, 0f, 0f);
+                }
+            }
+            else
+            {
+                float t = (Time.time - (startTimeMove + timeMoveHandle + 0.2f)) / timeMoveDoor;
+
+                if(t >= 0f)
+                {
+                    if (t <= 1f)
+                    {
+                        transform.rotation = Quaternion.Euler(0f, t * 90f, 0f);
+                    }
+                    else
+                    {
+                        isOpen = true;
+                        opening = false;
+                    }
+                }
+            }
 		}
 	}
 
@@ -39,8 +60,8 @@ public class Door : MonoBehaviour
 	{
 		if(!isOpen)
 		{
-			audio.Stop();
-			audio.Play();
+			audioDoor.Stop();
+			audioDoor.Play();
 			if(openNow)
 				MoveDoor();
 			else
