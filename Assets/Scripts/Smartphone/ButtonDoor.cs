@@ -15,8 +15,6 @@ public class ButtonDoor : MonoBehaviour
 	{
 		if (other != null) 
 		{
-			bool ok = false;
-
 			if(other.gameObject.tag.Equals("LeftHand") || other.gameObject.tag.Equals("RightHand"))
 			{
 				int index = (int)other.gameObject.GetComponentInParent<SteamVR_TrackedObject>().index;
