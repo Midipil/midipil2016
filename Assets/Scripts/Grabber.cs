@@ -47,7 +47,7 @@ public class Grabber : MonoBehaviour {
 	}
 
 	public void Grab(GameObject objToGrab){
-		Debug.Log ("Grabbed !");
+		//Debug.Log ("Grabbed !");
 		grabbedObject = objToGrab.GetComponent<Grabbable> ();
 		objToGrab.transform.position = this.transform.position;
 		objToGrab.transform.rotation = this.transform.rotation;
@@ -58,7 +58,7 @@ public class Grabber : MonoBehaviour {
 	}
 
 	void Drop(){
-		Debug.Log ("Dropped !");
+		//Debug.Log ("Dropped !");
 
 		var rigidbody = grabbedObject.GetComponent<Rigidbody>();
 		var trackedObj = GetComponentInParent<SteamVR_TrackedObject>();
