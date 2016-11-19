@@ -1061,7 +1061,7 @@ MonoBehaviour:
   screenOFF: {fileID: 1000010473185378}
   batteryImg: {fileID: 114000011481826722}
   batteryLowText: {fileID: 114000013645716862}
-  batteryLifeSeconds: 60
+  batteryLifeSeconds: 40
   btnDoor: {fileID: 114000012033745418}
   grab: {fileID: 114000011313236942}
   audioExplode: {fileID: 82000010454477498}
