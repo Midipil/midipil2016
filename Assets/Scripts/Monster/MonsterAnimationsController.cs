@@ -33,6 +33,10 @@ public class MonsterAnimationsController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if (!animator.isInitialized) {
+			animator.Rebind ();
+		}
+
 		animator.SetFloat ("TimeBeforeRoar", animator.GetFloat ("TimeBeforeRoar") - Time.deltaTime);
 		if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Idle breathing")) {
 			animator.SetFloat ("TimeBeforeRoar", timeBeforeRoar);
