@@ -17,6 +17,9 @@ public class MonsterAnimationsController : MonoBehaviour {
 	public AudioSource attackSound;
 	public AudioSource whooshSound;
 	public AudioSource deathSound;
+	public AudioSource playerDeathSound;
+
+	public GameObject wastedTexture;
 
 	// Use this for initialization
 	void Start () {
@@ -37,6 +40,10 @@ public class MonsterAnimationsController : MonoBehaviour {
 
 		if (countdownStarted) {
 			countdownBeforeEnd -= Time.deltaTime;
+
+			if (!win && countdownBeforeEnd < 2.0f) {
+				wastedTexture.SetActive (true);
+			}
 		}
 
 		if (countdownBeforeEnd <= 0) {
@@ -65,6 +72,7 @@ public class MonsterAnimationsController : MonoBehaviour {
 			attackSound.Play ();
 			whooshSound.PlayDelayed (1.5f);
 			deathSound.Stop ();
+			playerDeathSound.PlayDelayed (0.8f);
 		}
 		else if (animator.GetCurrentAnimatorStateInfo(0).IsName("Death") && !deathSound.isPlaying && !deathHasBeenPlayed) {
 			idleSound.Stop ();
