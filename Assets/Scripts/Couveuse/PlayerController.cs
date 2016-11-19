@@ -5,9 +5,9 @@ using System.Collections;
 public class PlayerController : MonoBehaviour {
 
     private float boostFactor = 1.0f;
-	private float moveSpeed = 1.0f;
-    private float rotationSpeed = 3.0f;
-	private float sidewaysSpeed = 1.0f;
+	private float moveSpeed = 0.6f;
+    private float rotationSpeed = 1.0f;
+	private float sidewaysSpeed = 0.6f;
 
 	private float boostDuration = 1;
 	private float boost = 3.0f;
