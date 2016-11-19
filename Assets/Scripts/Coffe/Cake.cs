@@ -41,11 +41,11 @@ public class Cake : MonoBehaviour
 
 	void CakeBakedOk()
 	{
-		FindObjectOfType<TextDisplay>().ShowEndMessage("Tu as réussis à cuire le gateau !\nJean-Pierre Coffe est fière de toi !", true);
+		FindObjectOfType<TextDisplay>().ShowEndMessage("Tu as réussis à cuire le gateau !\nJean-Pierre Coffe est fier de toi !", true);
 	}
 
 	void CakeBurnt()
 	{
-		FindObjectOfType<TextDisplay>().ShowEndMessage("Tu as cramé le gateau !\nJean-Pierre Coffe n'est pas content du tout !", false);
+		FindObjectOfType<TextDisplay>().ShowEndMessage("Le gâteau est complètement brûlé !\nJean-Pierre Coffe n'est pas content du tout !", false);
 	}
 }
