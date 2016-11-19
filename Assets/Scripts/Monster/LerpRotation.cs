@@ -14,6 +14,8 @@ public class LerpRotation : MonoBehaviour {
 	private float journeyLength;
 	private bool animStarted = false;
 
+	public float delayEnd = 0;
+
 	// Use this for initialization
 	void Start () {
 		
@@ -27,8 +29,11 @@ public class LerpRotation : MonoBehaviour {
 			float fracJourney = distCovered / journeyLength;
 			target.transform.localRotation = Quaternion.Euler(Vector3.Lerp (beginRotation, endRotation, fracJourney));
 			if (fracJourney >= 1) {
-				//animStarted = false;
-				GameObject.FindWithTag ("SceneManager").GetComponent<MonsterSceneManager>().SetEnd(true);
+				if (delayEnd < 0) {
+					//animStarted = false;
+					GameObject.FindWithTag ("SceneManager").GetComponent<MonsterSceneManager> ().SetEnd (true);
+				}
+				delayEnd -= Time.deltaTime;
 			}
 		}
 
