@@ -6,14 +6,12 @@ public class TinderBtn : MonoBehaviour
 	public Smartphone phone;
 	public bool cancelBtn;
 
-	private bool isCollisionEnabled = false;
-
 	void OnTriggerEnter(Collider other) 
 	{
-		if(isCollisionEnabled && other)
+		if(other)
 		{
-			if(other.gameObject.tag.Equals("LeftHand") || other.gameObject.tag.Equals("RightHand"))
-        	{
+			if(other.gameObject.tag.Equals("Finger")) //  || other.gameObject.tag.Equals("RightHand")
+            {
 	        	int index = (int)other.gameObject.GetComponentInParent<SteamVR_TrackedObject>().index;
 
 	        	if(phone.controllerIndex != index)
@@ -25,10 +23,5 @@ public class TinderBtn : MonoBehaviour
 				}
 			}
 		}
-    }
-
-    public void SetCollision(bool enabled)
-    {
-    	isCollisionEnabled = enabled;
     }
 }

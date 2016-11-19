@@ -8,7 +8,7 @@ public class Door : MonoBehaviour
     public float timeMoveHandle;
     public GameObject handle;
 
-	private bool opening, isOpen;
+	private bool opening = false, isOpen = false;
 	private float startTimeMove;
 	private Smartphone phone;
 
@@ -82,8 +82,9 @@ public class Door : MonoBehaviour
 
 	void MoveDoor()
 	{
-		startTimeMove = Time.time;
+        startTimeMove = Time.time;
 		opening = true;
-		phone.SetEndTime(true, timeMoveDoor);
+        if(phone)
+		    phone.SetEndTime(true, timeMoveDoor);
 	}
 }

@@ -5,7 +5,6 @@ using System.Collections;
 public class TinderImg : MonoBehaviour 
 {
 	public Image img;
-	public TinderBtn[] buttons;
 
 	private bool fading = false;
 	private bool fadeIn = false, fadeOut = false;
@@ -29,12 +28,6 @@ public class TinderImg : MonoBehaviour
 			}
 			else
 			{
-				if(fadeIn)
-				{
-					foreach(TinderBtn btn in buttons)
-						btn.SetCollision(true);
-				}
-
 				fading = false;
 			}
 		}
@@ -53,14 +46,13 @@ public class TinderImg : MonoBehaviour
 			fadeOut = true;
 		}
 
-		if(fadeOut)
-		{
-			foreach(TinderBtn btn in buttons)
-				btn.SetCollision(false);
-		}
-
 		fadeColor = Color.white;
 		startTimeFade = Time.time;
 		fading = true;
 	}
+
+    public void SetImage(Sprite new_img)
+    {
+        img.sprite = new_img;
+    }
 }

@@ -1,7 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
-public class SmartphoneSceneManager : WorldManager {
+public class SmartphoneSceneManager : WorldManager
+{
+    public Sprite[] imagesJP;
 
 	private static bool instantiated = false;
 
@@ -10,7 +13,8 @@ public class SmartphoneSceneManager : WorldManager {
         NOT_SET,
         OPEN_DOOR,
         OPEN_DOOR_BTN,
-		MATCH_TINDER
+		MATCH_TINDER,
+        MATH_TINDER_JP
 	}
 
 	// State we were last time we played this scene
@@ -25,6 +29,7 @@ public class SmartphoneSceneManager : WorldManager {
 	private Smartphone phone;
 	private Key key;
 	private Door door;
+    private Baby cradle;
 
 	void Awake () {
 
@@ -60,34 +65,28 @@ public class SmartphoneSceneManager : WorldManager {
 		phone = holder.phone;
 		key = holder.key;
 		door = holder.door;
+        cradle = holder.cradle;
 
-		//Grabber right = GameObject.FindWithTag("RightHand").GetComponent<Grabber>();
-		//Grabber left = GameObject.FindWithTag("LeftHand").GetComponent<Grabber>();
-
-		//right.Grab(phone.gameObject);
-
-		switch (previousState)
+        switch (previousState)
         {
         	case SceneState.NOT_SET:
 				currentState = SceneState.OPEN_DOOR;
 				phone.SetBtnDoor(false);
 				key.gameObject.SetActive(true);
-				//left.Grab(key.gameObject);
                 break;
             case SceneState.OPEN_DOOR:
             	if(!previousStateWin)
             	{
             		currentState = SceneState.OPEN_DOOR;
 					phone.SetBtnDoor(false);
-					//phone.ShowTinder(false);
+					phone.ShowTinder(false);
 					key.gameObject.SetActive(true);
-					//left.Grab(key.gameObject);
             	}
             	else
             	{
             		currentState = SceneState.OPEN_DOOR_BTN;
             		key.gameObject.SetActive(false);
-            		//phone.ShowTinder(false);
+            	    phone.ShowTinder(false);
             		phone.SetBtnDoor(true);
             	}
                 break;
@@ -100,11 +99,15 @@ public class SmartphoneSceneManager : WorldManager {
                 break;
 
             case SceneState.MATCH_TINDER:
-            	key.gameObject.SetActive(false);
+            case SceneState.MATH_TINDER_JP:
+                currentState = SceneState.MATH_TINDER_JP;
+                key.gameObject.SetActive(false);
             	phone.SetBtnDoor(false);
             	phone.ShowTinder(true);
-            	door.gameObject.SetActive(false);
-            	break;
+                phone.SetTinderImages(imagesJP);
+                door.gameObject.SetActive(false);
+                cradle.SetBabyJP();
+                break;
             default:
                 break;
         }

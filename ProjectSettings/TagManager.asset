@@ -10,6 +10,7 @@ TagManager:
   - RightHand
   - Holder
   - LeftHand
+  - Finger
   layers:
   - Default
   - TransparentFX

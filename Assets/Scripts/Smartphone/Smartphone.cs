@@ -173,7 +173,8 @@ public class Smartphone : MonoBehaviour
 
 	public void MatchTinder()
 	{
-		audioMatchTinder.Stop();
+        tinder.gameObject.SetActive(false);
+        audioMatchTinder.Stop();
 		audioMatchTinder.Play();
 		cradle.gameObject.SetActive(true);
 		won = true;
@@ -189,5 +190,14 @@ public class Smartphone : MonoBehaviour
 	{
 		btnDoor.gameObject.SetActive(show);
 	}
+
+    public void SetTinderImages(Sprite[] new_images)
+    {
+        for(int i = 0; i < new_images.Length; i++)
+        {
+            if (i < tinderImages.Length)
+                tinderImages[i].SetImage(new_images[i]);
+        }
+    }
 
 }
