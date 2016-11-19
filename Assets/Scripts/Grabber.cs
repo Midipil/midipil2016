@@ -21,8 +21,11 @@ public class Grabber : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
-	}
+        // Drop
+        if (grabbedObject != null && !controller.triggerPressed && !controller.gripped){
+            Drop();
+        }
+    }
 
 	void OnTriggerStay(Collider other) {
 
@@ -38,11 +41,6 @@ public class Grabber : MonoBehaviour {
 					Grab (other.gameObject);
 				}
 			} 
-			// Drop
-			else if (grabbedObject != null && !controller.triggerPressed && !controller.gripped) {
-				Drop ();
-			}
-
 
 		}
 
