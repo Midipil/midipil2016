@@ -134,6 +134,7 @@ public class Smartphone : MonoBehaviour
 	public void SetEndTime(bool win, float time)
 	{
 		won = win;
+		drainBattery = false;
 		Invoke("SetEnd", time);
 	}
 
@@ -228,8 +229,7 @@ public class Smartphone : MonoBehaviour
         audioMatchTinder.Stop();
 		audioMatchTinder.Play();
 		cradle.gameObject.SetActive(true);
-		won = true;
-		Invoke("SetEnd", 5f);
+		SetEndTime (true, 5f);
 	}
 
 	public void SetDrainBattery(bool drain)
