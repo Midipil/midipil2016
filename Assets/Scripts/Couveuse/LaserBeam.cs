@@ -60,10 +60,12 @@ public class LaserBeam : MonoBehaviour
         else
         {
 			this.transform.Find ("Spotlight").GetComponent<Light> ().spotAngle = initSpotAngle;
-            line.SetPosition(1, ray.GetPoint(rayLength));
+            
             //impactFX.SetActive(false);
-			currentTimeHit = timeToKill;
+            currentTimeHit = timeToKill;
         }
+        line.SetPosition(1, ray.GetPoint(rayLength));
+
     }
 
 	void End(){

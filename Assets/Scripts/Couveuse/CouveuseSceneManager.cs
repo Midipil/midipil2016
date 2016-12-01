@@ -72,7 +72,7 @@ public class CouveuseSceneManager : WorldManager {
 			break;
 
         case SceneState.EASY_LASER:
-            	playerCamera.SetActive(false);
+            playerCamera.SetActive(false);
             enemyBot.SetActive(false);
             oneEgg.SetActive(false);
             baseControls.SetActive(false);
@@ -88,18 +88,18 @@ public class CouveuseSceneManager : WorldManager {
 
             break;
 
-            case SceneState.TOO_SLOW:
-                playerCamera.SetActive(false);
-                enemyBot.SetActive(false);
-                laserControls.SetActive(false);
-			baseControls.SetActive(false);
-                enemy.GetComponent<EnemyController>().activateLaser(true);
-                player.GetComponent<PlayerController>().sweep = true;
-                enemy.transform.Rotate(new Vector3(100, 0, 0));
-                break;
+        case SceneState.TOO_SLOW:
+            playerCamera.SetActive(false);
+            enemyBot.SetActive(false);
+            laserControls.SetActive(false);
+		    baseControls.SetActive(false);
+            enemy.GetComponent<EnemyController>().activateLaser(true);
+            player.GetComponent<PlayerController>().sweep = true;
+            enemy.transform.Rotate(new Vector3(100, 0, 0));
+            break;
 
-            default:
-			break;
+        default:
+		break;
 		}
 
 	}
@@ -111,12 +111,15 @@ public class CouveuseSceneManager : WorldManager {
 		case SceneState.ONE_EGG:
                 currentState = SceneState.EASY_LASER;
 			break;
-            case SceneState.EASY_LASER:
-                currentState = SceneState.FATE;
-                break;
-            case SceneState.FATE:
-			currentState = SceneState.TOO_SLOW;
-                break;
+        case SceneState.EASY_LASER:
+            currentState = SceneState.FATE;
+            break;
+        case SceneState.FATE:
+		    currentState = SceneState.TOO_SLOW;
+            break;
+        case SceneState.TOO_SLOW:
+            currentState = SceneState.ONE_EGG;
+            break;
 
             default:
 			break;
