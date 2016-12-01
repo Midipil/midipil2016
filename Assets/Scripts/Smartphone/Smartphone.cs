@@ -242,4 +242,9 @@ public class Smartphone : MonoBehaviour
         }
     }
 
+    public void SetOneTinderImage(Sprite img, int index)
+    {
+        tinderImages[index].SetImage(img);
+    }
+
 }

@@ -75,20 +75,10 @@ public class SmartphoneSceneManager : WorldManager
 				key.gameObject.SetActive(true);
                 break;
             case SceneState.OPEN_DOOR:
-            	if(!previousStateWin)
-            	{
-            		currentState = SceneState.OPEN_DOOR;
-					phone.SetBtnDoor(false);
-					phone.ShowTinder(false);
-					key.gameObject.SetActive(true);
-            	}
-            	else
-            	{
-            		currentState = SceneState.OPEN_DOOR_BTN;
-            		key.gameObject.SetActive(false);
-            	    phone.ShowTinder(false);
-            		phone.SetBtnDoor(true);
-            	}
+            	currentState = SceneState.OPEN_DOOR_BTN;
+            	key.gameObject.SetActive(false);
+           	    phone.ShowTinder(false);
+           		phone.SetBtnDoor(true);
                 break;
             case SceneState.OPEN_DOOR_BTN:
             	currentState = SceneState.MATCH_TINDER;
@@ -100,7 +90,6 @@ public class SmartphoneSceneManager : WorldManager
                 break;
 
             case SceneState.MATCH_TINDER:
-            case SceneState.MATH_TINDER_JP:
                 currentState = SceneState.MATH_TINDER_JP;
                 key.gameObject.SetActive(false);
             	phone.SetBtnDoor(false);
@@ -108,6 +97,15 @@ public class SmartphoneSceneManager : WorldManager
                 phone.SetTinderImages(imagesJP);
                 door.gameObject.SetActive(false);
                 cradle.SetBabyJP();
+                break;
+            case SceneState.MATH_TINDER_JP:
+                currentState = SceneState.MATH_TINDER_JP;
+                key.gameObject.SetActive(false);
+                phone.SetBtnDoor(false);
+                phone.ShowTinder(true);
+                phone.SetOneTinderImage(imagesJP[2], 1);
+                phone.SetGeorge();
+                door.gameObject.SetActive(false);
                 break;
             default:
                 break;
@@ -140,7 +138,8 @@ public class SmartphoneSceneManager : WorldManager
 			GameObject.Find ("GameManager").GetComponent<GameManager> ().playLoose ();
 		}
 
-        previousState = currentState;
+        if(win)
+            previousState = currentState;
 		previousStateWin = win;
 
 		manager.ChangeScene();
