@@ -48,7 +48,7 @@ public class CoffeSceneManager : WorldManager {
 
     // Use this for initialization
     void Start () {
-
+       
 	}
 	
 	// Update is called once per frame
@@ -60,7 +60,7 @@ public class CoffeSceneManager : WorldManager {
 	public override void InitScene(){
 		Debug.Log ("Init coffe scene.");
 
-		FindObjectOfType<TextDisplay>().Initialize(this);
+        FindObjectOfType<TextDisplay>().Initialize(this);
 
         switch (previousState)
         {
@@ -77,6 +77,7 @@ public class CoffeSceneManager : WorldManager {
                 break;
             case SceneState.CAKE_OK:
                 currentState = SceneState.BOILER_HANDLE;
+                // poignée détachable
                 looseHandle = true;
                 FindObjectOfType<Boiler>().Initialize(this);
                 break;
@@ -87,6 +88,7 @@ public class CoffeSceneManager : WorldManager {
                 break;
 			case SceneState.CAKE_BURNT:
 				currentState = SceneState.BOILER_GRABBABLE;
+                // poignée normale
                 looseHandle = false;
                 FindObjectOfType<Boiler>().Initialize(this);
                 break;
@@ -100,10 +102,26 @@ public class CoffeSceneManager : WorldManager {
 	// Start end sequence when scene goal is achieved
 	public override void SetEnd(bool win)
     {
+        switch (currentState)
+        {
+
+            default:
+                break;
+
+        }
+
+        GameObject.FindWithTag("GameManager").GetComponent<GameManager>().ChangeScene();
+
+        if (win)
+        {
+            GameObject.Find("GameManager").GetComponent<GameManager>().playWin();
+        }
+        else {
+            GameObject.Find("GameManager").GetComponent<GameManager>().playLoose();
+        }
+
         previousState = currentState;
         previousStateWin = win;
-
-        FindObjectOfType<GameManager>().ChangeScene();
     }
 
 }

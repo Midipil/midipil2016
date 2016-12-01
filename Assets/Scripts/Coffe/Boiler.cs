@@ -9,8 +9,11 @@ public class Boiler : MonoBehaviour {
     public Grabbable handle;
     public GameObject heatingParticles, boilingParticles;
     public AudioSource backNoise;
+    public GameObject casserole;
 
-    bool needToLook, isHeating = true, handleGrabbed;
+    bool needToLook, handleGrabbed;
+    public bool isHeating = true;
+    bool isBoiling = false;
 
 	SteamVR_TrackedObject burningHand;
 
@@ -22,9 +25,14 @@ public class Boiler : MonoBehaviour {
         FindObjectOfType<TextDisplay>().DisplayText("Ne laisse pas le lait déborder !", 8f);
         
 		if (sceneManager.getLooseHandle()) {
-			Destroy(handle);
-			gameObject.AddComponent<Grabbable>();
-		}
+            //Destroy(handle);
+            //gameObject.AddComponent<Grabbable>();
+            Destroy(GetComponent<Grabbable>());
+            handle.enabled = true;
+		} else
+        {
+            handle.enabled = false;
+        }
         
 		Invoke("NeedToLook", 5f);
         Invoke("MakeNoise", 10f);
@@ -54,27 +62,55 @@ public class Boiler : MonoBehaviour {
     {
         if (isHeating)
         {
-			if (needToLook && isHeating && !handleGrabbed && Vector3.Angle(transform.position - Camera.main.transform.position, Camera.main.transform.transform.forward) > Camera.main.fieldOfView)
+            if (!GetComponent<AudioSource>().isPlaying)
             {
-                StartBoiling();
-                GetComponent<AudioSource>().volume = 1f;
-                isHeating = false;
-                Debug.Log(Vector3.Angle(transform.position - Camera.main.transform.position, Camera.main.transform.transform.forward) + " " + Camera.main.fieldOfView);
+                GetComponent<AudioSource>().Play();
             }
+            if (isBoiling)
+            {
+                heatingParticles.SetActive(false);
+                boilingParticles.SetActive(true);
+            } else
+            {
+                heatingParticles.SetActive(true);
+                boilingParticles.SetActive(false);
+            }
+        }
+        else
+        {
+            GetComponent<AudioSource>().Stop();
+            heatingParticles.SetActive(false);
+            boilingParticles.SetActive(false);
+        }
+
+        // la casserole chauffe
+        if (isHeating
+            && needToLook
+            && Vector3.Angle(transform.position - Camera.main.transform.position, Camera.main.transform.transform.forward) > Camera.main.fieldOfView)
+        {
+            StartBoiling();
+            GetComponent<AudioSource>().volume = 1f;
+            Debug.Log("ça bouille");
         }
 
         if (!handleGrabbed && handle.IsGrabbed() && sceneManager.getLooseHandle()==true)
         {
             //Invoke("StartBoiling", 1f);
-           
+
+            Destroy(GetComponent<Rigidbody>());
 			handleGrabbed = true;
 			handle.GetComponent<Rigidbody>().useGravity = true;
 			handle.GetComponent<Rigidbody>().isKinematic = false;
 			handle.GetComponent<Collider>().isTrigger = false;
+            handle.transform.parent = null;
+            GetComponent<Collider>().isTrigger = true;
+            casserole.GetComponent<Collider>().isTrigger = false;
+            casserole.GetComponent<Rigidbody>().isKinematic = false;
+            casserole.GetComponent<Rigidbody>().useGravity = true;
             CancelInvoke("MakeNoise");
         }
 
-        if(GetComponent<Grabbable>() != null && GetComponent<Grabbable>().IsGrabbed() && isHeating && sceneManager.getLooseHandle() == false)
+        /*if(GetComponent<Grabbable>() != null && GetComponent<Grabbable>().IsGrabbed() && isHeating && sceneManager.getLooseHandle() == false)
         {
             heatingParticles.SetActive(false);
             boilingParticles.SetActive(false);
@@ -82,7 +118,7 @@ public class Boiler : MonoBehaviour {
             CancelInvoke("MakeNoise");
             isHeating = false;
             Debug.Log("case 1");
-        }
+        }*/
 
         if(transform.up.y < -0.8)
         {
@@ -123,6 +159,7 @@ public class Boiler : MonoBehaviour {
 
     void StartBoiling()
     {
+        isBoiling = true;
         boilingParticles.SetActive(true);
         Invoke("BoilingFail", 1f);
     }
