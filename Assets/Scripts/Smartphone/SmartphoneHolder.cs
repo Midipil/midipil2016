@@ -7,4 +7,6 @@ public class SmartphoneHolder : MonoBehaviour
 	public Key key;
 	public Door door;
     public Baby cradle;
+	public GameObject cameraRig;
+	public Transform spawnInsideHouse;
 }

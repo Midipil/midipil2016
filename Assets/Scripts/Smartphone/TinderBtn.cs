@@ -12,15 +12,15 @@ public class TinderBtn : MonoBehaviour
 		{
 			if(other.gameObject.tag.Equals("Finger")) //  || other.gameObject.tag.Equals("RightHand")
             {
-	        	int index = (int)other.gameObject.GetComponentInParent<SteamVR_TrackedObject>().index;
+	        	/*int index = (int)other.gameObject.GetComponentInParent<SteamVR_TrackedObject>().index;
 
 	        	if(phone.controllerIndex != index)
-				{
+				{*/
 					if(cancelBtn)
 			        	phone.NextTinder();
 			       	else
 			       		phone.MatchTinder();
-				}
+				//}
 			}
 		}
     }

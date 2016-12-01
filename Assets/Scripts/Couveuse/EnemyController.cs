@@ -19,7 +19,10 @@ public class EnemyController : MonoBehaviour {
 
     void Update()
     {
-        
+        if (Input.GetKeyUp("i"))
+        {
+            activateLaser(true);
+        }
     }
 
 	// Update is called once per frame

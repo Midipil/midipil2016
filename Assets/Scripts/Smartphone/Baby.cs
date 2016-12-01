@@ -9,6 +9,7 @@ public class Baby : MonoBehaviour
     public GameObject baby;
     public GameObject babyJP;
     public AudioClip georgeClip;
+	public AudioClip jpClip;
 
     // Use this for initialization
     void Start()
@@ -20,11 +21,17 @@ public class Baby : MonoBehaviour
     public void SetBabyJP()
     {
         baby.SetActive(false);
-        babyJP.SetActive(true);
+		SetJpSound();
+		babyJP.SetActive (true);
     }
 
     public void SetGeorgeSound()
     {
         babySound.clip = georgeClip;
     }
+
+	public void SetJpSound()
+	{
+		babySound.clip = jpClip;
+	}
 }

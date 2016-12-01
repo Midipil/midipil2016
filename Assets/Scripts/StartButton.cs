@@ -25,9 +25,13 @@ public class StartButton : MonoBehaviour {
 		
 		child.localPosition = new Vector3 (initPos.x, initPos.y  -  pressOffset, initPos.z);
 
-		SceneManager.LoadScene ("Smartphone", LoadSceneMode.Single);
 
-	} 
+        GameObject.Find("GameManager").GetComponent<GameManager>().playWin();
+
+
+        FindObjectOfType<GameManager>().ChangeScene();
+
+    } 
 
 	void OnTriggerExit(Collider o) {
 

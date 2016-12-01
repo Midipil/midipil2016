@@ -14,7 +14,7 @@ public class SmartphoneSceneManager : WorldManager
         OPEN_DOOR,
         OPEN_DOOR_BTN,
 		MATCH_TINDER,
-        MATH_TINDER_JP
+        MATCH_TINDER_JP
 	}
 
 	// State we were last time we played this scene
@@ -30,6 +30,8 @@ public class SmartphoneSceneManager : WorldManager
 	private Key key;
 	private Door door;
     private Baby cradle;
+	private GameObject cameraRig;
+	private Transform spawnInsideHouse;
 
 	void Awake () {
 
@@ -50,7 +52,7 @@ public class SmartphoneSceneManager : WorldManager
 
 	// Use this for initialization
 	void Start () {
-
+		
 	}
 	
 	// Update is called once per frame
@@ -66,6 +68,8 @@ public class SmartphoneSceneManager : WorldManager
 		key = holder.key;
 		door = holder.door;
         cradle = holder.cradle;
+		cameraRig = holder.cameraRig;
+		spawnInsideHouse = holder.spawnInsideHouse;
 
         switch (previousState)
         {
@@ -75,23 +79,15 @@ public class SmartphoneSceneManager : WorldManager
 				key.gameObject.SetActive(true);
                 break;
             case SceneState.OPEN_DOOR:
-            	if(!previousStateWin)
-            	{
-            		currentState = SceneState.OPEN_DOOR;
-					phone.SetBtnDoor(false);
-					phone.ShowTinder(false);
-					key.gameObject.SetActive(true);
-            	}
-            	else
-            	{
-            		currentState = SceneState.OPEN_DOOR_BTN;
-            		key.gameObject.SetActive(false);
-            	    phone.ShowTinder(false);
-            		phone.SetBtnDoor(true);
-            	}
+            	currentState = SceneState.OPEN_DOOR_BTN;
+            	key.gameObject.SetActive(false);
+           	    phone.ShowTinder(false);
+           		phone.SetBtnDoor(true);
                 break;
-            case SceneState.OPEN_DOOR_BTN:
-            	currentState = SceneState.MATCH_TINDER;
+			case SceneState.OPEN_DOOR_BTN:
+				currentState = SceneState.MATCH_TINDER;
+				cameraRig.transform.position = spawnInsideHouse.position;
+				cameraRig.transform.rotation = spawnInsideHouse.rotation;
             	key.gameObject.SetActive(false);
             	phone.SetBtnDoor(false);
             	phone.ShowTinder(true);
@@ -100,8 +96,9 @@ public class SmartphoneSceneManager : WorldManager
                 break;
 
             case SceneState.MATCH_TINDER:
-            case SceneState.MATH_TINDER_JP:
-                currentState = SceneState.MATH_TINDER_JP;
+                currentState = SceneState.MATCH_TINDER_JP;
+				cameraRig.transform.position = spawnInsideHouse.position;
+				cameraRig.transform.rotation = spawnInsideHouse.rotation;
                 key.gameObject.SetActive(false);
             	phone.SetBtnDoor(false);
             	phone.ShowTinder(true);
@@ -109,9 +106,24 @@ public class SmartphoneSceneManager : WorldManager
                 door.gameObject.SetActive(false);
                 cradle.SetBabyJP();
                 break;
+			case SceneState.MATCH_TINDER_JP:
+				currentState = SceneState.MATCH_TINDER_JP;
+				cameraRig.transform.position = spawnInsideHouse.position;
+				cameraRig.transform.rotation = spawnInsideHouse.rotation;
+				key.gameObject.SetActive (false);
+				phone.SetBtnDoor (false);
+				phone.ShowTinder (true);
+				phone.SetOneTinderImage (imagesJP [2], 1);
+				phone.SetMultiTinder ();
+				phone.SetGeorgeFirst ();
+				phone.SetGeorge ();
+                door.gameObject.SetActive(false);
+                break;
             default:
                 break;
         }
+			
+		phone.transform.SetParent(null);
 
 		Debug.Log ("Init smartphone scene.");
 	}
@@ -140,7 +152,8 @@ public class SmartphoneSceneManager : WorldManager
 			GameObject.Find ("GameManager").GetComponent<GameManager> ().playLoose ();
 		}
 
-        previousState = currentState;
+        if(win)
+            previousState = currentState;
 		previousStateWin = win;
 
 		manager.ChangeScene();

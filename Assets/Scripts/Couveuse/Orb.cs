@@ -16,6 +16,7 @@ public class Orb : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider o) {
+        GetComponent<AudioSource>().Play();
 		Invoke ("End", winTime);
 		this.transform.GetComponent<Renderer> ().enabled = false;
 		this.transform.GetChild (0).gameObject.SetActive (false);
