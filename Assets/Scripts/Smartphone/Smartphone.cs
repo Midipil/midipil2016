@@ -27,6 +27,7 @@ public class Smartphone : MonoBehaviour
 	private SmartphoneSceneManager sceneManager;
     private bool exploded = false;
     private bool george = false;
+	private bool multiTinder = false;
 
     public int batteryLife
     {
@@ -211,16 +212,24 @@ public class Smartphone : MonoBehaviour
         george = true;
     }
 
+	public void SetMultiTinder()
+	{
+		multiTinder = true;
+	}
+
     public void MatchTinder()
 	{
-        if (george && selectedTinder == 2)
+		if (george && ((!multiTinder && selectedTinder == 2) || (multiTinder && selectedTinder == 0)))
             cradle.SetGeorgeSound();
+		else if (multiTinder && selectedTinder == 1)
+			cradle.SetBabyJP ();
+		
         tinder.gameObject.SetActive(false);
         audioMatchTinder.Stop();
 		audioMatchTinder.Play();
 		cradle.gameObject.SetActive(true);
 		won = true;
-		Invoke("SetEnd", 4f);
+		Invoke("SetEnd", 5f);
 	}
 
 	public void SetDrainBattery(bool drain)
@@ -231,6 +240,15 @@ public class Smartphone : MonoBehaviour
 	public void SetBtnDoor(bool show)
 	{
 		btnDoor.gameObject.SetActive(show);
+	}
+
+	public void SetGeorgeFirst()
+	{
+		Sprite temp = tinderImages [0].img.sprite;
+
+		tinderImages [0].SetImage (tinderImages [2].img.sprite);
+
+		tinderImages [2].SetImage (temp);
 	}
 
     public void SetTinderImages(Sprite[] new_images)
