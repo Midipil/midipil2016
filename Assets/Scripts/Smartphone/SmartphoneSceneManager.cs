@@ -5,6 +5,8 @@ using UnityEngine.UI;
 public class SmartphoneSceneManager : WorldManager
 {
     public Sprite[] imagesJP;
+	public GameObject cameraRig;
+	public Transform spawnInsideHouse;
 
 	private static bool instantiated = false;
 
@@ -14,7 +16,7 @@ public class SmartphoneSceneManager : WorldManager
         OPEN_DOOR,
         OPEN_DOOR_BTN,
 		MATCH_TINDER,
-        MATH_TINDER_JP
+        MATCH_TINDER_JP
 	}
 
 	// State we were last time we played this scene
@@ -80,8 +82,10 @@ public class SmartphoneSceneManager : WorldManager
            	    phone.ShowTinder(false);
            		phone.SetBtnDoor(true);
                 break;
-            case SceneState.OPEN_DOOR_BTN:
-            	currentState = SceneState.MATCH_TINDER;
+			case SceneState.OPEN_DOOR_BTN:
+				currentState = SceneState.MATCH_TINDER;
+				cameraRig.transform.position = spawnInsideHouse.position;
+				cameraRig.transform.rotation = spawnInsideHouse.rotation;
             	key.gameObject.SetActive(false);
             	phone.SetBtnDoor(false);
             	phone.ShowTinder(true);
@@ -90,7 +94,9 @@ public class SmartphoneSceneManager : WorldManager
                 break;
 
             case SceneState.MATCH_TINDER:
-                currentState = SceneState.MATH_TINDER_JP;
+                currentState = SceneState.MATCH_TINDER_JP;
+				cameraRig.transform.position = spawnInsideHouse.position;
+				cameraRig.transform.rotation = spawnInsideHouse.rotation;
                 key.gameObject.SetActive(false);
             	phone.SetBtnDoor(false);
             	phone.ShowTinder(true);
@@ -98,8 +104,10 @@ public class SmartphoneSceneManager : WorldManager
                 door.gameObject.SetActive(false);
                 cradle.SetBabyJP();
                 break;
-			case SceneState.MATH_TINDER_JP:
-				currentState = SceneState.MATH_TINDER_JP;
+			case SceneState.MATCH_TINDER_JP:
+				currentState = SceneState.MATCH_TINDER_JP;
+				cameraRig.transform.position = spawnInsideHouse.position;
+				cameraRig.transform.rotation = spawnInsideHouse.rotation;
 				key.gameObject.SetActive (false);
 				phone.SetBtnDoor (false);
 				phone.ShowTinder (true);
