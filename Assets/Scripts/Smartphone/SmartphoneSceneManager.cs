@@ -50,7 +50,7 @@ public class SmartphoneSceneManager : WorldManager
 
 	// Use this for initialization
 	void Start () {
-
+		
 	}
 	
 	// Update is called once per frame
@@ -98,13 +98,15 @@ public class SmartphoneSceneManager : WorldManager
                 door.gameObject.SetActive(false);
                 cradle.SetBabyJP();
                 break;
-            case SceneState.MATH_TINDER_JP:
-                currentState = SceneState.MATH_TINDER_JP;
-                key.gameObject.SetActive(false);
-                phone.SetBtnDoor(false);
-                phone.ShowTinder(true);
-                phone.SetOneTinderImage(imagesJP[2], 1);
-                phone.SetGeorge();
+			case SceneState.MATH_TINDER_JP:
+				currentState = SceneState.MATH_TINDER_JP;
+				key.gameObject.SetActive (false);
+				phone.SetBtnDoor (false);
+				phone.ShowTinder (true);
+				phone.SetOneTinderImage (imagesJP [2], 1);
+				phone.SetMultiTinder ();
+				phone.SetGeorgeFirst ();
+				phone.SetGeorge ();
                 door.gameObject.SetActive(false);
                 break;
             default:
