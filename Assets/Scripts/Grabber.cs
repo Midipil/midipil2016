@@ -54,8 +54,9 @@ public class Grabber : MonoBehaviour {
 		objToGrab.GetComponent<Collider> ().isTrigger = true;
 		GetComponent<FixedJoint> ().connectedBody = objToGrab.GetComponent<Rigidbody> ();
 		grabbedObject.SetGrabbed(true, (int)GetComponentInParent<SteamVR_TrackedObject>().index);
+        SteamVR_Controller.Input((int)GetComponentInParent<SteamVR_TrackedObject>().index).TriggerHapticPulse((ushort)1000);
 
-	}
+    }
 
 	void Drop(){
 		//Debug.Log ("Dropped !");
