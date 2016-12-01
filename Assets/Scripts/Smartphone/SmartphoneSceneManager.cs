@@ -5,8 +5,6 @@ using UnityEngine.UI;
 public class SmartphoneSceneManager : WorldManager
 {
     public Sprite[] imagesJP;
-	public GameObject cameraRig;
-	public Transform spawnInsideHouse;
 
 	private static bool instantiated = false;
 
@@ -32,6 +30,8 @@ public class SmartphoneSceneManager : WorldManager
 	private Key key;
 	private Door door;
     private Baby cradle;
+	private GameObject cameraRig;
+	private Transform spawnInsideHouse;
 
 	void Awake () {
 
@@ -68,6 +68,8 @@ public class SmartphoneSceneManager : WorldManager
 		key = holder.key;
 		door = holder.door;
         cradle = holder.cradle;
+		cameraRig = holder.cameraRig;
+		spawnInsideHouse = holder.spawnInsideHouse;
 
         switch (previousState)
         {
@@ -120,6 +122,8 @@ public class SmartphoneSceneManager : WorldManager
             default:
                 break;
         }
+			
+		phone.transform.SetParent(null);
 
 		Debug.Log ("Init smartphone scene.");
 	}
