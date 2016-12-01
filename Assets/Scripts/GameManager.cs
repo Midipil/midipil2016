@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour {
 	public AudioClip winSound;
 	public AudioClip looseSound;
 
-	int gamesCount = 1;
+	int gamesCount = 0;
 	int maxBeforeCredits = 25;
 
 	string[] scenesNames = new string[5];
