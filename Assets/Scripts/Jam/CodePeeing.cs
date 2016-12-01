@@ -30,6 +30,11 @@ public class CodePeeing : MonoBehaviour {
             if (currentTextLength + codePieceLength <= randomCode.Length)
                 DisplayMoreCode();
         }
+
+        if (other.GetComponentInParent<SteamVR_TrackedObject>() != null)
+        {
+            SteamVR_Controller.Input((int)other.GetComponentInParent<SteamVR_TrackedObject>().index).TriggerHapticPulse((ushort)1000);
+        }
     }
 
     void DisplayMoreCode()
