@@ -5,8 +5,10 @@ using System.Collections;
 public class TinderImg : MonoBehaviour 
 {
 	public Image img;
+    public TinderBtn btnCancel;
+    public TinderBtn btnMatch;
 
-	private bool fading = false;
+    private bool fading = false;
 	private bool fadeIn = false, fadeOut = false;
 	private float startTimeFade;
 	private Color fadeColor;
@@ -28,6 +30,11 @@ public class TinderImg : MonoBehaviour
 			}
 			else
 			{
+                if(fadeIn)
+                {
+                    btnCancel.SetEnabled(true);
+                    btnMatch.SetEnabled(true);
+                }
 				fading = false;
 			}
 		}
@@ -35,7 +42,10 @@ public class TinderImg : MonoBehaviour
 
 	public void Fade(bool fade_in)
 	{
-		if(fade_in)
+        btnCancel.SetEnabled(false);
+        btnMatch.SetEnabled(false);
+
+        if (fade_in)
 		{
 			fadeOut = false;
 			fadeIn = true;

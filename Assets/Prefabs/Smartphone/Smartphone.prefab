@@ -375,10 +375,10 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000010803787336}
-  m_LocalRotation: {x: 0.5, y: 0.5, z: 0.5, w: 0.5}
-  m_LocalPosition: {x: -0.88, y: 0.002, z: 5.055}
-  m_LocalScale: {x: 0.011540681, y: 0.30552045, z: 0.15160304}
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 90}
+  m_LocalRotation: {x: 0.50000006, y: 0.5, z: 0.50000006, w: 0.5}
+  m_LocalPosition: {x: -0, y: -0, z: 1.518}
+  m_LocalScale: {x: 0.19234477, y: 2.5460045, z: 1.6844785}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 90.00001}
   m_Children:
   - {fileID: 4000013190475652}
   - {fileID: 4000011917471018}
@@ -669,7 +669,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 5
+  MaxDistance: 2
   Pan2D: 0
   rolloffMode: 2
   BypassEffects: 0
@@ -803,6 +803,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   img: {fileID: 114000013156224206}
+  btnCancel: {fileID: 114000014187048268}
+  btnMatch: {fileID: 114000012996435644}
 --- !u!114 &114000010754614448
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -815,6 +817,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   img: {fileID: 114000013334227126}
+  btnCancel: {fileID: 114000014187048268}
+  btnMatch: {fileID: 114000012996435644}
 --- !u!114 &114000010777498598
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1067,6 +1071,7 @@ MonoBehaviour:
   audioExplode: {fileID: 82000010454477498}
   audioLowBattery: {fileID: 82000010112076324}
   audioMatchTinder: {fileID: 82000010205891906}
+  rightRumble: {fileID: 0}
 --- !u!114 &114000012631459508
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1079,6 +1084,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   img: {fileID: 114000012195484966}
+  btnCancel: {fileID: 114000014187048268}
+  btnMatch: {fileID: 114000012996435644}
 --- !u!114 &114000012946858206
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1119,6 +1126,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   phone: {fileID: 114000012629492744}
   cancelBtn: 0
+  img: {fileID: 114000012342631810}
 --- !u!114 &114000013156224206
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1268,6 +1276,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   phone: {fileID: 114000012629492744}
   cancelBtn: 1
+  img: {fileID: 114000011860233506}
 --- !u!136 &136000010764346874
 CapsuleCollider:
   m_ObjectHideFlags: 1

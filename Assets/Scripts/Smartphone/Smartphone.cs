@@ -22,6 +22,7 @@ public class Smartphone : MonoBehaviour
 	public AudioSource audioExplode;
 	public AudioSource audioLowBattery;
 	public AudioSource audioMatchTinder;
+    public Rumble rightRumble;
 
     private Door door;
 	private SmartphoneSceneManager sceneManager;
@@ -50,7 +51,6 @@ public class Smartphone : MonoBehaviour
     private bool noBattery;
     private bool drainBattery = true;
     private bool won;
-    private SteamVR_TrackedObject right;
     private bool firstPulse = false;
 
     void Start()
@@ -70,18 +70,11 @@ public class Smartphone : MonoBehaviour
         
     }
 
-    bool SetRightPulse(int time)
+    bool SetRightPulse(float time)
     {
-        if(!right)
+        if (rightRumble && rightRumble.isActiveAndEnabled)
         {
-            GameObject o = GameObject.FindGameObjectWithTag("RightHand");
-            if (o)
-                right = o.GetComponentInParent<SteamVR_TrackedObject>();
-        }
-
-        if (right)
-        {
-            SteamVR_Controller.Input((int)right.index).TriggerHapticPulse((ushort)time);
+            rightRumble.StartRumble(time);
             return true;
         }
         else
@@ -91,7 +84,7 @@ public class Smartphone : MonoBehaviour
 	void Update () 
 	{
         if (!firstPulse)
-            firstPulse = SetRightPulse(1000);
+            firstPulse = SetRightPulse(0.5f);
 
         if (drainBattery)
 		{
@@ -106,7 +99,7 @@ public class Smartphone : MonoBehaviour
 		{
             audioLowBattery.Stop();
 			audioLowBattery.Play();
-            SetRightPulse(2000);
+            SetRightPulse(1f);
             batteryLowText.gameObject.SetActive(true);
 		}
 		else if(batteryLife > 25 && batteryLowText.gameObject.activeSelf)
@@ -167,6 +160,7 @@ public class Smartphone : MonoBehaviour
     private void Explode()
     {
         exploded = true;
+        SetRightPulse(0.5f);
         audioExplode.Stop();
         audioExplode.Play();
         Instantiate(fxExplosion, transform.position, Quaternion.identity);
