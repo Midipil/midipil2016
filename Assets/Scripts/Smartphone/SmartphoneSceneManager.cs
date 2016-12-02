@@ -71,8 +71,6 @@ public class SmartphoneSceneManager : WorldManager
 		cameraRig = holder.cameraRig;
 		spawnInsideHouse = holder.spawnInsideHouse;
 
-        previousState = SceneState.MATCH_TINDER_JP;
-
         switch (previousState)
         {
         	case SceneState.NOT_SET:

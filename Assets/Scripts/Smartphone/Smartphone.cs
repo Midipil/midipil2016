@@ -228,7 +228,7 @@ public class Smartphone : MonoBehaviour
         audioMatchTinder.Stop();
 		audioMatchTinder.Play();
 		cradle.gameObject.SetActive(true);
-		SetEndTime (true, 5f);
+		SetEndTime (true, 6f);
 	}
 
 	public void SetBtnDoor(bool show)
