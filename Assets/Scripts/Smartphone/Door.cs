@@ -60,6 +60,7 @@ public class Door : MonoBehaviour
 	{
 		if(!isOpen)
 		{
+            phone.SetDrainBattery(false);
 			audioDoor.Stop();
 			audioDoor.Play();
 			if(openNow)
@@ -85,6 +86,6 @@ public class Door : MonoBehaviour
         startTimeMove = Time.time;
 		opening = true;
         if(phone)
-		    phone.SetEndTime(true, timeMoveDoor);
+		    phone.SetEndTime(true, timeMoveDoor + timeMoveHandle);
 	}
 }

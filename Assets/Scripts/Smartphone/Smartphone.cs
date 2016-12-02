@@ -143,6 +143,11 @@ public class Smartphone : MonoBehaviour
 		sceneManager.SetEnd(won);
 	}
 
+    public void SetDrainBattery(bool drain)
+    {
+        drainBattery = drain;
+    }
+
 	void SetBattery(bool empty)
 	{
 		screenON.SetActive(!empty);
@@ -230,11 +235,6 @@ public class Smartphone : MonoBehaviour
 		audioMatchTinder.Play();
 		cradle.gameObject.SetActive(true);
 		SetEndTime (true, 5f);
-	}
-
-	public void SetDrainBattery(bool drain)
-	{
-		drainBattery = drain;
 	}
 
 	public void SetBtnDoor(bool show)
