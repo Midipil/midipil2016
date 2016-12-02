@@ -35,7 +35,7 @@ public class Boiler : MonoBehaviour {
         }
         
 		Invoke("NeedToLook", 5f);
-        Invoke("MakeNoise", 10f);
+        Invoke("MakeNoise", 4f);
 
         GetComponent<AudioSource>().Play();
 
@@ -90,7 +90,6 @@ public class Boiler : MonoBehaviour {
         {
             StartBoiling();
             GetComponent<AudioSource>().volume = 1f;
-            Debug.Log("ça bouille");
         }
 
         if (!handleGrabbed && handle.IsGrabbed() && sceneManager.getLooseHandle()==true)
