@@ -25,7 +25,7 @@ public class TextDisplay : MonoBehaviour {
 
     public void HideText()
     {
-        feedback.text = "";
+        //feedback.text = "";
     }
 
     public void ShowEndMessage(string message, bool win)

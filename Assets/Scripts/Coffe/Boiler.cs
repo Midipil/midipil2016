@@ -35,7 +35,7 @@ public class Boiler : MonoBehaviour {
         }
         
 		Invoke("NeedToLook", 5f);
-        Invoke("MakeNoise", 4f);
+        Invoke("MakeNoise", 7f);
 
         GetComponent<AudioSource>().Play();
 

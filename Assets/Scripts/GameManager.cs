@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour {
 	public AudioClip looseSound;
 
 	int gamesCount = 0;
-	int maxBeforeCredits = 25;
+	int maxBeforeCredits = 23;
 
 	string[] scenesNames = new string[5];
 
@@ -21,11 +21,11 @@ public class GameManager : MonoBehaviour {
 		if (!instantiated) {
 			DontDestroyOnLoad (this);
 
-			scenesNames [0] = "Smartphone";
-			scenesNames [1] = "Monster";
+			scenesNames [0] = "Monster";
+			scenesNames [1] = "Smartphone";
 			scenesNames [2] = "Coffe";
-			scenesNames [3] = "Couveuse";
-			scenesNames [4] = "Jam";
+			scenesNames [3] = "Jam";
+			scenesNames [4] = "Couveuse";
 
 			SceneManager.sceneLoaded += OnSceneWasLoaded;
 

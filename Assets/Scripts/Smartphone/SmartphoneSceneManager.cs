@@ -122,8 +122,8 @@ public class SmartphoneSceneManager : WorldManager
             default:
                 break;
         }
-			
-		phone.transform.SetParent(null);
+        key.transform.SetParent(null);
+        phone.transform.SetParent(null);
 
 		Debug.Log ("Init smartphone scene.");
 	}

@@ -51,7 +51,7 @@ public class CouveuseSceneManager : WorldManager {
 
 	// Init scene and its content
 	public override void InitScene(){
-
+        
 		playerBot = GameObject.Find ("Bearbot").gameObject;
 		enemyBot = GameObject.Find ("Evil").gameObject;
 		oneEgg = GameObject.Find ("OneEgg").gameObject;
@@ -60,9 +60,9 @@ public class CouveuseSceneManager : WorldManager {
 		baseControls = GameObject.Find ("BaseControls").gameObject;
 		laserControls = GameObject.Find ("LaserControls").gameObject;
 		playerCamera = player.transform.Find ("Anchor/[CameraRigCustom]").gameObject;
-		enemyCamera = enemy.transform.Find ("[CameraRigCustom]").gameObject;
+        enemyCamera = enemy.transform.Find("[CameraRigCustom]").gameObject;
 
-		Debug.Log ("Init couveuse scene with state : "+ currentState);
+        Debug.Log ("Init couveuse scene with state : "+ currentState);
 		switch (currentState)
 		{
 		case SceneState.ONE_EGG:

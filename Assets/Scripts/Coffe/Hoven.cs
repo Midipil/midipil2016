@@ -23,7 +23,7 @@ public class Hoven : MonoBehaviour {
         this.sceneManager = sceneManager;
 		cake.Initialize (sceneManager);
 
-		FindObjectOfType<TextDisplay>().DisplayText("Mets le gateau au four !", 10f);
+		FindObjectOfType<TextDisplay>().DisplayText("Mets le gâteau au four !", 10f);
     }
 
 	public void ToggleDoor(SteamVR_TrackedController controller)
